@@ -1,4 +1,3 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
 module type_guards_demo {
 
     let x: any = { /* ... */ };

@@ -1,4 +1,4 @@
-module flow_control_demo {
+namespace flow_control_demo {
 
     // if
 
@@ -10,9 +10,9 @@ module flow_control_demo {
 
     // if ... else
 
-    var isValid2: boolean = true;
+    let isValid2: boolean = true;
 
-    if(isValid2) {
+    if (isValid2) {
         alert("Is valid!");
     } else {
         alert("Is NOT valid!");
@@ -26,15 +26,15 @@ module flow_control_demo {
 
     // switch
 
-    enum AlertLevel{
+    enum AlertLevel {
         info,
         warning,
-        error	
+        error
     }
 
-    function getAlertSubscribers(level: AlertLevel){
-        var emails = new Array<string>();
-        switch(level){
+    function getAlertSubscribers(level: AlertLevel) {
+        let emails = new Array<string>();
+        switch (level) {
             case AlertLevel.info:
                 emails.push("cst@domain.com");
                 break;
@@ -76,10 +76,12 @@ module flow_control_demo {
 
     // for ... in
 
-    var obj: any = { a:1, b:2, c:3 };
+    let obj: any = { a: 1, b: 2, c: 3 };
 
-    for (var key in obj) {
-        console.log(key + " = " + obj[key]);
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            console.log(key + " = " + obj[key]);
+        }
     }
 
     // for ... of
@@ -93,7 +95,7 @@ module flow_control_demo {
 
     // for
 
-    for (var i: number = 0; i < 9; i++) {
+    for (let i: number = 0; i < 9; i++) {
         console.log(i);
     }
 

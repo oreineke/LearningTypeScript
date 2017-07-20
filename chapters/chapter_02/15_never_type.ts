@@ -1,4 +1,3 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
 module never_type_demo {
 
     function error(message: string): never {

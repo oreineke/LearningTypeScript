@@ -1,4 +1,4 @@
-module type_inference_demo {
+namespace type_inference_demo {
 
     let counter1;              // unknown (any) type
     let counter2 = 0;          // number (inferred)

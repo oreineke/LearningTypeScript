@@ -1,4 +1,3 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
 module nullable_types_demo {
 
     let name: string;

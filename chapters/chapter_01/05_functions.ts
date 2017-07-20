@@ -1,8 +1,8 @@
-module functions_demo {
+namespace functions_demo {
 
     // named function
-    function greet1(name? : string) : string {
-        if(name){
+    function greet1(name?: string): string {
+        if (name) {
             return "Hi! " + name;
         } else {
             return "Hi!";
@@ -10,23 +10,7 @@ module functions_demo {
     }
 
     // anonymous function
-    var greet2 = function(name? : string) : string {
-        if (name) {
-            return "Hi! " + name;
-        } else {
-            return "Hi!";
-        }
-    }
-
-    var greet = (name: string) : string =>  {
-        if(name){
-            return "Hi! " + name;
-        } else {
-            return "Hi! my name is " + this.fullname;
-        }
-    };
-
-    var greet: (name: string) => string = function(name: string): string {
+    let greet2 = function(name?: string): string {
         if (name) {
             return "Hi! " + name;
         } else {
@@ -34,7 +18,25 @@ module functions_demo {
         }
     };
 
-    function add(a: number, b: number, callback :(result: number) => void) {
+    let greet3 = (name: string): string =>  {
+        if (name) {
+            return "Hi! " + name;
+        } else {
+            return "Hi!";
+        }
+    };
+
+    let greet4: (name: string) => string = function(name: string): string {
+        if (name) {
+            return "Hi! " + name;
+        } else {
+            return "Hi!";
+        }
+    };
+
+    function add(
+        a: number, b: number, callback: (result: number) => void
+    ) {
         callback(a + b);
     }
 

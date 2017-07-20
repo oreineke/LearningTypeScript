@@ -1,4 +1,3 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
 module literal_types_demo {
 
     let five1 = 5; // number

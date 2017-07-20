@@ -1,4 +1,4 @@
-module scope_demo {
+namespace scope_demo {
 
     var myNumber: number = 1;
     let isValid: boolean = true;

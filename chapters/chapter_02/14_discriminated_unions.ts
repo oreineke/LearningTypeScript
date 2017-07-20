@@ -1,25 +1,24 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-module discriminated_unions_demo {
+namespace discriminated_unions_demo {
 
-    interface Square {
+    interface ISquare {
         kind: "square";
         size: number;
     }
 
-    interface Rectangle {
+    interface IRectangle {
         kind: "rectangle";
         width: number;
         height: number;
     }
 
-    interface Circle {
+    interface ICircle {
         kind: "circle";
         radius: number;
     }
 
-    type Shape = Square | Rectangle | Circle;
+    type IShape = ISquare | IRectangle | ICircle;
 
-    function area(shape: Shape) {
+    function area(shape: IShape) {
         const PI = Math.PI;
         switch (shape.kind) {
             case "square": return shape.size * shape.size;

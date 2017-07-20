@@ -1,4 +1,3 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
 module control_flow_analysis_demo {
 
     function increment(

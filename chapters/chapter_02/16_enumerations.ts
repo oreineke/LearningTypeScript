@@ -1,31 +1,30 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
 module enumerations_demo {
 
-    enum CardinalDirectionEnum {
+    enum DirectionEnum {
         Up,
         Down,
         Left,
         Right
     }
 
-    type CardinalDirectionUnionType =
-        "North"
-        | "East"
-        | "South"
-        | "West";
+    type DirectionUnionType =
+        "Up"
+        | "Down"
+        | "Left"
+        | "Right";
 
-    function move(distance: number, direction: CardinalDirectionUnionType) {
+    function move(distance: number, direction: DirectionUnionType) {
         // ...
     }
 
-    move(1, "North"); // Okay
-    move(1, "Nurth"); // Error!
+    move(1, "Right"); // Okay
+    move(1, "Righ"); // Error!
 
-    enum CardinalDirectionStringEnum {
-        Red = "North",
-        Green = "East",
-        Blue = "South",
-        West = "West"
+    enum DirectionStringEnum {
+        Up = "Up",
+        Down = "Down",
+        Left = "Left",
+        Right = "Right"
     }
 
 }

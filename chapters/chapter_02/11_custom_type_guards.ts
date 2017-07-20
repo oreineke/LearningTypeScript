@@ -1,4 +1,3 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
 module custom_type_guard_demo_1 {
 
     interface Bird {

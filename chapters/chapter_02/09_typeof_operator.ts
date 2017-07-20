@@ -1,4 +1,3 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
 module typeof_operator_demo {
 
     // typeof at runtime
