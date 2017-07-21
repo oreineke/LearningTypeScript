@@ -1,4 +1,4 @@
-module enumerations_demo {
+namespace enumerations_demo {
 
     enum DirectionEnum {
         Up,

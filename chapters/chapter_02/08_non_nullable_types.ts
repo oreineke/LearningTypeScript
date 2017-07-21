@@ -1,4 +1,4 @@
-module nullable_types_demo {
+namespace nullable_types_demo {
 
     let name: string;
     name = "Remo"; // OK

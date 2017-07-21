@@ -1,4 +1,4 @@
-module custom_type_guard_demo_1 {
+namespace custom_type_guard_demo_1 {
 
     interface Bird {
         fly(): void;

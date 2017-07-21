@@ -1,5 +1,5 @@
 // Don't forget to disable strictNullChecks or strict in tsconfig.json
-module intersection_types_demo {
+namespace intersection_types_demo {
 
     interface A { a: string }
     interface B { b: string }
@@ -25,7 +25,6 @@ module intersection_types_demo {
     let s = f("hello"); // OK
     let n = f(42); // OK
     let t = f(true); // Error
-
 
     interface Bird {
         fly(): void;

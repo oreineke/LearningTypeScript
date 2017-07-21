@@ -1,5 +1,4 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-module keyof_operator_demo {
+namespace keyof_operator_demo {
 
     interface User {
         name: string;

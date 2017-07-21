@@ -1,5 +1,5 @@
 // Don't forget to disable strictNullChecks or strict in tsconfig.json
-module union_types_demo {
+namespace union_types_demo {
 
     let path: string[]|string;
     path = '/temp/log.xml';

@@ -1,14 +1,14 @@
-module control_flow_analysis_demo {
+namespace control_flow_analysis_demo {
 
     function increment(
-        incrementBy: number, value: number | number[]
+        incrementBy: number, valueOrValues: number | number[]
     ) {
-        if (Array.isArray(value)) {
-            // value must be an array of number
-            return value.map(value => value + incrementBy);
+        if (Array.isArray(valueOrValues)) {
+            // values must be an array of number
+            return valueOrValues.map((value) => value + incrementBy);
         } else {
-            // value is a number
-            return value + incrementBy;
+            // values is a number
+            return valueOrValues + incrementBy;
         }
     }
 

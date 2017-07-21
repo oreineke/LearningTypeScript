@@ -1,5 +1,4 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-module mapped_types_demo {
+namespace mapped_types_demo {
 
     type Keyify<T> = {
         [P in keyof T]: P;
@@ -24,8 +23,8 @@ module mapped_types_demo {
     let user: User = { name: "Remo", age: 28 };
     let keys = getKeys<User>(user);
 
-    keys.name; // "name"
-    keys.age; // "age"
+    console.log(keys.name); // "name"
+    console.log(keys.age); // "age"
 
     // Make all properties in T optional
     type Partial<T> = {
@@ -40,11 +39,11 @@ module mapped_types_demo {
     // From T pick a set of properties K
     type Pick<T, K extends keyof T> = {
         [P in K]: T[P];
-    }
+    };
 
     // Construct a type with a set of properties K of type T
     type Record<K extends string, T> = {
         [P in K]: T;
-    }
+    };
 
 }

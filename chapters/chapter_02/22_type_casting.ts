@@ -1,5 +1,4 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-module type_casting_demo {
+namespace type_casting_demo {
 
     interface SomeType {
         // ...

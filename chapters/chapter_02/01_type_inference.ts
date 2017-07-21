@@ -1,5 +1,5 @@
 // Don't forget to disable strictNullChecks or strict in tsconfig.json
-module type_inference_demo {
+namespace type_inference_demo {
 
   // number
   let myVariable1 = 3;

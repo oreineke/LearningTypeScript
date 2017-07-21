@@ -1,5 +1,4 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-module polymorphic_this_type_demo {
+namespace polymorphic_this_type_demo {
 
     class BasicCalculator {
         public constructor(protected value: number = 0) { }

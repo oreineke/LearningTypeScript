@@ -1,22 +1,21 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-module local_type_demo {
+namespace local_type_demo {
 
     interface Person {
         name: string;
         age: number;
     }
 
-    function makePerson(name: string, age: number): Person {
+    function makePerson(employeeName: string, employeeAge: number): Person {
 
         // Local type
-        class Person implements Person {
+        class Employee implements Person {
             constructor(
                 public name: string,
                 public age: number
             ) {}
         }
 
-        return new Person(name, age);
+        return new Employee(employeeName, employeeAge);
 
     }
 

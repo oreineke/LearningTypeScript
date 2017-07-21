@@ -1,5 +1,5 @@
 // Don't forget to disable strictNullChecks or strict in tsconfig.json
-module structural_type_system_demo {
+namespace structural_type_system_demo {
 
   interface Person {
     name: string;

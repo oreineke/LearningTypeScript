@@ -1,5 +1,4 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-module object_literal_demo {
+namespace object_literal_demo {
 
     let person1 = { name: "Remo", age: 28 };
 
@@ -9,7 +8,7 @@ module object_literal_demo {
     }
 
     let person2: User = { name: "Remo", age: 28 }; // OK
-    let person3: User = { name: "Remo" }; // False
+    let person3: User = { name: "Remo" }; // Error
 
     interface UserWithOptionalProperties {
         name: string;

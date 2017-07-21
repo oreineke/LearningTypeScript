@@ -1,4 +1,4 @@
-module typeof_operator_demo {
+namespace typeof_operator_demo {
 
     // typeof at runtime
     let myNumber1 = 5;

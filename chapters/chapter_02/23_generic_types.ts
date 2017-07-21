@@ -1,5 +1,4 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-module generic_types_demo {
+namespace generic_types_demo {
 
     function deserialize<T>(json: string): T {
         return JSON.parse(json) as T;

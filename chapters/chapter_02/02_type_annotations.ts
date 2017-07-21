@@ -1,5 +1,5 @@
 // Don't forget to disable strictNullChecks or strict in tsconfig.json
-module type_annotations_demo {
+namespace type_annotations_demo {
 
   // (a: any, b: any) => any;
   function add(a, b) {

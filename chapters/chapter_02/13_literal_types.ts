@@ -1,4 +1,4 @@
-module literal_types_demo {
+namespace literal_types_demo {
 
     let five1 = 5; // number
     let falsy1 = false; // boolean

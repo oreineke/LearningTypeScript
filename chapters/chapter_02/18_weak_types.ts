@@ -1,5 +1,4 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-module weak_type_dmeo {
+namespace weak_type_dmeo {
 
     interface User {
         name?: string;

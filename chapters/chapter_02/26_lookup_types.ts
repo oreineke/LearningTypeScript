@@ -1,10 +1,9 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-module lookup_types_demo {
+namespace lookup_types_demo {
 
     function filterByProperty<T, K extends keyof T>(
         property: K, entities: T[], value: T[K]
     ) {
-        return entities.filter(e => e[property] === value);
+        return entities.filter((e) => e[property] === value);
     }
 
     interface User {
@@ -19,6 +18,6 @@ module lookup_types_demo {
     ];
 
     filterByProperty<User, "age">("age", users, 21);
-    filterByProperty<User, "surname">("surname", users, "Smith");    
+    filterByProperty<User, "surname">("surname", users, "Smith");
 
 }

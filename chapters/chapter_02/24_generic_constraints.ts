@@ -1,10 +1,8 @@
-// Don't forget to enable strictNullChecks or strict in tsconfig.json
-
-interface Comparable { 
+interface Comparable {
     equals<T>(value: T): boolean;
 }
 
-function isEqual<T extends Comparable, TVal>(comparable: T, value: TVal) { 
+function isEqual<T extends Comparable, TVal>(comparable: T, value: TVal) {
     return comparable.equals(value);
 }
 

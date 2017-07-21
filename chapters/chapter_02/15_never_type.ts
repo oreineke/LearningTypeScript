@@ -1,4 +1,4 @@
-module never_type_demo {
+namespace never_type_demo {
 
     function error(message: string): never {
         throw new Error(message);
