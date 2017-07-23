@@ -26,19 +26,19 @@ namespace intersection_types_demo {
     let n = f(42); // OK
     let t = f(true); // Error
 
-    interface Bird {
-        fly(): void;
-        layEggs(): void;
+    interface Supplier {
+        orderItems(): void;
+        getAddress(): void;
     }
 
-    interface Fish {
-        swim(): void;
-        layEggs(): void;
+    interface Customer {
+        sellItems(): void;
+        getAddress(): void;
     }
 
-    declare let pet: Fish & Bird;
-    pet.layEggs(); // OK
-    pet.swim(); // OK
-    pet.fly();  // OK
+    declare let person: Supplier & Customer;
+    person.getAddress(); // OK
+    person.orderItems(); // OK
+    person.sellItems();  // OK
 
 }

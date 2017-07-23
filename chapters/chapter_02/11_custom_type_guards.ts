@@ -1,65 +1,64 @@
 namespace custom_type_guard_demo_1 {
 
-    interface Bird {
-        fly(): void;
-        layEggs(): void;
+    interface Supplier {
+        orderItems(): void;
+        getAddress(): void;
     }
 
-    interface Fish {
-        swim(): void;
-        layEggs(): void;
+    interface Customer {
+        sellItems(): void;
+        getAddress(): void;
     }
 
-    function isFish(pet: Fish | Bird): pet is Fish {
-        return (<Fish>pet).swim !== undefined;
+    function isSupplier(person: Supplier | Customer): person is Supplier {
+        return (<Supplier> person).orderItems !== undefined;
     }
 
-    function movePet(pet: Fish | Bird) { 
-        if (isFish(pet)) {
-            pet.swim(); // OK
+    function handleItems(person: Supplier | Customer) {
+        if (isSupplier(person)) {
+            person.orderItems(); // OK
         } else {
-            pet.fly(); // OK
+            person.sellItems(); // OK
         }
     }
 
 }
 
-module custom_type_guard_demo_2 {
+namespace custom_type_guard_demo_2 {
 
-    class Bird {
-        fly() {
+    class Supplier {
+        public orderItems(): void {
             // do something...
         }
-        layEggs() {
-            // do something...
-        }
-    }
-
-    class Fish {
-        swim() {
-            // do something...
-        }
-        layEggs() {
+        public getAddress(): void {
             // do something...
         }
     }
 
-    function isFish(pet: Fish | Bird): pet is Fish {
-        return pet instanceof Fish;
+    class Customer {
+        public sellItems(): void {
+            // do something...
+        }
+        public getAddress(): void {
+            // do something...
+        }
     }
 
-    function movePet(pet: Fish | Bird) { 
-        if (isFish(pet)) {
-            pet.swim(); // OK
+    function isSupplier(person: Supplier | Customer): person is Supplier {
+        return person instanceof Supplier;
+    }
+
+    function handleItems(person: Supplier | Customer) {
+        if (isSupplier(person)) {
+            person.orderItems(); // OK
         } else {
-            pet.fly(); // OK
+            person.sellItems(); // OK
         }
     }
 
 }
 
-
-module custom_type_guard_demo_2 {
+namespace custom_type_guard_demo_2 {
 
     function doSomething(x: number | string) {
         if (typeof x === "string") {

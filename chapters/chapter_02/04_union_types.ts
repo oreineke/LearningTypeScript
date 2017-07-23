@@ -1,24 +1,24 @@
-// Don't forget to disable strictNullChecks or strict in tsconfig.json
+// Don"t forget to disable strictNullChecks or strict in tsconfig.json
 namespace union_types_demo {
 
     let path: string[]|string;
-    path = '/temp/log.xml';
-    path = ['/temp/log.xml', '/temp/errors.xml'];
+    path = "/temp/log.xml";
+    path = ["/temp/log.xml", "/temp/errors.xml"];
     path = 1; // Error
 
-    interface Bird {
-        fly(): void;
-        layEggs(): void;
+    interface Supplier {
+        orderItems(): void;
+        getAddress(): void;
     }
 
-    interface Fish {
-        swim(): void;
-        layEggs(): void;
+    interface Customer {
+        sellItems(): void;
+        getAddress(): void;
     }
 
-    declare let pet: Fish | Bird;
-    pet.layEggs(); // OK
-    pet.swim(); // Errors
-    pet.fly();  // Error
+    declare let person: Supplier | Customer;
+    person.getAddress(); // OK
+    person.orderItems(); // Error
+    person.sellItems();  // Error
 
 }

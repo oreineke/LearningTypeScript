@@ -1,29 +1,33 @@
 namespace discriminated_unions_demo {
 
-    interface ISquare {
-        kind: "square";
+    interface Cube {
+        kind: "cube";
         size: number;
     }
 
-    interface IRectangle {
-        kind: "rectangle";
+    interface Pyramid {
+        kind: "pyramid";
         width: number;
+        length: number;
         height: number;
     }
 
-    interface ICircle {
-        kind: "circle";
+    interface Sphere {
+        kind: "sphere";
         radius: number;
     }
 
-    type IShape = ISquare | IRectangle | ICircle;
+    type Shape = Cube | Pyramid | Sphere;
 
-    function area(shape: IShape) {
+    function volume(shape: Shape) {
         const PI = Math.PI;
         switch (shape.kind) {
-            case "square": return shape.size * shape.size;
-            case "rectangle": return shape.width * shape.height;
-            case "circle": return PI * shape.radius * shape.radius;
+            case "cube":
+                return shape.size ** 3;
+            case "pyramid":
+                return (shape.width * shape.height * shape.length) / 3;
+            case "sphere":
+                return (4 / 3) * PI * (shape.radius ** 3);
         }
     }
 
