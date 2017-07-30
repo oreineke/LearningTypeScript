@@ -1,3 +1,7 @@
+// Remember to enable
+// "lib": [ "es2015.promise", "dom", "es5", "es2015.generator", "es2015.iterable" ]
+// "downlevelIteration": true
+// in tsconfig.json
 namespace async_iterator_demo {
 
     let counter = 0;
