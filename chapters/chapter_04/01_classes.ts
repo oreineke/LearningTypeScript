@@ -14,7 +14,7 @@ namespace classes_demo {
         }
     }
 
-    let person: Person = new Person(
+    const person = new Person(
         "Remo",
         "Jansen",
         "remo.jansen@wolksoftware.com"

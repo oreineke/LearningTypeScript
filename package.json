@@ -19,5 +19,7 @@
   "homepage": "https://github.com/remojansen/LearningTypeScript#readme",
   "devDependencies": {
     "typescript": "2.4.2"
+  },
+  "dependencies": {
   }
 }
