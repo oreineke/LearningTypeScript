@@ -21,5 +21,7 @@
     "typescript": "2.4.2"
   },
   "dependencies": {
+    "@types/requirejs": "^2.1.31",
+    "inversify": "^4.3.0"
   }
 }

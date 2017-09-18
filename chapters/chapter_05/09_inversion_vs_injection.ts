@@ -1,4 +1,4 @@
-namespace di_demo {
+namespace dependency_injection_demo {
 
     class Katana {
         public tryHit(fromDistance: number) {
@@ -21,7 +21,7 @@ namespace di_demo {
 
 }
 
-namespace ioc_demo {
+namespace dependency_inversion_demo {
 
     interface Weapon {
         tryHit(fromDistance: number): boolean;
