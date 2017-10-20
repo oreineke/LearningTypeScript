@@ -1,4 +1,4 @@
-# Learning TypeScript
+# Learning TypeScript (2nd Edition)
 
 Source code of the book Learning TypeScript written by Remo H. Jansen and published by Packt Publishing
 
@@ -16,7 +16,7 @@ Source code of the book Learning TypeScript written by Remo H. Jansen and publis
 
 - [Chapter 04: Object-oriented programming with TypeScript](/chapters/chapter_04)
 
-- [Chapter 05: Working with modules](/chapters/chapter_05)
+- [Chapter 05: Working with dependencies](/chapters/chapter_05)
 
 - [Chapter 06: Understanding the runtime](/chapters/chapter_06)
 
