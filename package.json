@@ -18,10 +18,13 @@
   },
   "homepage": "https://github.com/remojansen/LearningTypeScript#readme",
   "devDependencies": {
+    "@types/ramda": "0.24.17",
     "typescript": "2.4.2"
   },
   "dependencies": {
-    "@types/requirejs": "^2.1.31",
-    "inversify": "^4.3.0"
+    "@types/requirejs": "2.1.31",
+    "immutable": "3.8.2",
+    "inversify": "4.3.0",
+    "ramda": "0.25.0"
   }
 }
