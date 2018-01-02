@@ -17,19 +17,19 @@ Source code of the book Learning TypeScript written by [Remo H. Jansen](https://
 
 ### PART I: TypeScript fundamentals
 
-- :white_check_mark: [Chapter 01: Introducing TypeScript](/chapters/chapter_01)
+- [Chapter 01: Introducing TypeScript](/chapters/chapter_01)
 
-- :white_check_mark: [Chapter 02: Working with types](/chapters/chapter_02)
+- [Chapter 02: Working with types](/chapters/chapter_02)
 
-- :white_check_mark: [Chapter 03: Working with functions](/chapters/chapter_03)
+- [Chapter 03: Working with functions](/chapters/chapter_03)
 
-- :white_check_mark: [Chapter 04: Object-oriented programming with TypeScript](/chapters/chapter_04)
+- [Chapter 04: Object-oriented programming with TypeScript](/chapters/chapter_04)
 
-- :white_check_mark: [Chapter 05: Working with dependencies](/chapters/chapter_05)
+- [Chapter 05: Working with dependencies](/chapters/chapter_05)
 
-- :white_check_mark: [Chapter 06: Understanding the runtime](/chapters/chapter_06)
+- [Chapter 06: Understanding the runtime](/chapters/chapter_06)
 
-- :white_check_mark: [Chapter 07: Functional programming with TypeScript](/chapters/chapter_07)
+- [Chapter 07: Functional programming with TypeScript](/chapters/chapter_07)
 
 - [Chapter 08: Working with decorators](/chapters/chapter_08)
 
