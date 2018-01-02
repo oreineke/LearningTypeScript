@@ -8,14 +8,11 @@ Source code of the book Learning TypeScript written by [Remo H. Jansen](https://
 
 ---
 
-> **Note:** Not all source code files are free
-of compilation errors. Some of the examples throw
-compilation errors to demostrate how the TypeScript
-language services can detect them.
+> **Note:** Not all source code files are free of compilation errors. Some of the examples throw compilation errors to demostrate how the TypeScript language services can detect them.
 
 ---
 
-> **Note:** The source code contains internal modules (AKA `namespace`), which are used to isolate each demo from the others. As it is explained in the book contents, it is recommended to avoid the usage of internal modules.
+> **Note:** The source code contains internal modules (AKA `namespace`), which are used to isolate each demo from the others. As it is explained in the book contents, in a real-world TypeScript application, it is recommended to avoid the usage of internal modules.
 ---
 
 ### PART I: TypeScript fundamentals
