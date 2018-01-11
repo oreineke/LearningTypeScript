@@ -2,11 +2,20 @@
 
 Source code of the book Learning TypeScript written by [Remo H. Jansen](https://github.com/remojansen) and published by [Packt Publishing](https://www.packtpub.com/).
 
-<img src="./media/cover.png" width="250" />
+### Second edition (ISBN 9781788391474)
+
 <img src="./media/cover_2.png" width="250" />
 
-- First edition (ISBN 9781783985548)
-- Second edition (ISBN 9781788391474)
+- [Amazon :uk:](https://www.amazon.co.uk/Learning-TypeScript-2-x-Remo-Jansen-ebook/dp/B078PQ6MF4/)
+- [Amazon :us:](https://www.amazon.com/Learning-TypeScript-2-x-Remo-Jansen-ebook/dp/B078PQ6MF4/)
+
+### First edition (ISBN 9781783985548)
+
+<img src="./media/cover.png" width="250" />
+
+- [Amazon :uk:](https://www.amazon.co.uk/Learning-TypeScript-Remo-H-Jansen/dp/1783985542)
+- [Amazon :us:](https://www.amazon.com/Learning-TypeScript-Remo-H-Jansen/dp/1783985542)
+- [Amazon :cn:](https://www.amazon.cn/dp/B01M2CAFTB)
 
 ## Content
 
