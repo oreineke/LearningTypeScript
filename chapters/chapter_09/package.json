@@ -1,0 +1,27 @@
+{
+  "name": "chapter_09",
+  "version": "1.0.0",
+  "description": "Learning TypeScript: Chapter 09 Source code",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node ./src/main.ts",
+    "test": "npm run lint & npm run nyc",
+    "lint": "tslint --project tsconfig.json -c tslint.json ./**/*.ts",
+    "nyc": "nyc -x **/*.js --clean --all --require ts-node/register --extension .ts -- mocha --timeout 5000 **/*.test.ts"
+  },
+  "keywords": [],
+  "author": "Remo H. Jansen <remo.jansen@wolksoftware.com> (http://www.remojansen.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "4.1.0",
+    "@types/mocha": "2.2.46",
+    "chai": "4.1.2",
+    "gulp": "3.9.1",
+    "gulp-tslint": "8.1.2",
+    "mocha": "4.1.0",
+    "nyc": "11.4.1",
+    "ts-node": "4.1.0",
+    "tslint": "5.8.0",
+    "typescript": "2.6.2"
+  }
+}
