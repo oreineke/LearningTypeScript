@@ -11,7 +11,7 @@ describe("isNumber", () => {
     it ("Should throw if an invalid argument is provided", () => {
         const a: any = "2";
         const throws = () => isNumber(a);
-        expect(throws).to.throw("");
+        expect(throws).to.throw();
     });
 
 });

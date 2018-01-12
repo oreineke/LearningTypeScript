@@ -12,7 +12,7 @@ describe("Operation: pow", () => {
         const a: any = "2";
         const b: any = 3;
         const throws = () => pow(a, b);
-        expect(throws).to.throw("");
+        expect(throws).to.throw();
     });
 
 });

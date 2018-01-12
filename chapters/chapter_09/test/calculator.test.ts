@@ -14,7 +14,7 @@ describe("Calculator", () => {
     it ("Should throw if an invalid operation is provided", () => {
         const calculator = new Calculator();
         const throws = () => calculator.calculate("division", 2, 3);
-        expect(throws).to.throw("");
+        expect(throws).to.throw();
     });
 
 });
