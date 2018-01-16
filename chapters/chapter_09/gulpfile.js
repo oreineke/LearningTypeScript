@@ -1,9 +1,11 @@
 let gulp = require("gulp");
-let tslint = require("gulp-tslint");
 
-gulp.task("default", function() {
+gulp.task("hello", function() {
     console.log("Hello Gulp!");
 });
+
+let tslint = require("tslint");
+let gulpTslint = require("gulp-tslint");
 
 gulp.task("lint", function() {
 
@@ -21,3 +23,4 @@ gulp.task("lint", function() {
 
 });
 
+gulp.task("default", ["hello", "lint"]);

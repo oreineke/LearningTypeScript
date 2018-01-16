@@ -7,7 +7,7 @@ interface Operation {
 }
 
 export class Calculator {
-    private _operations: Operation[];
+    private readonly _operations: Operation[];
     public constructor() {
         this._operations = [
             { name: "add", operation: add },
