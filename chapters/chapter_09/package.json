@@ -15,7 +15,6 @@
   "devDependencies": {
     "@types/chai": "4.1.0",
     "@types/mocha": "2.2.46",
-    "@types/chalk": "2.2.0",
     "awesome-typescript-loader": "3.4.1",
     "chai": "4.1.2",
     "css-loader": "0.28.8",
