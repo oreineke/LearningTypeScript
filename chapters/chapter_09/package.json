@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run lint & npm run nyc",
-    "ts-node": "ts-node ./src/main.ts",
+    "ts-node": "ts-node ./src/main_server.ts",
     "lint": "tslint --project tsconfig.json -c tslint.json ./**/*.ts",
     "nyc": "nyc -x **/*.js --clean --all --require ts-node/register --extension .ts -- mocha --timeout 5000 **/*.test.ts"
   },
