@@ -1,12 +1,3 @@
-export interface Component<T> {
-  componentDidMount(): void;
-  render(): string;
-}
-
-export interface ComponentConstructor<T> {
-  new(props: T): Component<T>;
-}
-
 export interface MathInterface {
   PI: number;
   pow(base: number, exponent: number): number;
