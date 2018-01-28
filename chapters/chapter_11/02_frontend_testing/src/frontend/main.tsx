@@ -1,15 +1,14 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Calculator } from "./calculator_component";
+import "./main.scss";
 import { MathClient } from "./math_client";
 
-const Root = (
-    <div>
-        <Calculator math={new MathClient()} />
-    </div>
-);
-
 ReactDOM.render(
-    Root,
+    (
+        <div>
+            <Calculator client={new MathClient()} />
+        </div>
+    ),
     document.querySelector("#main")
 );

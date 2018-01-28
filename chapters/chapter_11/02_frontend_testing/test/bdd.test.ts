@@ -1,4 +1,4 @@
-///<reference path="../source/interfaces.d.ts" />
+/*
 
 import { MathDemo } from "../source/math_demo";
 import { CalculatorWidget } from "../source/calculator_widget";
@@ -80,7 +80,6 @@ describe('BDD test example for MathDemo class \n', () => {
       done(); // invoke done() inside your call back or fulfilled promises
     });
   });
-  */
 
   // how to test for errors
   it('should throw an exception when no parameters passed \n', () => {
@@ -89,7 +88,6 @@ describe('BDD test example for MathDemo class \n', () => {
   });
 
 });
-
 
 describe('BDD test example for CalculatorWidget class \n', () => {
 
@@ -148,3 +146,5 @@ describe('BDD test example for CalculatorWidget class \n', () => {
   });
 
 });
+
+*/

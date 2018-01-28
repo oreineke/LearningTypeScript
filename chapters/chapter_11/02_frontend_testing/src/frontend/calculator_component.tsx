@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Input } from "./input_component";
 import { MathClient } from "./math_client";
+import { NumericInput } from "./numeric_input_component";
 
 const ids = {
   base: "#base",
@@ -9,7 +9,9 @@ const ids = {
   submit: "#submit"
 };
 
-interface CalculatorProps {}
+interface CalculatorProps {
+  client: MathClient;
+}
 
 interface CalculatorState {
   base: number;
@@ -18,8 +20,6 @@ interface CalculatorState {
 }
 
 export class Calculator extends React.Component<CalculatorProps, CalculatorState> {
-
-  private _client: MathClient;
 
   public constructor(props: CalculatorProps) {
     super(props);
@@ -34,27 +34,30 @@ export class Calculator extends React.Component<CalculatorProps, CalculatorState
     return (
       <div className="well">
         <div className="row">
-          <div className="col-md-3">
-            <Input
-              name="base"
+          <div className="col">
+            <NumericInput
+              name="Base"
+              readonly={false}
               onChangeHandler={(v) => this.setState({ base: v })}
             />
           </div>
-          <div className="col-md-3">
-            <Input
-              name="exponent"
+          <div className="col">
+            <NumericInput
+              name="Exponent"
+              readonly={false}
               onChangeHandler={(v) => this.setState({ exponent: v })}
             />
           </div>
-          <div className="col-md-3">
-            <Input
-              name="result"
+          <div className="col">
+            <NumericInput
+              name="Result"
+              readonly={true}
               onChangeHandler={(v) => this.setState({ result: v })}
             />
           </div>
-          <div className="col-md-3">
+          <div className="col">
             <button
-              type="submit"
+              type="Submit"
               className="btn btn-primary"
               onClick={() => this._onSubmit()}
             >
@@ -67,12 +70,13 @@ export class Calculator extends React.Component<CalculatorProps, CalculatorState
   }
 
   private _onSubmit() {
-    this.setState({
-      result: this._client.pow(
+    (async () => {
+      const result = await this.props.client.pow(
         this.state.base,
         this.state.exponent
-      )
-    });
+      );
+      this.setState({ result });
+    })();
   }
 
 }

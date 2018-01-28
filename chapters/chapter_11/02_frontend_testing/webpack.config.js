@@ -24,7 +24,7 @@ const plugins = isProduction ? corePlugins.concat(prodPlugins) : corePlugins.con
 
 module.exports = {
     entry: {
-        "app/": "./src/main_browser.ts"
+        "app/": "./src/frontend/main.tsx"
     },
     devServer: {
         inline: true
@@ -36,7 +36,7 @@ module.exports = {
     },
     devtool: isProduction ? "source-map" : "eval-source-map",
     resolve: {
-        extensions: [".webpack.js", ".ts", ".tsx", ".js"],
+        extensions: [".ts", ".tsx", ".js", ".jsx",".json"],
         plugins: [
             new TsConfigPathsPlugin({ configFileName: "tsconfig.json" })
         ]
@@ -47,12 +47,12 @@ module.exports = {
                 enforce: "pre",
                 test: /\.js$/,
                 loader: "source-map-loader",
-                exclude: [/node_modules/, /experimental/]
+                exclude: [/node_modules/]
             },
             {
                 test: /\.(ts|tsx)$/,
                 loader: "awesome-typescript-loader",
-                exclude: [/node_modules/, /experimental/]
+                exclude: [/node_modules/]
             },
             {
                 test: /\.scss$/,

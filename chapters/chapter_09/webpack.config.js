@@ -47,12 +47,12 @@ module.exports = {
                 enforce: "pre",
                 test: /\.js$/,
                 loader: "source-map-loader",
-                exclude: [/node_modules/, /experimental/]
+                exclude: [/node_modules/]
             },
             {
                 test: /\.(ts|tsx)$/,
                 loader: "awesome-typescript-loader",
-                exclude: [/node_modules/, /experimental/]
+                exclude: [/node_modules/]
             },
             {
                 test: /\.scss$/,

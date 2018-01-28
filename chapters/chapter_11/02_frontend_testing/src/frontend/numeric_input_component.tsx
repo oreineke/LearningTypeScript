@@ -2,6 +2,7 @@ import * as React from "react";
 
 interface NumericInputProps {
     name: string;
+    readonly: boolean;
     onChangeHandler(val: number): void;
 }
 
@@ -9,7 +10,7 @@ interface NumericInputState {
     isValid: boolean;
 }
 
-export class Input extends React.Component<NumericInputProps, NumericInputState> {
+export class NumericInput extends React.Component<NumericInputProps, NumericInputState> {
 
     public constructor(props: NumericInputProps) {
         super(props);
@@ -21,15 +22,17 @@ export class Input extends React.Component<NumericInputProps, NumericInputState>
     public render() {
         return (
             <div className="form-group">
+                {this._renderError()}
                 <label>{this.props.name}</label>
                 <input
                     type="text"
                     className="form-control"
+                    readOnly={this.props.readonly}
                     onChange={(e) => {
-                        const val = parseFloat(e.target.value);
+                        const val = e.target.value as any;
                         if (!isNaN(val)) {
                             this.setState({ isValid: true });
-                            this.props.onChangeHandler(val);
+                            this.props.onChangeHandler(parseFloat(val));
                         } else {
                             this.setState({ isValid: false });
                         }
@@ -38,4 +41,15 @@ export class Input extends React.Component<NumericInputProps, NumericInputState>
             </div>
         );
     }
+
+    private _renderError() {
+        if (!this.state.isValid) {
+            return (
+                <div className="error-msg">
+                    <p>{`${this.props.name} must be numeric!`}</p>
+                </div>
+            );
+        }
+    }
+
 }
