@@ -1,7 +1,7 @@
-import * as nightwatch from "nightwatch";
+import { NightwatchBrowser } from "nightwatch";
 
 const test = {
-  "Calculator pow e2e test example": (browser: nightwatch.NightwatchBrowser) => {
+  "Calculator pow e2e test example": (browser: NightwatchBrowser) => {
     browser
       .url("http://localhost:8080/")
       .waitForElementVisible("body", 1000)
