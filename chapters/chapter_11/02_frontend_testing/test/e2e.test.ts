@@ -1,4 +1,5 @@
 import * as nightwatch from "nightwatch";
+
 const test = {
   "Calculator pow e2e test example": (browser: nightwatch.NightwatchBrowser) => {
     browser

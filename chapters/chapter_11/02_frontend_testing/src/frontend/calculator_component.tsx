@@ -14,9 +14,9 @@ interface CalculatorProps {
 }
 
 interface CalculatorState {
-  base: number;
-  exponent: number;
-  result: number;
+  base: string;
+  exponent: string;
+  result: string;
 }
 
 export class Calculator extends React.Component<CalculatorProps, CalculatorState> {
@@ -24,9 +24,9 @@ export class Calculator extends React.Component<CalculatorProps, CalculatorState
   public constructor(props: CalculatorProps) {
     super(props);
     this.state = {
-      base: 1,
-      exponent: 1,
-      result: 1
+      base: "1",
+      exponent: "1",
+      result: "1"
     };
   }
 
@@ -36,27 +36,29 @@ export class Calculator extends React.Component<CalculatorProps, CalculatorState
         <div className="row">
           <div className="col">
             <NumericInput
+              id="base"
               name="Base"
-              readonly={false}
+              value={this.state.base}
               onChangeHandler={(v) => this.setState({ base: v })}
             />
           </div>
           <div className="col">
             <NumericInput
+              id="exponent"
               name="Exponent"
-              readonly={false}
+              value={this.state.exponent}
               onChangeHandler={(v) => this.setState({ exponent: v })}
             />
           </div>
           <div className="col">
-            <NumericInput
-              name="Result"
-              readonly={true}
-              onChangeHandler={(v) => this.setState({ result: v })}
-            />
+            <div className="form-group">
+                  <label>Result</label>
+                  <div>{this.state.result}</div>
+              </div>
           </div>
           <div className="col">
             <button
+              id="submit_btn"
               type="Submit"
               className="btn btn-primary"
               onClick={() => this._onSubmit()}
@@ -72,8 +74,8 @@ export class Calculator extends React.Component<CalculatorProps, CalculatorState
   private _onSubmit() {
     (async () => {
       const result = await this.props.client.pow(
-        this.state.base,
-        this.state.exponent
+        parseFloat(this.state.base),
+        parseFloat(this.state.exponent)
       );
       this.setState({ result });
     })();

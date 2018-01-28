@@ -1,22 +1,16 @@
 import * as React from "react";
 
 interface NumericInputProps {
+    id: string;
     name: string;
-    readonly: boolean;
-    onChangeHandler(val: number): void;
+    value: string;
+    onChangeHandler(val: string): void;
 }
 
-interface NumericInputState {
-    isValid: boolean;
-}
-
-export class NumericInput extends React.Component<NumericInputProps, NumericInputState> {
+export class NumericInput extends React.Component<NumericInputProps> {
 
     public constructor(props: NumericInputProps) {
         super(props);
-        this.state = {
-            isValid: true
-        };
     }
 
     public render() {
@@ -25,25 +19,26 @@ export class NumericInput extends React.Component<NumericInputProps, NumericInpu
                 {this._renderError()}
                 <label>{this.props.name}</label>
                 <input
+                    id={this.props.id}
                     type="text"
+                    defaultValue={this.props.value ? this.props.value.toString() : ""}
                     className="form-control"
-                    readOnly={this.props.readonly}
                     onChange={(e) => {
                         const val = e.target.value as any;
-                        if (!isNaN(val)) {
-                            this.setState({ isValid: true });
-                            this.props.onChangeHandler(parseFloat(val));
-                        } else {
-                            this.setState({ isValid: false });
-                        }
+                        this.props.onChangeHandler(val);
                     }}
                 />
             </div>
         );
     }
 
+    private _idValid() {
+        const val = this.props.value as any;
+        return (val && !isNaN(val));
+    }
+
     private _renderError() {
-        if (!this.state.isValid) {
+        if (!this._idValid()) {
             return (
                 <div className="error-msg">
                     <p>{`${this.props.name} must be numeric!`}</p>
