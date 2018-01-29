@@ -53,7 +53,7 @@ export class Calculator extends React.Component<CalculatorProps, CalculatorState
           <div className="col">
             <div className="form-group">
                   <label>Result</label>
-                  <div>{this.state.result}</div>
+                  <div id="result">{this.state.result}</div>
               </div>
           </div>
           <div className="col">

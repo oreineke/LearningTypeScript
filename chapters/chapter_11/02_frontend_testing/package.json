@@ -7,14 +7,15 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npm run lint && npm run build && npm run nyc && npm run e2e",
-    "start": "npm run build && node private/main.js",
+    "all": "npm install && npm run lint && npm run build && npm test",
+    "start": "ts-node src/backend/main.ts &",
     "lint": "tslint --project tsconfig.json -c tslint.json ./**/*.ts",
-    "build": "npm run build-frontend && npm run build-backend-and-tests",
+    "build": "npm run build-frontend && npm run build-e2e",
     "build-frontend": "webpack",
-    "build-backend-and-tests": "tsc -p tsconfig.json --outDir dist",
-    "e2e": "nightwatch",
-    "nyc": "nyc -x **/*.js --clean --all --require ts-node/register --extension .ts -- mocha --timeout 5000 **/*.test.ts"
+    "build-e2e": "tsc -p tsconfig.e2e.json",
+    "test": "npm run nyc && npm run e2e",
+    "nyc": "nyc -x **/*.js --clean --all --require ts-node/register --extension .ts -- mocha --timeout 5000 test/*.test.ts test/*.test.tsx",
+    "e2e": "ts-node src/backend/main.ts & (sleep 3000 && nightwatch --config nightwatch.js)"
   },
   "keywords": [],
   "author": "Remo H. Jansen <remo.jansen@wolksoftware.com> (http://www.remojansen.com)",
@@ -39,7 +40,7 @@
     "nyc": "11.4.1",
     "resolve-url-loader": "2.2.1",
     "sass-loader": "6.0.6",
-    "selenium-standalone": "6.12.0",
+    "chromedriver": "2.33.2",
     "sinon": "4.2.0",
     "style-loader": "0.19.1",
     "ts-node": "4.1.0",
