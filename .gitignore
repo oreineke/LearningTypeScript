@@ -61,3 +61,4 @@ package-lock.json
 public
 screenshots
 dist
+CHROME_*

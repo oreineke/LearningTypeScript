@@ -5,11 +5,15 @@ import { MathDemo } from "./math_demo";
 const app = express();
 
 // Route for static assests (css and js file)
-app.use("/public", express.static(path.join(__dirname, "../../public")));
+// the path is ../../../ because it is executed
+// from the /dist/backend folder
+app.use("/public", express.static(path.join(__dirname, "../../../public")));
 
-// Route for index.html
+// Route for index.html the path
+// is ../../../ because it is executed
+// from the /dist/backend folder
 app.get("/", (req, res) =>
-    res.sendFile(path.join(__dirname, "../../index.html")));
+    res.sendFile(path.join(__dirname, "../../../index.html")));
 
 // Route for math pow operation
 app.get("/api/math/pow/:base/:exponent", (req, res) => {
