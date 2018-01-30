@@ -17,7 +17,7 @@
     "build-e2e": "tsc -p tsconfig.e2e.json",
     "test": "npm run nyc && npm run e2e",
     "nyc": "nyc --clean --all -x webpack.config.js -x public -x dist -x globals.js --require ts-node/register --extension .ts -- mocha --timeout 5000 **/*.test.ts",
-    "e2e": "npm run start && sleep 3s && nightwatch --config nightwatch.json && npm run kill"
+    "e2e": "npm run start && nightwatch --config nightwatch.json && npm run kill"
   },
   "keywords": [],
   "author": "Remo H. Jansen <remo.jansen@wolksoftware.com> (http://www.remojansen.com)",
