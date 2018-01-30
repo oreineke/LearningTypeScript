@@ -1,5 +1,9 @@
 import { NightwatchBrowser } from "nightwatch";
 
+// This is an end-to-end test. We use a real web browser
+// to simulate a real user and check that everything
+// works as expected.
+
 const test = {
   "Calculator pow e2e test example": (browser: NightwatchBrowser) => {
     browser
