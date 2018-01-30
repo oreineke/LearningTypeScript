@@ -2,6 +2,7 @@ import * as ts from "typescript";
 import Ast, { DiagnosticMessageChain, ClassDeclaration, MethodDeclaration, PropertyDeclaration, InterfaceDeclaration } from "ts-simple-ast";
 import { join, flatten } from "lodash";
 import * as fs from "fs";
+import * as path from "path";
 import * as request from "request";
 
 /*
@@ -109,20 +110,18 @@ function emmitInheritanceRelationships(classDeclaration: ClassDeclaration) {
 
 // Renders the UML diagram in a png
 function render(yuml: string) {
-    const url = templates.url(yuml);
 
-    const download = function(uri, filename, callback){
+    const download = (uri: string, filename: string, callback: () => void) => {
         request.head(uri, (err, res, body) => {
-            console.log('content-type:', res.headers['content-type']);
-            console.log('content-length:', res.headers['content-length']);
-        
-            request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+            request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
         });
     };
 
-    download('https://www.google.com/images/srpr/logo3w.png', 'uml.png', function(){
-        console.log('done');
-    });
+    const url = templates.url(yuml);
+    const file = `uml_diagram_${new Date().getTime()}.png`;
+    const absolutePath = path.join(__dirname, file);
+
+    download(url, file, () => console.log(`Saved UML diagram available at ${absolutePath}`));
 }
 
 // Generates the yUML for the given TypeScript files
@@ -160,7 +159,5 @@ const yuml = yUML(
         "./app/main.ts"
     ]
 );
-
-console.log(yuml);
 
 render(yuml);
