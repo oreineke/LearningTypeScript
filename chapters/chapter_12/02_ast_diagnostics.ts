@@ -1,6 +1,11 @@
 import Ast, { DiagnosticMessageChain } from "ts-simple-ast";
 import chalk from "chalk";
 
+/*
+    This file demostrates how to use ts-simple-ast
+    to find errors in TypeScript files
+*/
+
 function getAst(tsConfigPath: string, sourceFilesPath: string) {
     const ast = new Ast({
         tsConfigFilePath: tsConfigPath,
@@ -40,6 +45,6 @@ function getErrors(ast: Ast) {
     return errors;
 }
 
-const myAst = getAst("./tsconfig.json", "./app/*.ts");
+const myAst = getAst("./tsconfig.json", "./app/broken.ts");
 
 getErrors(myAst).forEach(err => console.log(chalk.red(err)));
