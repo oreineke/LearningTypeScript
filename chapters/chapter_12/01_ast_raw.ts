@@ -1,5 +1,5 @@
-import * as ts from "typescript";
 import chalk from "chalk";
+import * as ts from "typescript";
 
 /*
     This file demostrates how to use the TypeScript
@@ -69,7 +69,7 @@ const entities = program.getSourceFiles().map(file => {
             // Iterate module nodes
             ts.forEachChild(node, visit);
         }
-    }
+    };
 
     ts.forEachChild(file, visit);
     return result;

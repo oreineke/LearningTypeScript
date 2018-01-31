@@ -1,9 +1,9 @@
-import * as ts from "typescript";
-import Ast, { DiagnosticMessageChain, ClassDeclaration, MethodDeclaration, PropertyDeclaration, InterfaceDeclaration } from "ts-simple-ast";
-import { join, flatten } from "lodash";
 import * as fs from "fs";
+import { flatten, join } from "lodash";
 import * as path from "path";
 import * as request from "request";
+import Ast, * as SimpleAST from "ts-simple-ast";
+import * as ts from "typescript";
 
 /*
     This file demostrates how to use ts-simple-ast
@@ -20,10 +20,11 @@ interface PropertyDetails {
 }
 
 const templates = {
-    url: (yuml: string) => `http://yuml.me/diagram/scruffy/class/${yuml}`,
+    url: (dsl: string) => `http://yuml.me/diagram/scruffy/class/${dsl}`,
     composition: "+->",
     implementsOrExtends: (abstraction: string, implementation: string) => {
-        return `${templates.plainClassOrInterface(abstraction)}^-${templates.plainClassOrInterface(implementation)}`;
+        return `${templates.plainClassOrInterface(abstraction)}` +
+            `^-${templates.plainClassOrInterface(implementation)}`;
     },
     plainClassOrInterface: (name: string) => `[${name}]`,
     colorClass: (name: string) => `[${name}{bg:skyblue}]`,
@@ -31,12 +32,14 @@ const templates = {
     class: (name: string, props: PropertyDetails[], methods: MethodDetails[]) => {
         const pTemplate = (property: PropertyDetails) => `${property.name};`;
         const mTemplate = (method: MethodDetails) => `${method.name}();`;
-        return `${templates.colorClass(name)}[${name}|${props.map(pTemplate)}|${methods.map(mTemplate)}]`
+        return `${templates.colorClass(name)}` +
+            `[${name}|${props.map(pTemplate)}|${methods.map(mTemplate)}]`;
     },
     interface: (name: string, props: PropertyDetails[], methods: MethodDetails[]) => {
         const pTemplate = (property: PropertyDetails) => `${property.name};`;
         const mTemplate = (method: MethodDetails) => `${method.name}();`;
-        return `${templates.colorInterface(name)}[${name}|${props.map(pTemplate)}|${methods.map(mTemplate)}]`
+        return `${templates.colorInterface(name)}` +
+            `[${name}|${props.map(pTemplate)}|${methods.map(mTemplate)}]`;
     }
 };
 
@@ -52,18 +55,18 @@ function getAst(tsConfigPath: string, sourceFilesPaths?: string[]) {
 }
 
 // Emmits yUML code for an class declaration
-function emmitClass(classDeclaration: ClassDeclaration) {
+function emmitClass(classDeclaration: SimpleAST.ClassDeclaration) {
 
     const name = classDeclaration.getName();
     const members = classDeclaration.getAllMembers();
 
-    const properties = members.filter(m => m instanceof PropertyDeclaration).map(m => {
+    const properties = members.filter(m => m instanceof SimpleAST.PropertyDeclaration).map(m => {
         return {
             name: m.getChildren().filter(c => c.getKind() === ts.SyntaxKind.Identifier)[0].getFullText().trim()
         };
     });
 
-    const methods = members.filter(m => m instanceof MethodDeclaration).map(m => {
+    const methods = members.filter(m => m instanceof SimpleAST.MethodDeclaration).map(m => {
         return {
             name: m.getChildren().filter(c => c.getKind() === ts.SyntaxKind.Identifier)[0].getFullText().trim()
         };
@@ -73,7 +76,7 @@ function emmitClass(classDeclaration: ClassDeclaration) {
 }
 
 // Emmits yUML code for an interface declaration
-function emmitInterface(interfaceDeclaration: InterfaceDeclaration) {
+function emmitInterface(interfaceDeclaration: SimpleAST.InterfaceDeclaration) {
 
     const name = interfaceDeclaration.getName();
     const members = interfaceDeclaration.getAllMembers();
@@ -95,7 +98,7 @@ function emmitInterface(interfaceDeclaration: InterfaceDeclaration) {
 }
 
 // Emmits yUML code for an heritage clauses
-function emmitInheritanceRelationships(classDeclaration: ClassDeclaration) {
+function emmitInheritanceRelationships(classDeclaration: SimpleAST.ClassDeclaration) {
 
     const name = classDeclaration.getName();
     const heritageClauses = classDeclaration.getHeritageClauses();
@@ -109,7 +112,7 @@ function emmitInheritanceRelationships(classDeclaration: ClassDeclaration) {
 }
 
 // Renders the UML diagram in a png
-function render(yuml: string) {
+function render(dsl: string) {
 
     const download = (uri: string, filename: string, callback: () => void) => {
         request.head(uri, (err, res, body) => {
@@ -117,7 +120,7 @@ function render(yuml: string) {
         });
     };
 
-    const url = templates.url(yuml);
+    const url = templates.url(dsl);
     const file = `uml_diagram_${new Date().getTime()}.png`;
     const absolutePath = path.join(__dirname, file);
 
@@ -130,7 +133,7 @@ function yUML(tsConfigPath: string, sourceFilesPaths: string[]) {
     const ast = getAst(tsConfigPath, sourceFilesPaths);
     const files = ast.getSourceFiles();
 
-    const declarations = files.map(f => {
+    const declarations = files.map((f) => {
         return {
             fileName: f.getFilePath(),
             classes: f.getClasses(),
@@ -138,16 +141,15 @@ function yUML(tsConfigPath: string, sourceFilesPaths: string[]) {
         };
     });
 
-    const entities = declarations.map(d => {
+    const entities = declarations.map((d) => {
         const classes = d.classes.map(emmitClass);
         const interfaces = d.interfaces.map(emmitInterface);
         const inheritanceRelationships = d.classes.map(emmitInheritanceRelationships);
         return [...classes, ...interfaces, ...inheritanceRelationships];
     });
 
-    const yuml = join(flatten(entities), ",");
+    return join(flatten(entities), ",");
 
-    return yuml;
 }
 
 const yuml = yUML(
@@ -159,5 +161,7 @@ const yuml = yUML(
         "./app/main.ts"
     ]
 );
+
+console.log(yuml);
 
 render(yuml);

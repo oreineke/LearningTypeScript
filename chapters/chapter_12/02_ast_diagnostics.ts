@@ -1,5 +1,5 @@
-import Ast, { DiagnosticMessageChain } from "ts-simple-ast";
 import chalk from "chalk";
+import Ast, { DiagnosticMessageChain } from "ts-simple-ast";
 
 /*
     This file demostrates how to use ts-simple-ast
@@ -18,7 +18,7 @@ function getAst(tsConfigPath: string, sourceFilesPath: string) {
 function getErrors(ast: Ast) {
     const diagnostics = ast.getDiagnostics();
     const preEmitDiagnostics = ast.getPreEmitDiagnostics();
-    
+
     function dmcToString(dmc: DiagnosticMessageChain, msg: string = ""): string {
         const messageText = dmc.getMessageText();
         const code = dmc.getCode();
@@ -26,7 +26,7 @@ function getErrors(ast: Ast) {
         const next = dmc.getNext();
         return next ? dmcToString(next, msg) : msg;
     }
-    
+
     const errors = diagnostics.map((diagnostic) => {
         const code = diagnostic.getCode();
         const sourceOrUndefined = diagnostic.getSourceFile();

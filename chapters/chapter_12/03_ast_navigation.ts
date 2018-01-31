@@ -1,5 +1,5 @@
-import Ast, { DiagnosticMessageChain } from "ts-simple-ast";
 import chalk from "chalk";
+import Ast, { DiagnosticMessageChain } from "ts-simple-ast";
 
 /*
     This file demostrates how to use ts-simple-ast
