@@ -8,7 +8,7 @@ import { getApp } from "../src/backend/server";
 // response works as expected.
 
 describe("Math Services", function() {
-    it("GET /api/math/pow/:base/:exponent", function() {
+    it("Should be able to HTTP GET /api/math/pow/:base/:exponent", function() {
         const app = getApp();
         request(app).get("/api/math/pow/2/3")
                     .set("Accept", "application/json")
