@@ -33,23 +33,21 @@ Source code of the book Learning TypeScript (http://www.learningtypescript.com/)
 
 - [Chapter 08: Working with decorators](/chapters/chapter_08)
 
-### PART II: TypeScript tooling
+### PART II: TypeScript tools and frameworks
 
 - [Chapter 09: Automating your development workflow](/chapters/chapter_09)
 
-- [Chapter 10: Application performance](/chapters/chapter_10)
+- [Chapter 10: Node.js development with TypeScript](/chapters/chapter_10)
 
-- [Chapter 11: Application testing](/chapters/chapter_11)
+- [Chapter 11: React development with TypeScript](/chapters/chapter_11)
 
-- [Chapter 12: working with the language services](/chapters/chapter_11)
+- [Chapter 12: Angular development with TypeScript](/chapters/chapter_12)
 
-### PART III: TypeScript in practice
+- [Chapter 13: Application performance](/chapters/chapter_13)
 
-- [Chapter 13: Node.js development with TypeScript](/chapters/chapter_13)
+- [Chapter 14: Application testing](/chapters/chapter_14)
 
-- [Chapter 14: React development with TypeScript](/chapters/chapter_14)
-
-- [Chapter 15: Angular development with TypeScript](/chapters/chapter_15)
+- [Chapter 15: working with the language services](/chapters/chapter_15)
 
 ## Editions
 
