@@ -1,21 +1,8 @@
 # Learning TypeScript (2nd Edition)
 
-Source code of the book Learning TypeScript written by [Remo H. Jansen](https://github.com/remojansen) and published by [Packt Publishing](https://www.packtpub.com/).
+Source code of the book Learning TypeScript (http://www.learningtypescript.com/) written by [Remo H. Jansen](https://github.com/remojansen) and published by [Packt Publishing](https://www.packtpub.com/).
 
-### Second edition (ISBN 9781788391474)
-
-<img src="./media/cover_2.png" width="250" />
-
-- [Amazon :uk:](https://www.amazon.co.uk/Learning-TypeScript-2-x-Remo-Jansen-ebook/dp/B078PQ6MF4/)
-- [Amazon :us:](https://www.amazon.com/Learning-TypeScript-2-x-Remo-Jansen-ebook/dp/B078PQ6MF4/)
-
-### First edition (ISBN 9781783985548)
-
-<img src="./media/cover.png" width="250" />
-
-- [Amazon :uk:](https://www.amazon.co.uk/Learning-TypeScript-Remo-H-Jansen/dp/1783985542)
-- [Amazon :us:](https://www.amazon.com/Learning-TypeScript-Remo-H-Jansen/dp/1783985542)
-- [Amazon :cn:](https://www.amazon.cn/dp/B01M2CAFTB)
+![](http://www.learningtypescript.com/og.png)
 
 ## Content
 
@@ -63,3 +50,22 @@ Source code of the book Learning TypeScript written by [Remo H. Jansen](https://
 - [Chapter 14: React development with TypeScript](/chapters/chapter_14)
 
 - [Chapter 15: Angular development with TypeScript](/chapters/chapter_15)
+
+## Editions
+
+### Second edition (ISBN 9781788391474)
+
+<img src="./media/cover_2.png" width="250" />
+
+- [Amazon :uk:](https://www.amazon.co.uk/Learning-TypeScript-2-x-Remo-Jansen-ebook/dp/B078PQ6MF4/)
+- [Amazon :us:](https://www.amazon.com/Learning-TypeScript-2-x-Remo-Jansen-ebook/dp/B078PQ6MF4/)
+- [Packt Publishing](https://www.packtpub.com/application-development/learning-typescript-2x-second-edition)
+- [Rakuten Kobo](https://www.kobo.com/ie/en/ebook/learning-typescript-2-x-second-edition)
+
+### First edition (ISBN 9781783985548)
+
+<img src="./media/cover.png" width="250" />
+
+- [Amazon :uk:](https://www.amazon.co.uk/Learning-TypeScript-Remo-H-Jansen/dp/1783985542)
+- [Amazon :us:](https://www.amazon.com/Learning-TypeScript-Remo-H-Jansen/dp/1783985542)
+- [Amazon :cn:](https://www.amazon.cn/dp/B01M2CAFTB)
