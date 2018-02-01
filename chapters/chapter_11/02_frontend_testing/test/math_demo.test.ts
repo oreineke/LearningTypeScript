@@ -7,7 +7,7 @@ import { MathDemo } from "../src/backend/math_demo";
 // asynchronous and long running tasks.
 
 // The describe() handler is used to declare a test suite
-describe("MathDemo class", () => {
+describe("MathDemo", () => {
 
   // The before() handler is invoked once before ALL tests
   before(() => {
@@ -67,7 +67,7 @@ describe("MathDemo class", () => {
   // We can use the to.throw assertion to test errors
   it("Should throw an exception when no parameters passed", () => {
     const math = new MathDemo();
-    expect(() => math.bad(1)).to.throw(Error);
+    expect(math.bad).to.throw(Error);
   });
 
   /*

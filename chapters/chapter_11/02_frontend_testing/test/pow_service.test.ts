@@ -7,7 +7,7 @@ import { getApp } from "../src/backend/server";
 // We send an HTTP GET request and check that the
 // response works as expected.
 
-describe("Math Services", function() {
+describe("Math Service", function() {
     it("Should be able to HTTP GET /api/math/pow/:base/:exponent", function() {
         const app = getApp();
         request(app).get("/api/math/pow/2/3")
