@@ -21,6 +21,7 @@ describe("MathDemo", () => {
         const mathClient = new MathClient();
         const actualResult = await mathClient.pow(2, 3);
         expect(expectedResult).to.eq(actualResult);
+        expect(stubedFetch.callCount).to.eq(1);
 
       });
 });

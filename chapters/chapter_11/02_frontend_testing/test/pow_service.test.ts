@@ -8,9 +8,9 @@ import { getApp } from "../src/backend/server";
 // response works as expected.
 
 describe("Math Service", function() {
-    it("Should be able to HTTP GET /api/math/pow/:base/:exponent", function() {
+    it("HTTP GET /api/math/pow/:base/:exponent", async () => {
         const app = getApp();
-        request(app).get("/api/math/pow/2/3")
+        return request(app).get("/api/math/pow/2/3")
                     .set("Accept", "application/json")
                     .expect("Content-Type", /json/)
                     .expect(200)
