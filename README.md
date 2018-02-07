@@ -2,7 +2,7 @@
 
 Source code of the book Learning TypeScript (http://www.learningtypescript.com/) written by [Remo H. Jansen](https://github.com/remojansen) and published by [Packt Publishing](https://www.packtpub.com/).
 
-![](http://www.learningtypescript.com/og.png)
+![](http://learningtypescript.com/social_media_tile.png)
 
 ## Content
 
