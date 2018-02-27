@@ -28,8 +28,8 @@ files.forEach(file => {
     functionDeclaration.isDefaultExport();
 
     // Has export keyword
-    functionDeclaration.hasExportKeyword(); // returns: boolean
-    functionDeclaration.hasDefaultKeyword(); // returns: boolean
+    functionDeclaration.hasExportKeyword();
+    functionDeclaration.hasDefaultKeyword();
 
     // Access export keywords
     functionDeclaration.getExportKeyword();

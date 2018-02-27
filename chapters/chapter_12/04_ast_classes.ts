@@ -65,7 +65,7 @@ files.forEach(file => {
     // Remove method
     method.remove();
 
-    // Get instance proeprties
+    // Get instance properties
     const instanceProperties = classDeclaration.getInstanceProperties();
 
     // Get static properties
