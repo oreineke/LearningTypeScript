@@ -47,7 +47,7 @@ Source code of the book Learning TypeScript (http://www.learningtypescript.com/)
 
 - [Chapter 14: Application testing](/chapters/chapter_14)
 
-- [Chapter 15: working with the language services](/chapters/chapter_15)
+- [Chapter 15: Working with the language services](/chapters/chapter_15)
 
 ## Editions
 
