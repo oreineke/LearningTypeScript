@@ -7,10 +7,7 @@ export DATABASE_PORT=5432 \
 export DATABASE_DB=demo
 
 docker pull postgres:9.5
-docker stop $containerId
-docker rm $containerId
 
-containerId=$(docker ps -a -q --filter ancestor=postgres)
 docker run --name POSTGRES_USER -p "$DATABASE_PORT":"$DATABASE_PORT"  \
 -e POSTGRES_PASSWORD="$DATABASE_PASSWORD"  \
 -e POSTGRES_USER="$DATABASE_USER"  \
@@ -18,6 +15,7 @@ docker run --name POSTGRES_USER -p "$DATABASE_PORT":"$DATABASE_PORT"  \
 -d postgres
 
 */
+import "reflect-metadata";
 
 import {
     Entity,
@@ -27,27 +25,27 @@ import {
     Column
 } from "typeorm";
 
+@Entity()
+class Movie {
+    @PrimaryGeneratedColumn()
+    public id!: number;
+    @Column()
+    public title!: string;
+    @Column()
+    public year!: number;
+}
+
+const entities = [
+    Movie
+];
+
+const DATABASE_HOST = process.env.DATABASE_HOST || "localhost";
+const DATABASE_USER = process.env.DATABASE_USER || "";
+const DATABASE_PORT = 5432;
+const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || "";
+const DATABASE_DB = "demo";
+
 (async () => {
-
-    @Entity()
-    class Movie {
-        @PrimaryGeneratedColumn()
-        public id!: number;
-        @Column()
-        public title!: string;
-        @Column()
-        public year!: number;
-    }
-
-    const entities = [
-        Movie
-    ];
-    
-    const DATABASE_HOST = process.env.DATABASE_HOST || "localhost";
-    const DATABASE_USER = process.env.DATABASE_USER || "";
-    const DATABASE_PORT = 5432;
-    const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || "";
-    const DATABASE_DB = "demo";
     
     const conn = await createConnection({
         type: "postgres",
@@ -63,9 +61,19 @@ import {
     const getRepository = (entity: Function) => conn.getRepository(entity);
     const movieRepository = conn.getRepository(Movie);
 
-    movieRepository.create({
+    // INSERT INTO movies VALUES ('Star Wars: Episode IV – A New Hope', 1977)
+    await movieRepository.save({
         title: "Star Wars: Episode IV – A New Hope",
         year: 1977
     });
+
+    // SELECT * FROM movies WHERE year=1977
+    const aMovieFrom1977 = await movieRepository.findOne({
+        year: 1977
+    });
+
+    if (aMovieFrom1977) {
+        console.log(aMovieFrom1977.title);
+    }
 
 })();
