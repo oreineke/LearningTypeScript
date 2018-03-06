@@ -1,7 +1,4 @@
-import {
-    Entity,
-    createConnection,
-} from "typeorm";
+import { createConnection } from "typeorm";
 
 import { Movie } from "./entities/movie";
 

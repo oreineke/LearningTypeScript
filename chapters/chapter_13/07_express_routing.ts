@@ -18,7 +18,7 @@ const port = 3000;
 const app = express();
 
 app.use("/api/v1/movies", moviesRouter);
-app.get("/api/v1/directors", directorsRouter);
+app.use("/api/v1/directors", directorsRouter);
 
 app.listen(port, () => {
     console.log(`Server running at http://127.0.0.1:${port}/`)

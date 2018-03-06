@@ -5,7 +5,7 @@ const movieRouter = Router();
 
 movieRouter.get("/", function (req, res) {
     const movieRepository = getRepository();
-    const aMovieFrom1977 = movieRepository.find().then((movies) => {
+    movieRepository.find().then((movies) => {
         res.json(movies);
     }).catch((e: Error) => {
         res.status(500);

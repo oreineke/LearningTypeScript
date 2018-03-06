@@ -1,16 +1,17 @@
 import "reflect-metadata";
-import express from "express";
+import { Container } from "inversify";
+import { InversifyExpressServer } from "inversify-express-utils";
+import { bindings } from "./inversify.config";
 
 (async () => {
 
-    // await getDbConnection();
-
     const port = 3000;
-    const app = express();
-
-    // app.use("/api/v1/movies", movieRouter);
+    const container = new Container();
+    await container.loadAsync(bindings);
+    const app = new InversifyExpressServer(container);
+    const server = app.build();
     
-    app.listen(port, () => {
+    server.listen(port, () => {
         console.log(`Server running at http://127.0.0.1:${port}/`)
     });
 
