@@ -16,9 +16,9 @@ namespace classes_demo {
 
   let spark = new Character("Jacob", "Keyes");
   let msg = spark.greet();
-  alert(msg); // "Hi! my name is Jacob Keyes"
+  console.log(msg); // "Hi! my name is Jacob Keyes"
 
   let msg1 = spark.greet("Dr. Halsey");
-  alert(msg1); // "Hi! Dr. Halsey! my name is Jacob Keyes"
+  console.log(msg1); // "Hi! Dr. Halsey! my name is Jacob Keyes"
 
 }

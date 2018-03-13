@@ -9,7 +9,7 @@ namespace interfaces_demo {
             if (typeof console.log === "function") {
                 console.log(arg);
             } else {
-                alert(arg);
+                console.log(arg);
             }
         }
     }

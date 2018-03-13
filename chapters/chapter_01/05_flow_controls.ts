@@ -5,7 +5,7 @@ namespace flow_control_demo {
     let isValid1: boolean = true;
 
     if (isValid1) {
-        alert("is valid!");
+        console.log("is valid!");
     }
 
     // if ... else
@@ -13,16 +13,16 @@ namespace flow_control_demo {
     let isValid2: boolean = true;
 
     if (isValid2) {
-        alert("Is valid!");
+        console.log("Is valid!");
     } else {
-        alert("Is NOT valid!");
+        console.log("Is NOT valid!");
     }
 
     // inline if
 
     let isValid3: boolean = true;
     let message = isValid3 ? "Is valid!" : "Is NOT valid!";
-    alert(message);
+    console.log(message);
 
     // switch
 

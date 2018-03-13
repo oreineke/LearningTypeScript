@@ -33,5 +33,5 @@ namespace geometry_demo {
 let vector: geometry_demo.IVector2dInterface = new geometry_demo.Vector2d(2,3);
 vector.normalize();
 vector.toArray(function(vectorAsArray: number[]){
-  alert(`x: ${vectorAsArray[0]}, y: ${vectorAsArray[1]}`);
+    console.log(`x: ${vectorAsArray[0]}, y: ${vectorAsArray[1]}`);
 });
