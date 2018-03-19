@@ -14,12 +14,15 @@ import { TYPE } from "../constants/types";
 
 @controller("/api/v1/movies")
 export class MovieController {
+
     private readonly _movieRepository: Repository<Movie>;
+
     public constructor(
         @inject(TYPE.MovieRepository)movieRepository: Repository<Movie>
     ) {
         this._movieRepository = movieRepository;
     }
+
     @httpGet("/")
     public async get(
         @response() res: express.Response
@@ -31,7 +34,23 @@ export class MovieController {
             res.send(e.message);
         }
     }
-    @httpGet("/:year")
+
+    @httpGet("/by_title/:title")
+    public async getByTitle(
+        @response() res: express.Response,
+        @requestParam("title") title: string
+    ) {
+        try {
+            return await this._movieRepository.find({
+                title
+            });
+        } catch(e) {
+            res.status(500);
+            res.send(e.message);
+        }
+    }
+
+    @httpGet("/by_year/:year")
     public async getByYear(
         @response() res: express.Response,
         @requestParam("year") yearParam: string
@@ -46,6 +65,7 @@ export class MovieController {
             res.send(e.message);
         }
     }
+
     @httpPost("/")
     public async post(
         @response() res: express.Response,
@@ -64,4 +84,5 @@ export class MovieController {
             res.send(e.message);
         }
     }
+
 }

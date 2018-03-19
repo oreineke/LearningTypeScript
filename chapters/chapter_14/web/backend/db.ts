@@ -1,6 +1,6 @@
 import { createConnection } from "typeorm";
-
 import { Movie } from "./entities/movie";
+import { Actor } from "./entities/actor";
 
 export async function getDbConnection() {
 
@@ -11,6 +11,7 @@ export async function getDbConnection() {
     const DATABASE_DB = "demo";
 
     const entities = [
+        Actor,
         Movie
     ];
 

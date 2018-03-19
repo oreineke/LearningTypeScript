@@ -1,6 +1,6 @@
-import { Actor } from "../../shared/entities/actor";
+import { Actor } from "../../universal/entities/actor";
 
-export default class ActorClient {
+export class ActorClient {
     static async getAllActors(): Promise<Actor[]> {
         const response = await fetch("/api/v1/actors/", { method: "GET" });
         const json = await response.json();

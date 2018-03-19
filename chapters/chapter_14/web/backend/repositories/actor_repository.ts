@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm";
 import { Actor } from "../entities/actor";
 
-export function getRepository() {
+export function getActorRepository() {
     const conn = getConnection();
     const movieRepository = conn.getRepository(Actor);
     return movieRepository;

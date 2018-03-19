@@ -1,6 +1,6 @@
-import { Movie } from "../../shared/entities/movie";
+import { Movie } from "../../universal/entities/movie";
 
-export default class MovieClient {
+export class MovieClient {
     static async getAllMovies(): Promise<Movie[]> {
         const response = await fetch("/api/v1/movies/", { method: "GET" });
         const json = await response.json();

@@ -12,7 +12,7 @@ import { Repository } from "typeorm";
 import { Actor } from "../entities/actor";
 import { TYPE } from "../constants/types";
 
-@controller("/api/v1/Actors")
+@controller("/api/v1/actors")
 export class ActorController {
     private readonly _ActorRepository: Repository<Actor>;
     public constructor(
