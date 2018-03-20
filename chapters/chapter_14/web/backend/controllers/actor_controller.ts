@@ -14,12 +14,15 @@ import { TYPE } from "../constants/types";
 
 @controller("/api/v1/actors")
 export class ActorController {
+
     private readonly _ActorRepository: Repository<Actor>;
+
     public constructor(
         @inject(TYPE.ActorRepository)ActorRepository: Repository<Actor>
     ) {
         this._ActorRepository = ActorRepository;
     }
+
     @httpGet("/")
     public async get(
         @response() res: express.Response
@@ -31,6 +34,7 @@ export class ActorController {
             res.send(e.message);
         }
     }
+
     @httpGet("/:year")
     public async getByYear(
         @response() res: express.Response,
@@ -46,6 +50,7 @@ export class ActorController {
             res.send(e.message);
         }
     }
+
     @httpPost("/")
     public async post(
         @response() res: express.Response,
@@ -64,4 +69,5 @@ export class ActorController {
             res.send(e.message);
         }
     }
+
 }

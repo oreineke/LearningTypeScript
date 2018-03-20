@@ -1,6 +1,7 @@
-import { ActorClient } from "../http_client/actor_client";
+import { ActorClient } from "../../shared/http_client/actor_client";
 import { ACTION_TYPE } from "../constants/action_types";
-import { Actor } from "../../universal/entities/actor";
+import { ActorInterface } from "../../../universal/entities/actor";
+import * as Redux from "redux";
 
 export async function fetchActorsStart() {
     return {
@@ -18,7 +19,7 @@ export function fetchActorsError(error: Error) {
     };
 }
 
-export function fetchActorsSuccess(actors: Actor[]) {
+export function fetchActorsSuccess(actors: ActorInterface[]) {
     return {
         type: ACTION_TYPE.FETCH_ACTORS_SUCCESS,
         error: null,
@@ -27,7 +28,7 @@ export function fetchActorsSuccess(actors: Actor[]) {
 }
 
 export function fetchActorsAsync() {
-    return function(dispatch) {
+    return function(dispatch: Redux.) {
         (async () => {
             try {
                 dispatch(fetchActorsStart());

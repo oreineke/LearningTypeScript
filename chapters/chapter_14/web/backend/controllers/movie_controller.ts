@@ -5,7 +5,7 @@ import {
     httpGet,
     httpPost,
     response,
-    requestParam,
+    queryParam,
     requestBody
 } from "inversify-express-utils";
 import { Repository } from "typeorm";
@@ -24,42 +24,17 @@ export class MovieController {
     }
 
     @httpGet("/")
-    public async get(
-        @response() res: express.Response
-    ) {
-        try {
-            return await this._movieRepository.find();
-        } catch(e) {
-            res.status(500);
-            res.send(e.message);
-        }
-    }
-
-    @httpGet("/by_title/:title")
     public async getByTitle(
         @response() res: express.Response,
-        @requestParam("title") title: string
+        @queryParam("title") titleParam: string | undefined,
+        @queryParam("year") yearParam: string | undefined
     ) {
         try {
-            return await this._movieRepository.find({
-                title
-            });
-        } catch(e) {
-            res.status(500);
-            res.send(e.message);
-        }
-    }
-
-    @httpGet("/by_year/:year")
-    public async getByYear(
-        @response() res: express.Response,
-        @requestParam("year") yearParam: string
-    ) {
-        try {
-            const year = parseInt(yearParam);
-            return await this._movieRepository.find({
-                year
-            });
+            const filter  = {
+                year: yearParam ? parseInt(yearParam) : undefined,
+                title: titleParam
+            };
+            return await this._movieRepository.find(filter);
         } catch(e) {
             res.status(500);
             res.send(e.message);
