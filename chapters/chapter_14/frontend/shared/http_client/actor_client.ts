@@ -1,22 +1,22 @@
-import { Actor } from "../../universal/entities/actor";
+import { ActorInterface } from "../../../universal/entities/actor";
 
 export class ActorClient {
-    static async getAllActors(): Promise<Actor[]> {
+    static async getAllActors(): Promise<ActorInterface[]> {
         const response = await fetch("/api/v1/actors/", { method: "GET" });
         const json = await response.json();
-        return json as Actor[];
+        return json as ActorInterface[];
     }
 
-    static async filterActorsByYearOfBirth(year: number): Promise<Actor[]> {
+    static async filterActorsByYearOfBirth(year: number): Promise<ActorInterface[]> {
         const response = await fetch(`/api/v1/actors/${year}`, { method: "GET" });
         const json = await response.json();
-        return json as Actor[];
+        return json as ActorInterface[];
     }
 
-    static async createActor(actor: Actor) {
+    static async createActor(actor: ActorInterface) {
         const requestBody = JSON.stringify(actor);
         const response = await fetch("/api/v1/actors/", { method: "POST", body: requestBody });
         const json = await response.json();
-        return json as Actor;
+        return json as ActorInterface;
     }
 }

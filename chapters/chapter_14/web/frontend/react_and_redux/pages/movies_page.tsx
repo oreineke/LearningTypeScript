@@ -1,5 +1,0 @@
-class MoviesPage {
-    async componentWillMount() {
-    }
-
-}

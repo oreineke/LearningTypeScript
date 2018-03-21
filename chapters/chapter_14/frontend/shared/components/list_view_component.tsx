@@ -13,11 +13,16 @@ export class ListView extends React.Component<ListViewProps> {
         }
         return (
             <div className="list-view">
-                {this.props.items.map((item) => {
-                    return this.props.children; // TODO pass item
-                })}
+                {this._renderItems()}
             </div>
         );
+    }
+    private _renderItems() {
+        if (this.props.items) {
+            return this.props.items.map((item) => {
+                return this.props.children; // TODO pass item
+            });
+        }
     }
     private _renderError() {
         if (this.props.error) {

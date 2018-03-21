@@ -1,8 +1,9 @@
-import { MovieClient } from "../http_client/movie_client";
+import { MovieClient } from "../../shared/http_client/movie_client";
 import { ACTION_TYPE } from "../constants/action_types";
-import { Movie } from "../../universal/entities/movie";
+import { MovieInterface } from "../../../universal/entities/movie";
+import * as Redux from "redux";
 
-export async function fetchMoviesStart() {
+export function fetchMoviesStart() {
     return {
         type: ACTION_TYPE.FETCH_MOVIES_SUCCESS,
         error: null,
@@ -18,7 +19,7 @@ export function fetchMoviesError(error: Error) {
     };
 }
 
-export function fetchMoviesSuccess(movies: Movie[]) {
+export function fetchMoviesSuccess(movies: MovieInterface[]) {
     return {
         type: ACTION_TYPE.FETCH_MOVIES_SUCCESS,
         error: null,
@@ -27,7 +28,7 @@ export function fetchMoviesSuccess(movies: Movie[]) {
 }
 
 export function fetchMoviesAsync() {
-    return function(dispatch) {
+    return function(dispatch: Redux.Dispatch<Redux.Action>) {
         (async () => {
             try {
                 dispatch(fetchMoviesStart());

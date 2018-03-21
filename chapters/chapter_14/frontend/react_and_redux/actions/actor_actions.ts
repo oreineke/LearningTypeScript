@@ -3,7 +3,7 @@ import { ACTION_TYPE } from "../constants/action_types";
 import { ActorInterface } from "../../../universal/entities/actor";
 import * as Redux from "redux";
 
-export async function fetchActorsStart() {
+export function fetchActorsStart() {
     return {
         type: ACTION_TYPE.FETCH_ACTORS_SUCCESS,
         error: null,
@@ -28,7 +28,7 @@ export function fetchActorsSuccess(actors: ActorInterface[]) {
 }
 
 export function fetchActorsAsync() {
-    return function(dispatch: Redux.) {
+    return function(dispatch: Redux.Dispatch<Redux.Action>) {
         (async () => {
             try {
                 dispatch(fetchActorsStart());
