@@ -11,6 +11,11 @@ import { bindings } from "./inversify.config";
         const container = new Container();
         await container.loadAsync(bindings);
         const app = new InversifyExpressServer(container);
+
+        app.setConfig((a) => {
+            a.use();
+        });
+
         const server = app.build();
         
         server.listen(port, () => {
