@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node ./backend/index.ts",
-    "build": "webpack"
+    "start": "ts-node ./web/backend/index.ts",
+    "build": "webpack",
+    "lint": "tslint --project tsconfig.json -c tslint.json ./web/**/*.ts ./web/**/*.tsx"
   },
   "keywords": [],
   "author": "Remo H. Jansen <remo.jansen@wolksoftware.com> (http://www.remojansen.com)",

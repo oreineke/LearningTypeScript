@@ -24,8 +24,8 @@ const plugins = isProduction ? corePlugins.concat(prodPlugins) : corePlugins.con
 
 module.exports = {
     entry: {
-        "react_only/": "./frontend/react_only/index.tsx",
-        "react_and_redux/": "./frontend/react_and_redux/index.tsx"
+        "react_only/": "./web/frontend/react_only/index.tsx",
+        "react_and_redux/": "./web/frontend/react_and_redux/index.tsx"
     },
     devServer: {
         inline: true

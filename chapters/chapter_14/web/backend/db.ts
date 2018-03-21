@@ -1,6 +1,6 @@
 import { createConnection } from "typeorm";
-import { Movie } from "./entities/movie";
 import { Actor } from "./entities/actor";
+import { Movie } from "./entities/movie";
 
 export async function getDbConnection() {
 
@@ -16,14 +16,14 @@ export async function getDbConnection() {
     ];
 
     const conn = await createConnection({
-        type: "postgres",
-        host: DATABASE_HOST,
-        port: DATABASE_PORT,
-        username: DATABASE_USER,
-        password: DATABASE_PASSWORD,
         database: DATABASE_DB,
-        entities: entities,
-        synchronize: true
+        entities,
+        host: DATABASE_HOST,
+        password: DATABASE_PASSWORD,
+        port: DATABASE_PORT,
+        synchronize: true,
+        type: "postgres",
+        username: DATABASE_USER
     });
 
     return conn;

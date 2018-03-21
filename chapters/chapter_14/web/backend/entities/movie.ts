@@ -1,6 +1,6 @@
+import { Column, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { MovieInterface } from "../../universal/entities/movie";
 import { Actor } from "./actor";
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToMany } from "typeorm";
 
 @Entity()
 export class Movie implements MovieInterface {
@@ -11,6 +11,6 @@ export class Movie implements MovieInterface {
     @Column()
     public year!: number;
     @JoinColumn()
-    @ManyToMany(type => Actor)
+    @ManyToMany((type) => Actor)
     public actors!: Actor[];
 }

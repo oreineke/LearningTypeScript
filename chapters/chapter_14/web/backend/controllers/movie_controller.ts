@@ -1,16 +1,16 @@
-import express from "express";
+import * as express from "express";
 import { inject } from "inversify";
 import {
     controller,
     httpGet,
     httpPost,
-    response,
     queryParam,
-    requestBody
+    requestBody,
+    response
 } from "inversify-express-utils";
 import { Repository } from "typeorm";
-import { Movie } from "../entities/movie";
 import { TYPE } from "../constants/types";
+import { Movie } from "../entities/movie";
 
 @controller("/api/v1/movies")
 export class MovieController {
@@ -31,11 +31,11 @@ export class MovieController {
     ) {
         try {
             const filter  = {
-                year: yearParam ? parseInt(yearParam) : undefined,
-                title: titleParam
+                title: titleParam,
+                year: yearParam ? parseInt(yearParam) : undefined
             };
             return await this._movieRepository.find(filter);
-        } catch(e) {
+        } catch (e) {
             res.status(500);
             res.send(e.message);
         }
@@ -50,11 +50,11 @@ export class MovieController {
             !(typeof newMovie.title === "string") || isNaN(newMovie.year)
         ) {
             res.status(400);
-            res.send(`Invalid Movie!`);
+            res.send("Invalid Movie!");
         }
         try {
             return await this._movieRepository.save(newMovie);
-        } catch(e) {
+        } catch (e) {
             res.status(500);
             res.send(e.message);
         }

@@ -13,17 +13,17 @@ import { bindings } from "./inversify.config";
         const app = new InversifyExpressServer(container);
 
         app.setConfig((a) => {
-            a.use();
+            // a.use();
         });
 
         const server = app.build();
-        
+
         server.listen(port, () => {
-            console.log(`Server running at http://127.0.0.1:${port}/`)
+            console.log(`Server running at http://127.0.0.1:${port}/`); // tslint:disable-line
         });
-    
-    } catch(e) {
-        console.log(e);
+
+    } catch (e) {
+        console.log(e); // tslint:disable-line
     }
 
 })();

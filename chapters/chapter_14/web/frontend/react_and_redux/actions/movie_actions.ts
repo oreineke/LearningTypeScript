@@ -1,29 +1,29 @@
+import * as Redux from "redux";
+import { MovieInterface } from "../../../universal/entities/movie";
 import { MovieClient } from "../../shared/http_client/movie_client";
 import { ACTION_TYPE } from "../constants/action_types";
-import { MovieInterface } from "../../../universal/entities/movie";
-import * as Redux from "redux";
 
 export function fetchMoviesStart() {
     return {
-        type: ACTION_TYPE.FETCH_MOVIES_SUCCESS,
         error: null,
-        playload: null
+        playload: null,
+        type: ACTION_TYPE.FETCH_MOVIES_SUCCESS
     };
 }
 
 export function fetchMoviesError(error: Error) {
     return {
-        type: ACTION_TYPE.FETCH_MOVIES_SUCCESS,
-        error: error,
-        playload: null
+        error,
+        playload: null,
+        type: ACTION_TYPE.FETCH_MOVIES_SUCCESS
     };
 }
 
 export function fetchMoviesSuccess(movies: MovieInterface[]) {
     return {
-        type: ACTION_TYPE.FETCH_MOVIES_SUCCESS,
         error: null,
-        playload: movies
+        playload: movies,
+        type: ACTION_TYPE.FETCH_MOVIES_SUCCESS
     };
 }
 
@@ -34,9 +34,9 @@ export function fetchMoviesAsync() {
                 dispatch(fetchMoviesStart());
                 const movies = await MovieClient.getAllMovies();
                 dispatch(fetchMoviesSuccess(movies));
-            } catch(e) {
+            } catch (e) {
                 dispatch(fetchMoviesError(e));
             }
         })();
-    }
+    };
 }

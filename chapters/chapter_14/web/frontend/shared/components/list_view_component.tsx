@@ -1,9 +1,11 @@
 import * as React from "react";
 import { ErrorMsg } from "./error_msg_component";
+import { Loading } from "./loading_component";
 
 interface ListViewProps {
     error: Error | null;
     items: any[] | null;
+    itemComponent(item: any): JSX.Element;
 }
 
 export class ListView extends React.Component<ListViewProps> {
@@ -18,15 +20,14 @@ export class ListView extends React.Component<ListViewProps> {
         );
     }
     private _renderItems() {
-        if (this.props.items) {
-            return this.props.items.map((item) => {
-                return this.props.children; // TODO pass item
-            });
-        }
-    }
-    private _renderError() {
         if (this.props.error) {
-            return <ErrorMsg msg={this.props.error.message} />
+            return <ErrorMsg msg={this.props.error.message} />;
+        } else if (!this.props.items) {
+            return <Loading />;
+        } else {
+            return this.props.items.map(
+                (item) => this.props.itemComponent(item)
+            );
         }
     }
 

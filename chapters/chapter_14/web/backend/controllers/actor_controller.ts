@@ -1,16 +1,16 @@
-import express from "express";
+import * as express from "express";
 import { inject } from "inversify";
 import {
     controller,
     httpGet,
     httpPost,
-    response,
+    requestBody,
     requestParam,
-    requestBody
+    response
 } from "inversify-express-utils";
 import { Repository } from "typeorm";
-import { Actor } from "../entities/actor";
 import { TYPE } from "../constants/types";
+import { Actor } from "../entities/actor";
 
 @controller("/api/v1/actors")
 export class ActorController {
@@ -29,7 +29,7 @@ export class ActorController {
     ) {
         try {
             return await this._ActorRepository.find();
-        } catch(e) {
+        } catch (e) {
             res.status(500);
             res.send(e.message);
         }
@@ -45,7 +45,7 @@ export class ActorController {
             return await this._ActorRepository.find({
                 yearBorn
             });
-        } catch(e) {
+        } catch (e) {
             res.status(500);
             res.send(e.message);
         }
@@ -60,11 +60,11 @@ export class ActorController {
             !(typeof newActor.name === "string") || isNaN(newActor.yearBorn)
         ) {
             res.status(400);
-            res.send(`Invalid Actor!`);
+            res.send("Invalid Actor!");
         }
         try {
             return await this._ActorRepository.save(newActor);
-        } catch(e) {
+        } catch (e) {
             res.status(500);
             res.send(e.message);
         }

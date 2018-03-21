@@ -2,13 +2,13 @@ import { MovieInterface } from "../../../universal/entities/movie";
 
 export class MovieClient {
 
-    static async getAllMovies(): Promise<MovieInterface[]> {
+    public static async getAllMovies(): Promise<MovieInterface[]> {
         const response = await fetch("/api/v1/movies/", { method: "GET" });
         const json = await response.json();
         return json as MovieInterface[];
     }
 
-    static async filterMoviesB(title?: string, year?: number): Promise<MovieInterface[]> {
+    public static async filterMoviesB(title?: string, year?: number): Promise<MovieInterface[]> {
 
         const baseUrl = "/api/v1/movies";
         const args = [];
@@ -32,13 +32,13 @@ export class MovieClient {
 
     }
 
-    static async filterMoviesByYear(year: number): Promise<MovieInterface[]> {
+    public static async filterMoviesByYear(year: number): Promise<MovieInterface[]> {
         const response = await fetch(`/api/v1/movies?year=${year}`, { method: "GET" });
         const json = await response.json();
         return json as MovieInterface[];
     }
 
-    static async createMovie(movie: MovieInterface): Promise<MovieInterface> {
+    public static async createMovie(movie: MovieInterface): Promise<MovieInterface> {
         const requestBody = JSON.stringify(movie);
         const response = await fetch("/api/v1/movies/", { method: "POST", body: requestBody });
         const json = await response.json();

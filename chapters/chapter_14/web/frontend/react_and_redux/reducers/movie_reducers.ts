@@ -1,9 +1,9 @@
-import { ActorPageState } from "../pages/actors_page";
 import { ACTION_TYPE } from "../constants/action_types";
+import { ActorPageState } from "../pages/actors_page";
 
 type ACTION_TYPES = keyof typeof ACTION_TYPE;
 
-export function movieReducer(action: { type: ACTION_TYPES, playload: any }, previousState: ActorPageState) {
+export function movieReducer(action: { type: ACTION_TYPES; playload: any }, previousState: ActorPageState) {
     switch (action.type) {
         case ACTION_TYPE.FETCH_MOVIES_START:
             return { /* TODO */ };
