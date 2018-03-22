@@ -1,6 +1,7 @@
 const { CheckerPlugin } = require("awesome-typescript-loader");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const corePlugins = [
     new CheckerPlugin(),
@@ -10,7 +11,11 @@ const corePlugins = [
     new ExtractTextPlugin({
         filename: "[name]main.css",
         allChunks: true
-    })
+    }),
+    new CopyWebpackPlugin([
+        { from: "./web/frontend/react_demo/index.html", to: "react_demo/index.html" },
+        { from: "./web/frontend/redux_demo/index.html", to: "redux_demo/index.html" }
+    ])
 ];
 
 const devPlugins = [];
@@ -24,8 +29,8 @@ const plugins = isProduction ? corePlugins.concat(prodPlugins) : corePlugins.con
 
 module.exports = {
     entry: {
-        "react_only/": "./web/frontend/react_only/index.tsx",
-        "react_and_redux/": "./web/frontend/react_and_redux/index.tsx"
+        "react_demo/": "./web/frontend/react_demo/index.tsx",
+        "redux_demo/": "./web/frontend/redux_demo/index.tsx"
     },
     devServer: {
         inline: true
