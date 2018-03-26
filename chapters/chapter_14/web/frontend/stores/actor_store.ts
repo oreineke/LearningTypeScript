@@ -9,11 +9,11 @@ mobx.configure({ enforceActions: true });
 
 const { observable, action, runInAction } = mobx;
 
-@provide(TYPE.MovieStore)
+@provide(TYPE.ActorStore)
 export class ActorStore implements interfaces.ActorStore {
 
     @observable public actors: ActorInterface[] = [];
-    @observable public status: "pending" | "error" | "done" = "pending";
+    @observable public status: interfaces.Status = "pending";
 
     @action
     public async getAllActors() {
@@ -33,6 +33,7 @@ export class ActorStore implements interfaces.ActorStore {
         }
     }
 
+    @action
     public async filterActorsByYearOfBirth(year: number) {
         this.actors = [];
         this.status = "pending";
@@ -50,6 +51,7 @@ export class ActorStore implements interfaces.ActorStore {
         }
     }
 
+    @action
     public async createActor(actor: ActorInterface) {
         this.actors = [];
         this.status = "pending";
@@ -67,4 +69,5 @@ export class ActorStore implements interfaces.ActorStore {
             });
         }
     }
+
 }

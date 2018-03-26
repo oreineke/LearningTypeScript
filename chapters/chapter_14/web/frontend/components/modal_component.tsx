@@ -12,7 +12,9 @@ interface ModalProps {
 
 export class Modal extends React.Component<ModalProps> {
     public render() {
-        if (this.props.isVisible) {
+        if (!this.props.isVisible) {
+            return null;
+        } else {
             return (
                 <div
                     className="modal fade show"

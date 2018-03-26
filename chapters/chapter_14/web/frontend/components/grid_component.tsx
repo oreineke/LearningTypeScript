@@ -27,12 +27,13 @@ type DeviceSize = "s" | "m" | "l" | "xl";
 interface ColumnProps {
     width: ColumnWidth;
     size?: DeviceSize;
+    style?: React.CSSProperties;
 }
 
 export class Column extends React.Component<ColumnProps> {
     public render() {
         return (
-            <div className={this._getClass()}>
+            <div className={this._getClass()} style={this.props.style ? this.props.style : {}}>
                 {this.props.children}
             </div>
         );

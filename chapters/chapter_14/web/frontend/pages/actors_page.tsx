@@ -4,45 +4,67 @@ import { ActorInterface } from "../../universal/entities/actor";
 import { Container, Row, Column } from "../components/grid_component";
 import { ListGroup } from "../components/list_group_component";
 import { Modal } from "../components/modal_component";
-import { Button } from "../components/button_component";
+import { Button, ButtonGroup, ButtonToolbar } from "../components/button_component";
 import { lazyInject } from "../config/ioc";
 import { TYPE } from "../contants/types";
 import * as interfaces from "../interfaces";
 
-interface ActorPageProps {
-    actors: ActorInterface[] | null;
-    error: Error | null;
-}
-
 @observer
-export class ActorPage extends React.Component<ActorPageProps> {
+export class ActorPage extends React.Component {
     @lazyInject(TYPE.ActorStore) public actorStore!: interfaces.ActorStore;
+    public componentWillMount() {
+        this.actorStore.getAllActors();
+    }
     public render() {
+        const error = this.actorStore.status === "error" ? new Error("Actors could not be loaded!") : null;
+        const actors = this.actorStore.status === "pending" ? null : this.actorStore.actors;
         return (
             <Container>
                 <Row>
-                    <Column width={12}>
+                    <Column width={12} style={{ textAlign: "right", marginBottom: "10px" }}>
                         <Button
                             onClick={() => {
                                 //
                             }}
                         >
-                            Add Movie
+                            Delete
                         </Button>
                     </Column>
                 </Row>
                 <Row>
                     <Column width={12}>
                         <ListGroup
-                            error={null/*new Error("Movies could not be loaded!")*/}
-                            items={[
-                                { title: "Star Wars" },
-                                { title: "Star Trek" }
-                            ]}
+                            error={error}
+                            items={actors}
                             itemComponent={(actor: ActorInterface) => (
-                                <div>
-                                    <h5>{actor.name}</h5>
-                                </div>
+                                <Row>
+                                    <Column width={8}>
+                                        <h5>{actor.name}</h5>
+                                    </Column>
+                                    <Column width={4}>
+                                    <ButtonToolbar>
+                                            <ButtonGroup>
+                                                <Button
+                                                    onClick={() => {
+                                                        //
+                                                    }}
+                                                >
+                                                    View
+                                                </Button>
+                                            </ButtonGroup>
+                                            <ButtonGroup>
+                                                <Button
+                                                    kind="danger"
+                                                    onClick={() => {
+                                                        //
+                                                    }}
+                                                >
+                                                    Delete
+                                                </Button>
+                                            </ButtonGroup>
+                                        </ButtonToolbar>
+                                    </Column>
+                                </Row>
                             )}
                         />
                     </Column>

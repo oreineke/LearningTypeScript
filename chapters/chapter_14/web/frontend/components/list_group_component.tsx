@@ -23,8 +23,8 @@ export class ListGroup extends React.Component<ListGroupProps> {
             return <Loading />;
         } else {
             return this.props.items.map(
-                (item) => (
-                    <li className="list-group-item">
+                (item, itemIndex) => (
+                    <li className="list-group-item" key={itemIndex}>
                         {this.props.itemComponent(item)}
                     </li>
                 )

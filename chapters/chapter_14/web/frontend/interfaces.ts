@@ -1,19 +1,21 @@
 import { ActorInterface } from "../universal/entities/actor";
 import { MovieInterface } from "../universal/entities/movie";
 
+export type Status = "pending" | "error" | "done";
+
 export interface ActorStore {
     actors: ActorInterface[];
-    status: "pending" | "error" | "done";
+    status: Status;
     getAllActors(): Promise<void>;
     filterActorsByYearOfBirth(year: number): Promise<void>;
     createActor(actor: ActorInterface): Promise<void>;
 }
 
 export interface MovieStore {
-    actors: MovieInterface[];
-    status: "pending" | "error" | "done";
+    movies: MovieInterface[];
+    status: Status;
     getAllMovies(): Promise<void>;
-    filterMoviesB(title?: string, year?: number): Promise<void>;
+    filterMovies(title?: string, year?: number): Promise<void>;
     filterMoviesByYear(year: number): Promise<void>;
     createMovie(movie: MovieInterface): Promise<void>;
 }

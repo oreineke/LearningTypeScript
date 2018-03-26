@@ -5,6 +5,8 @@ import { Header } from "../components/header_component";
 import { HomePage } from "../pages/home_page";
 import { MoviePage } from "../pages/movies_page";
 import { ActorPage } from "../pages/actors_page";
+import "../stores/movie_store";
+import "../stores/actor_store";
 
 export const Layout = () => (
     <BrowserRouter>
@@ -12,17 +14,17 @@ export const Layout = () => (
             <Header
                 bg="primary"
                 title="TsMovies"
-                rootPath="/mobx_demo"
+                rootPath="/"
                 links={[
-                    { path: "/mobx_demo/movies", text: "Movies"},
-                    { path: "/mobx_demo/actors", text: "Actors"}
+                    { path: "/movies", text: "Movies"},
+                    { path: "/actors", text: "Actors"}
                 ]}
             />
             <main style={{ paddingTop: "60px" }}>
                 <Switch>
-                    <Route exact path="/mobx_demo" component={HomePage}/>
-                    <Route path="/mobx_demo/movies" component={MoviePage}/>
-                    <Route path="/mobx_demo/actors" component={ActorPage}/>
+                    <Route exact path="/" component={HomePage}/>
+                    <Route path="/movies" component={MoviePage}/>
+                    <Route path="/actors" component={ActorPage}/>
                 </Switch>
             </main>
         </div>

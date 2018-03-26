@@ -9,7 +9,7 @@ export const HomePage = () => (
                 <Card
                     title="Movies"
                     description="Explore our database of movies"
-                    linkPath="/mobx_demo/movies"
+                    linkPath="/movies"
                     linkText="Movies"
                     img={null}
                 />
@@ -18,7 +18,7 @@ export const HomePage = () => (
                 <Card
                     title="Actors"
                     description="Explore our actors of movies"
-                    linkPath="/mobx_demo/actors"
+                    linkPath="/actors"
                     linkText="Actors"
                     img={null}
                 />

@@ -24,7 +24,7 @@ export class MovieController {
     }
 
     @httpGet("/")
-    public async getByTitle(
+    public async get(
         @response() res: express.Response,
         @queryParam("title") titleParam: string | undefined,
         @queryParam("year") yearParam: string | undefined
@@ -34,6 +34,12 @@ export class MovieController {
                 title: titleParam,
                 year: yearParam ? parseInt(yearParam) : undefined
             };
+            if (titleParam === undefined) {
+                delete filter.title;
+            }
+            if (yearParam === undefined) {
+                delete filter.year;
+            }
             return await this._movieRepository.find(filter);
         } catch (e) {
             res.status(500);
