@@ -16,10 +16,8 @@ import { bindings } from "./inversify.config";
 
         // Declare routes of static files
         app.setConfig((a) => {
-            const reactAppPath = path.join(__dirname, "../../public/react_demo");
-            const reduxAppPath = path.join(__dirname, "../../public/redux_demo");
-            a.use("/react_demo", express.static(reactAppPath));
-            a.use("/redux_demo", express.static(reduxAppPath));
+            const appPath = path.join(__dirname, "../../public");
+            a.use("/", express.static(appPath));
         });
 
         const server = app.build();

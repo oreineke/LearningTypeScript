@@ -30,7 +30,7 @@ docker run --name POSTGRES_USER -p "$DATABASE_PORT":"$DATABASE_PORT"  \
 
 ## Windows
 
-Set the following environment variables:
+Set the following environment variables. These commands have been tested in the windows powershell.
 
 ```sh
 $env:DATABASE_USER='postgres';

@@ -2,21 +2,18 @@ import * as React from "react";
 import { ErrorMsg } from "./error_msg_component";
 import { Loading } from "./loading_component";
 
-interface ListViewProps {
+interface ListGroupProps {
     error: Error | null;
     items: any[] | null;
     itemComponent(item: any): JSX.Element;
 }
 
-export class ListView extends React.Component<ListViewProps> {
+export class ListGroup extends React.Component<ListGroupProps> {
     public render() {
-        if (!this.props.children) {
-            throw new Error();
-        }
         return (
-            <div className="list-view">
+            <ul className="list-group">
                 {this._renderItems()}
-            </div>
+            </ul>
         );
     }
     private _renderItems() {
@@ -26,7 +23,11 @@ export class ListView extends React.Component<ListViewProps> {
             return <Loading />;
         } else {
             return this.props.items.map(
-                (item) => this.props.itemComponent(item)
+                (item) => (
+                    <li className="list-group-item">
+                        {this.props.itemComponent(item)}
+                    </li>
+                )
             );
         }
     }

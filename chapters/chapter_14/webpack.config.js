@@ -9,12 +9,11 @@ const corePlugins = [
         "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development")
     }),
     new ExtractTextPlugin({
-        filename: "[name]main.css",
+        filename: "main.css",
         allChunks: true
     }),
     new CopyWebpackPlugin([
-        { from: "./web/frontend/react_demo/index.html", to: "react_demo/index.html" },
-        { from: "./web/frontend/redux_demo/index.html", to: "redux_demo/index.html" }
+        { from: "./web/frontend/index.html", to: "index.html" }
     ])
 ];
 
@@ -28,15 +27,12 @@ const isProduction = process.env.NODE_ENV === "production";
 const plugins = isProduction ? corePlugins.concat(prodPlugins) : corePlugins.concat(devPlugins);
 
 module.exports = {
-    entry: {
-        "react_demo/": "./web/frontend/react_demo/index.tsx",
-        "redux_demo/": "./web/frontend/redux_demo/index.tsx"
-    },
+    entry: "./web/frontend/index.tsx",
     devServer: {
         inline: true
     },
     output: {
-        filename: "[name]bundle.js",
+        filename: "bundle.js",
         path: __dirname + "/public",
         publicPath: "/public"
     },

@@ -7,7 +7,7 @@ interface ErrorMsgProps {
 export class ErrorMsg extends React.Component<ErrorMsgProps> {
     public render() {
         return (
-            <div className="error-msg">
+            <div className="alert alert-danger" role="alert">
                 {this.props.msg}
             </div>
         );
