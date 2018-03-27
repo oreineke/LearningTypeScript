@@ -4,9 +4,10 @@ import {
     controller,
     httpGet,
     httpPost,
-    queryParam,
+    requestParam,
     requestBody,
-    response
+    response,
+    httpDelete
 } from "inversify-express-utils";
 import { Repository } from "typeorm";
 import { TYPE } from "../constants/types";
@@ -40,7 +41,6 @@ export class MovieController {
         @response() res: express.Response,
         @requestBody() newMovie: Movie
     ) {
-        console.log(newMovie);
         if (
             !(typeof newMovie.title === "string") || isNaN(newMovie.year)
         ) {
@@ -49,6 +49,20 @@ export class MovieController {
         }
         try {
             return await this._movieRepository.save(newMovie);
+        } catch (e) {
+            res.status(500);
+            res.send(e.message);
+        }
+    }
+
+    @httpDelete("/:id")
+    public async delete(
+        @requestParam("id") id: string,
+        @response() res: express.Response
+    ) {
+        try {
+            await this._movieRepository.deleteById(id);
+            res.json({});
         } catch (e) {
             res.status(500);
             res.send(e.message);

@@ -117,11 +117,12 @@ export class MovieStore implements interfaces.MovieStore {
     @action
     public async delete(id: number) {
         try {
-            const response = await fetch(`/api/v1/movies/:${id}`, { method: "DELETE" });
+            const response = await fetch(`/api/v1/movies/${id}`, { method: "DELETE" });
             await response.json();
             runInAction(() => {
                 this.deleteStatus = "done";
                 this.movies = this.movies.filter((m) => m.id !== id);
+                this.deleteMovieId = null;
             });
         } catch (error) {
             runInAction(() => {

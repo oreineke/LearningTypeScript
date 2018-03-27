@@ -6,7 +6,8 @@ import {
     httpPost,
     requestBody,
     requestParam,
-    response
+    response,
+    httpDelete
 } from "inversify-express-utils";
 import { Repository } from "typeorm";
 import { TYPE } from "../constants/types";
@@ -15,12 +16,12 @@ import { Actor } from "../entities/actor";
 @controller("/api/v1/actors")
 export class ActorController {
 
-    private readonly _ActorRepository: Repository<Actor>;
+    private readonly _actorRepository: Repository<Actor>;
 
     public constructor(
-        @inject(TYPE.ActorRepository)ActorRepository: Repository<Actor>
+        @inject(TYPE.ActorRepository) actorRepository: Repository<Actor>
     ) {
-        this._ActorRepository = ActorRepository;
+        this._actorRepository = actorRepository;
     }
 
     @httpGet("/")
@@ -28,7 +29,7 @@ export class ActorController {
         @response() res: express.Response
     ) {
         try {
-            return await this._ActorRepository.find();
+            return await this._actorRepository.find();
         } catch (e) {
             res.status(500);
             res.send(e.message);
@@ -47,7 +48,21 @@ export class ActorController {
             res.send("Invalid Actor!");
         }
         try {
-            return await this._ActorRepository.save(newActor);
+            return await this._actorRepository.save(newActor);
+        } catch (e) {
+            res.status(500);
+            res.send(e.message);
+        }
+    }
+
+    @httpDelete("/:id")
+    public async delete(
+        @requestParam("id") id: string,
+        @response() res: express.Response
+    ) {
+        try {
+            await this._actorRepository.deleteById(id);
+            res.json({});
         } catch (e) {
             res.status(500);
             res.send(e.message);

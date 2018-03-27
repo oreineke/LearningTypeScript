@@ -110,11 +110,12 @@ export class ActorStore implements interfaces.ActorStore {
     @action
     public async delete(id: number) {
         try {
-            const response = await fetch(`/api/v1/actors/:${id}`, { method: "DELETE" });
+            const response = await fetch(`/api/v1/actors/${id}`, { method: "DELETE" });
             await response.json();
             runInAction(() => {
                 this.deleteStatus = "done";
                 this.actors = this.actors.filter((m) => m.id !== id);
+                this.deleteActorId = null;
             });
         } catch (error) {
             runInAction(() => {
