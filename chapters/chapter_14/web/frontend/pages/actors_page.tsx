@@ -16,8 +16,8 @@ function isValidNewActor(o: any) {
         o === undefined ||
         // new actors don't have ID
         o.id !== undefined ||
-        typeof o.title !== "string" ||
-        isNaN(o.year)
+        typeof o.name !== "string" ||
+        isNaN(o.yearBorn)
     ) {
         return false;
     }

@@ -61,10 +61,17 @@ export class ActorStore implements interfaces.ActorStore {
         try {
             const response = await fetch("/api/v1/actors/", { method: "GET" });
             const actors: ActorInterface[] = await response.json();
-            runInAction(() => {
-                this.loadStatus = "done";
-                this.actors = actors;
-            });
+            // We use setTimeout to simulate a slow request
+            // this should allow us to see the loading component
+            setTimeout(
+                () => {
+                    runInAction(() => {
+                        this.loadStatus = "done";
+                        this.actors = actors;
+                    });
+                },
+                1500
+            );
         } catch (error) {
             runInAction(() => {
                 this.loadStatus = "error";
