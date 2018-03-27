@@ -5,7 +5,7 @@ import { Container, Row, Column } from "../components/grid_component";
 import { ListGroup } from "../components/list_group_component";
 import { Modal } from "../components/modal_component";
 import { TextField } from "../components/textfield_component";
-import { Button, ButtonToolbar, ButtonGroup } from "../components/button_component";
+import { Button } from "../components/button_component";
 import { lazyInject } from "../config/ioc";
 import { TYPE } from "../contants/types";
 import * as interfaces from "../interfaces";
@@ -39,7 +39,7 @@ export class ActorPage extends React.Component {
                     <Column width={12} style={{ textAlign: "right", marginBottom: "10px" }}>
                         <Button
                             onClick={() => {
-                                this.actorStore.focusEditor(null/* null means new actor */);
+                                this.actorStore.focusEditor();
                             }}
                         >
                             Add Actor
@@ -57,19 +57,15 @@ export class ActorPage extends React.Component {
                                         <h5>{actor.name}</h5>
                                         <p>{actor.yearBorn}</p>
                                     </Column>
-                                    <Column width={4}>
-                                        <ButtonToolbar>
-                                            <ButtonGroup>
-                                                <Button
-                                                    kind="danger"
-                                                    onClick={() => {
-                                                        this.actorStore.focusDeleteDialog(actor.id);
-                                                    }}
-                                                >
-                                                    Delete
-                                                </Button>
-                                            </ButtonGroup>
-                                        </ButtonToolbar>
+                                    <Column width={4} style={{ textAlign: "right" }}>
+                                        <Button
+                                            kind="danger"
+                                            onClick={() => {
+                                                this.actorStore.focusDeleteDialog(actor.id);
+                                            }}
+                                        >
+                                            Delete
+                                        </Button>
                                     </Column>
                                 </Row>
                             )}
@@ -99,7 +95,7 @@ export class ActorPage extends React.Component {
                             value={this.actorStore.editorValue ? this.actorStore.editorValue.name : ""}
                             title="Name"
                             placeholder="Name"
-                            isValid={(val) => val !== ""}
+                            isValid={(val) => val !== undefined && val !== ""}
                             onChange={(val) => {
                                 this.actorStore.edit("name", val);
                             }}
@@ -122,7 +118,7 @@ export class ActorPage extends React.Component {
                 <Modal
                     title="Are you sure?"
                     isVisible={this.actorStore.deleteActorId !== null}
-                    onAcceptLabel="Save"
+                    onAcceptLabel="Delete"
                     onAccept={() => {
                         if (this.actorStore.deleteActorId) {
                             this.actorStore.delete(this.actorStore.deleteActorId);

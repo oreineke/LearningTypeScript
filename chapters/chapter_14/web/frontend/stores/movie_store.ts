@@ -21,28 +21,24 @@ export class MovieStore implements interfaces.MovieStore {
     // Used to represent the status of the HTTP POST and HTTP PUT calls
     @observable public saveStatus: interfaces.Status = "idle";
 
-    // Used to display the movie editor: null means new movie,
-    // number means existing movie and undefined means no movie
-    @observable public editMovieId: number | null | undefined = undefined;
-
     // Used to desplay the confimation dialog before deleting a movie
     // null hides the modal and number displays the modal
     @observable public deleteMovieId: null | number = null;
 
-    // Used to hold the values of the movie editor
-    @observable public editorValue: Partial<MovieInterface> = {};
+    // Used to hold the values of the movie editor or null when nothing is being edited
+    @observable public editorValue: null | Partial<MovieInterface> = null;
 
     @action
-    public focusEditor(id: number | null) {
+    public focusEditor() {
         runInAction(() => {
-            this.editMovieId = id;
+            this.editorValue = {};
         });
     }
 
     @action
     public focusOutEditor() {
         runInAction(() => {
-            this.editMovieId = undefined;
+            this.editorValue = null;
         });
     }
 
@@ -65,10 +61,17 @@ export class MovieStore implements interfaces.MovieStore {
         try {
             const response = await fetch("/api/v1/movies/", { method: "GET" });
             const movies: MovieInterface[] = await response.json();
-            runInAction(() => {
-                this.loadStatus = "done";
-                this.movies = movies;
-            });
+            // We use setTimeout to simulate a slow request
+            // this should allow us to see the loading component
+            setTimeout(
+                () => {
+                    runInAction(() => {
+                        this.loadStatus = "done";
+                        this.movies = movies;
+                    });
+                },
+                1500
+            );
         } catch (error) {
             runInAction(() => {
                 this.loadStatus = "error";
@@ -79,7 +82,7 @@ export class MovieStore implements interfaces.MovieStore {
     @action
     public edit<T extends MovieInterface, K extends keyof T>(key: K, val: T[K]) {
         runInAction(() => {
-            const movie = {...this.editorValue, ...{[key]: val}};
+            const movie = {...(this.editorValue || {}), ...{[key]: val}};
             this.editorValue = movie;
         });
     }
@@ -87,12 +90,22 @@ export class MovieStore implements interfaces.MovieStore {
     @action
     public async create(movie: Partial<MovieInterface>) {
         try {
-            const requestBody = JSON.stringify(movie);
-            const response = await fetch("/api/v1/movies/", { method: "POST", body: requestBody });
+            const response = await fetch(
+                "/api/v1/movies/",
+                {
+                    body: JSON.stringify(movie),
+                    headers: {
+                        "Accept": "application/json, text/plain, */*",
+                        "Content-Type": "application/json"
+                    },
+                    method: "POST"
+                }
+            );
             const newMovie: MovieInterface = await response.json();
             runInAction(() => {
                 this.loadStatus = "done";
                 this.movies.push(newMovie);
+                this.editorValue = null;
             });
         } catch (error) {
             runInAction(() => {

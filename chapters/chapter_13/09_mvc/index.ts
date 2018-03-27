@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import express from "express";
+import * as bodyParser from "body-parser";
 import { getDbConnection } from "./db";
 import { movieRouter } from "./controllers/movie_controller";
 
@@ -10,6 +11,8 @@ import { movieRouter } from "./controllers/movie_controller";
     const port = 3000;
     const app = express();
 
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.use("/api/v1/movies", movieRouter);
     
     app.listen(port, () => {

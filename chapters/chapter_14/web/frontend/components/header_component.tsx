@@ -13,7 +13,7 @@ interface HeaderProps {
 }
 
 export const Header = (props: HeaderProps) => (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className={`navbar navbar-expand-lg navbar-light bg-${props.bg}`}>
         <Link className="navbar-brand" to={props.rootPath}>
             {props.title}
         </Link>

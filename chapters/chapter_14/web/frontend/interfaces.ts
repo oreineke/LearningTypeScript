@@ -14,7 +14,7 @@ export interface ActorStore {
     create(actor: ActorInterface): Promise<void>;
     edit<T extends ActorInterface, K extends keyof T>(k: K, val: T[K]): void;
     delete(id: number): Promise<void>;
-    focusEditor(id: null | number): void;
+    focusEditor(): void;
     focusDeleteDialog(id: number): void;
     focusOutDeleteDialog(): void;
     focusOutEditor(): void;
@@ -31,7 +31,7 @@ export interface MovieStore {
     create(movie: MovieInterface): Promise<void>;
     edit<T extends MovieInterface, K extends keyof T>(k: K, val: T[K]): void;
     delete(id: number): Promise<void>;
-    focusEditor(id: null | number): void;
+    focusEditor(): void;
     focusDeleteDialog(id: number): void;
     focusOutDeleteDialog(): void;
     focusOutEditor(): void;

@@ -5,7 +5,7 @@ import { Container, Row, Column } from "../components/grid_component";
 import { ListGroup } from "../components/list_group_component";
 import { Modal } from "../components/modal_component";
 import { TextField } from "../components/textfield_component";
-import { Button, ButtonToolbar, ButtonGroup } from "../components/button_component";
+import { Button } from "../components/button_component";
 import { lazyInject } from "../config/ioc";
 import { TYPE } from "../contants/types";
 import * as interfaces from "../interfaces";
@@ -39,7 +39,7 @@ export class MoviePage extends React.Component {
                     <Column width={12} style={{ textAlign: "right", marginBottom: "10px" }}>
                         <Button
                             onClick={() => {
-                                this.movieStore.focusEditor(null/* null means new movie */);
+                                this.movieStore.focusEditor();
                             }}
                         >
                             Add Movie
@@ -57,19 +57,15 @@ export class MoviePage extends React.Component {
                                         <h5>{movie.title}</h5>
                                         <p>{movie.year}</p>
                                     </Column>
-                                    <Column width={4}>
-                                        <ButtonToolbar>
-                                            <ButtonGroup>
-                                                <Button
-                                                    kind="danger"
-                                                    onClick={() => {
-                                                        this.movieStore.focusDeleteDialog(movie.id);
-                                                    }}
-                                                >
-                                                    Delete
-                                                </Button>
-                                            </ButtonGroup>
-                                        </ButtonToolbar>
+                                    <Column width={4} style={{ textAlign: "right" }}>
+                                        <Button
+                                            kind="danger"
+                                            onClick={() => {
+                                                this.movieStore.focusDeleteDialog(movie.id);
+                                            }}
+                                        >
+                                            Delete
+                                        </Button>
                                     </Column>
                                 </Row>
                             )}
@@ -99,7 +95,7 @@ export class MoviePage extends React.Component {
                             value={this.movieStore.editorValue ? this.movieStore.editorValue.title : ""}
                             title="Title"
                             placeholder="Title"
-                            isValid={(val) => val !== ""}
+                            isValid={(val) => val !== undefined && val !== ""}
                             onChange={(val) => {
                                 this.movieStore.edit("title", val);
                             }}
@@ -122,7 +118,7 @@ export class MoviePage extends React.Component {
                 <Modal
                     title="Are you sure?"
                     isVisible={this.movieStore.deleteMovieId !== null}
-                    onAcceptLabel="Save"
+                    onAcceptLabel="Delete"
                     onAccept={() => {
                         if (this.movieStore.deleteMovieId) {
                             this.movieStore.delete(this.movieStore.deleteMovieId);

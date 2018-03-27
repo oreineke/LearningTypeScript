@@ -21,28 +21,24 @@ export class ActorStore implements interfaces.ActorStore {
     // Used to represent the status of the HTTP POST and HTTP PUT calls
     @observable public saveStatus: interfaces.Status = "idle";
 
-    // Used to display the actor editor: null means new actor,
-    // number means existing actor and undefined means no actor
-    @observable public editActorId: number | null | undefined = undefined;
-
     // Used to desplay the confimation dialog before deleting a actor
     // null hides the modal and number displays the modal
     @observable public deleteActorId: null | number = null;
 
-    // Used to hold the values of the actor editor
-    @observable public editorValue: Partial<ActorInterface> = {};
+    // Used to hold the values of the actor editor or null when nothing is being edited
+    @observable public editorValue: null | Partial<ActorInterface> = null;
 
     @action
-    public focusEditor(id: number | null) {
+    public focusEditor() {
         runInAction(() => {
-            this.editActorId = id;
+            this.editorValue = {};
         });
     }
 
     @action
     public focusOutEditor() {
         runInAction(() => {
-            this.editActorId = undefined;
+            this.editorValue = null;
         });
     }
 
@@ -79,7 +75,7 @@ export class ActorStore implements interfaces.ActorStore {
     @action
     public edit<T extends ActorInterface, K extends keyof T>(key: K, val: T[K]) {
         runInAction(() => {
-            const actor = {...this.editorValue, ...{[key]: val}};
+            const actor = {...(this.editorValue || {}), ...{[key]: val}};
             this.editorValue = actor;
         });
     }
@@ -87,12 +83,22 @@ export class ActorStore implements interfaces.ActorStore {
     @action
     public async create(actor: Partial<ActorInterface>) {
         try {
-            const requestBody = JSON.stringify(actor);
-            const response = await fetch("/api/v1/actors/", { method: "POST", body: requestBody });
+            const response = await fetch(
+                "/api/v1/actors/",
+                {
+                    body: JSON.stringify(actor),
+                    headers: {
+                        "Accept": "application/json, text/plain, */*",
+                        "Content-Type": "application/json"
+                    },
+                    method: "POST"
+                }
+            );
             const newActor: ActorInterface = await response.json();
             runInAction(() => {
                 this.loadStatus = "done";
                 this.actors.push(newActor);
+                this.editorValue = null;
             });
         } catch (error) {
             runInAction(() => {

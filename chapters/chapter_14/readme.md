@@ -52,3 +52,10 @@ Run a Docker container:
 ```sh
 docker run --name POSTGRES_USER -p 5432:5432 -e POSTGRES_PASSWORD=secret -e POSTGRES_USER=postgres -e POSTGRES_DB=demo -d postgres:9.5
 ```
+
+# Build and Run
+
+```sh
+npm run build
+npm run start
+```

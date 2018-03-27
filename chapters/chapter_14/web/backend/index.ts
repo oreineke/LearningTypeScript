@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import * as express from "express";
 import { Container } from "inversify";
+import * as bodyParser from "body-parser";
 import * as path from "path";
 import { InversifyExpressServer } from "inversify-express-utils";
 import { bindings } from "./inversify.config";
@@ -16,6 +17,8 @@ import { bindings } from "./inversify.config";
 
         // Declare routes of static files
         app.setConfig((a) => {
+            a.use(bodyParser.json());
+            a.use(bodyParser.urlencoded({ extended: true }));
             const appPath = path.join(__dirname, "../../public");
             a.use("/", express.static(appPath));
         });

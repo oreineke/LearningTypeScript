@@ -40,6 +40,7 @@ export class MovieController {
         @response() res: express.Response,
         @requestBody() newMovie: Movie
     ) {
+        console.log(newMovie);
         if (
             !(typeof newMovie.title === "string") || isNaN(newMovie.year)
         ) {

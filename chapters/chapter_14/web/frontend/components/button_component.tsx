@@ -34,23 +34,3 @@ export class Button extends React.Component<ButtonProps> {
         }
     }
 }
-
-export class ButtonToolbar extends React.Component {
-    public render() {
-        return (
-            <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                {this.props.children}
-            </div>
-        );
-    }
-}
-
-export class ButtonGroup extends React.Component {
-    public render() {
-        return (
-            <div className="btn-group mr-2" role="group" aria-label="First group">
-                {this.props.children}
-            </div>
-        );
-    }
-}
