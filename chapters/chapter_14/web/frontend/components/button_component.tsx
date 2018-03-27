@@ -16,6 +16,7 @@ export class Button extends React.Component<ButtonProps> {
             <button
                 type="button"
                 className={this._getClass()}
+                onClick={() => this.props.onClick()}
             >
                 {this.props.children}
             </button>
