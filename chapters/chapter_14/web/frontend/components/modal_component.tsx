@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Button } from "./button_component";
+import { ErrorMsg } from "./error_msg_component";
 
 interface ModalProps {
     title: string;
@@ -8,6 +9,7 @@ interface ModalProps {
     onAcceptLabel: string;
     onCancel(): void;
     onCancelLabel: string;
+    error?: Error;
 }
 
 export class Modal extends React.Component<ModalProps> {
@@ -37,6 +39,13 @@ export class Modal extends React.Component<ModalProps> {
                                 </Button>
                             </div>
                             <div className="modal-body">
+                                {
+                                    (() => {
+                                        if (this.props.error) {
+                                            return <ErrorMsg msg={this.props.error.message} />;
+                                        }
+                                    })()
+                                }
                                 {this.props.children}
                             </div>
                             <div className="modal-footer">

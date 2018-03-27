@@ -35,22 +35,6 @@ export class ActorController {
         }
     }
 
-    @httpGet("/:year")
-    public async getByYear(
-        @response() res: express.Response,
-        @requestParam("year") yearParam: string
-    ) {
-        try {
-            const yearBorn = parseInt(yearParam);
-            return await this._ActorRepository.find({
-                yearBorn
-            });
-        } catch (e) {
-            res.status(500);
-            res.send(e.message);
-        }
-    }
-
     @httpPost("/")
     public async post(
         @response() res: express.Response,
