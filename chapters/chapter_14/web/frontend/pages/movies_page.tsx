@@ -105,7 +105,7 @@ export class MoviePage extends React.Component {
                             value={this.movieStore.editorValue ? this.movieStore.editorValue.year : 2018}
                             title="Year"
                             placeholder="Year"
-                            isValid={(val) => !isNaN(val as any)}
+                            isValid={(val) => typeof val === "number"}
                             onChange={(val) => {
                                 const n = parseInt(val);
                                 if (!isNaN(n)) {

@@ -1,6 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { ActorInterface } from "../../universal/entities/actor";
-import { Movie } from "./movie";
 
 @Entity()
 export class Actor implements ActorInterface {

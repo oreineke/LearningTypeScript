@@ -1,6 +1,5 @@
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import * as React from "react";
-import * as ReacDOM from "react-dom";
 import { Header } from "../components/header_component";
 import { HomePage } from "../pages/home_page";
 import { MoviePage } from "../pages/movies_page";
