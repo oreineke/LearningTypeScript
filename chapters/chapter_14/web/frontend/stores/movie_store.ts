@@ -4,7 +4,8 @@ import { provide } from "../config/ioc";
 import { TYPE } from "../contants/types";
 import * as interfaces from "../interfaces";
 
-const { observable, action, runInAction } = mobx;
+const { observable, action, runInAction, configure } = mobx;
+configure({ enforceActions: true });
 
 @provide(TYPE.MovieStore)
 export class MovieStore implements interfaces.MovieStore {
