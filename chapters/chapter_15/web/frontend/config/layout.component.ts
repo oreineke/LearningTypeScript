@@ -21,7 +21,6 @@ export const appRoutes: Routes = [
   { path: '**', component: PageNotFoundComponent }
 ];
 
-
 @Component({
   selector: 'app-heroes',
   template: `

@@ -1,19 +1,13 @@
-import { Link } from "react-router-dom";
-import * as React from "react";
+import { Component, Input } from "@angular/core";
 
 type BgColor = "primary" | "secondary" | "success" |
                "danger" | "warning" | "info" | "light" |
                "dark" | "white";
 
-interface HeaderProps {
-    bg: BgColor;
-    title: string;
-    rootPath: string;
-    links: { path: string; text: string }[];
-}
-
-export const Header = (props: HeaderProps) => (
-    <nav className={`navbar navbar-expand-lg navbar-light bg-${props.bg}`}>
+@Component({
+    selector: "",
+    template: `
+        <nav className={`navbar navbar-expand-lg navbar-light bg-${props.bg}`}>
         <Link className="navbar-brand" to={props.rootPath}>
             {props.title}
         </Link>
@@ -27,5 +21,11 @@ export const Header = (props: HeaderProps) => (
                 ))
             }
         </ul>
-    </nav>
-);
+    </nav>`
+})
+class Header {
+    @Input() public bg!: BgColor;
+    @Input() public title!: string;
+    @Input() public rootPath!: string;
+    @Input() public links!: { path: string; text: string }[];
+}

@@ -1,22 +1,9 @@
-import * as React from "react";
-import { ErrorMsg } from "./error_msg_component";
-import { Loading } from "./loading_component";
+import { Component, Input } from "@angular/core";
 
-interface ListGroupProps {
-    error: Error | null;
-    items: any[] | null;
-    itemComponent(item: any): JSX.Element;
-}
-
-export class ListGroup extends React.Component<ListGroupProps> {
-    public render() {
-        return (
-            <ul className="list-group">
-                {this._renderItems()}
-            </ul>
-        );
-    }
-    private _renderItems() {
+@Component({
+    selector: "",
+    template: `
+    <ul className="list-group">
         if (this.props.error) {
             return <ErrorMsg msg={this.props.error.message} />;
         } else if (!this.props.items) {
@@ -30,6 +17,11 @@ export class ListGroup extends React.Component<ListGroupProps> {
                 )
             );
         }
-    }
-
+    </ul>
+    `
+})
+export class ListGroup {
+    error: Error | null;
+    items: any[] | null;
+    itemComponent(item: any): JSX.Element;
 }

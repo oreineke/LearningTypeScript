@@ -1,16 +1,16 @@
-import * as React from "react";
+import { Component, Input } from "@angular/core";
 
-export class Loading extends React.Component {
-    public render() {
-        return (
-            <div className="progress">
-                <div
-                    className="progress-bar progress-bar-striped progress-bar-animated"
-                    role="progressbar"
-                    style={{ width: "50%" }}
-                >
-                </div>
-            </div>
-        );
-    }
+@Component({
+    selector: "",
+    template: `
+    <div className="progress">
+        <div
+            className="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar"
+            style="width: 50%"
+        >
+        </div>
+    </div>`
+})
+export class Loading {
 }

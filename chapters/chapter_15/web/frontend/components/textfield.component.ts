@@ -4,7 +4,9 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
     selector: "app-text-field",
     template: `
     <div>
-        {this._renderError()}
+        <div *ng-if={isValid(value)}>
+            <ErrorMsg msg="Invalid input value!" />
+        </div>
         <div className="form-group">
             <label>{this.props.title}</label>
             <input
@@ -25,11 +27,4 @@ export class TextField {
     @Input() public value!: any;
     @Input() public isValid!: (value: any) => boolean;
     @Input() public onChange = new EventEmitter<string>();
-    private _renderError() {
-        if (!this.props.isValid(this.props.value)) {
-            return (
-                <ErrorMsg msg="Invalid input value!" />
-            );
-        }
-    }
 }

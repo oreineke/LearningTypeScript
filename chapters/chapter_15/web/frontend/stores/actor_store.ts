@@ -1,9 +1,5 @@
 import { ActorInterface } from "../../universal/entities/actor";
-import * as mobx from "mobx";
-import { provide } from "../config/ioc";
-import { TYPE } from "../contants/types";
 import * as interfaces from "../interfaces";
-
 
 export class ActorStore implements interfaces.ActorStore {
 
