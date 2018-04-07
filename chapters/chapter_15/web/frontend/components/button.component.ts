@@ -1,3 +1,4 @@
+/*
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 type Kind = "primary" | "secondary" | "success" |
@@ -35,3 +36,4 @@ export class Button {
     }
 
 }
+*/

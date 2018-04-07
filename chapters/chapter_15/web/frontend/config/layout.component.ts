@@ -1,28 +1,20 @@
+/*
 import { Component, OnInit } from "@angular/core";
-import { Header } from "../components/header_component";
-import { HomePage } from "../pages/home_page";
-import { MoviePage } from "../pages/movies_page";
-import { ActorPage } from "../pages/actors_page";
+import { Routes } from "@angular/router";
+import { HomePage } from "../pages/homepage.component";
+import { MoviePage } from "../pages/moviespage.component";
+import { ActorPage } from "../pages/actorspage.component";
 import "../stores/movie_store";
 import "../stores/actor_store";
 
 export const appRoutes: Routes = [
-  { path: 'crisis-center', component: CrisisListComponent },
-  { path: 'hero/:id',      component: HeroDetailComponent },
-  {
-    path: 'heroes',
-    component: HeroListComponent,
-    data: { title: 'Heroes List' }
-  },
-  { path: '',
-    redirectTo: '/heroes',
-    pathMatch: 'full'
-  },
-  { path: '**', component: PageNotFoundComponent }
+  { path: "", component: HomePage },
+  { path: "movies", component: MoviePage },
+  { path: "actors", component: ActorPage },
 ];
 
 @Component({
-  selector: 'app-heroes',
+  selector: "app-heroes",
   template: `
   <BrowserRouter>
     <div>
@@ -41,7 +33,7 @@ export const appRoutes: Routes = [
     </div>
 </BrowserRouter>
   `,
-  styleUrls: ['./heroes.component.css']
+  styleUrls: ["./heroes.component.css"]
 })
 export class HeroesComponent implements OnInit {
 
@@ -62,3 +54,4 @@ export class HeroesComponent implements OnInit {
 export class Application {
   name: string = "World";
 }
+*/

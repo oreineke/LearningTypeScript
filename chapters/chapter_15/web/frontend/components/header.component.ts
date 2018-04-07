@@ -1,3 +1,4 @@
+/*
 import { Component, Input } from "@angular/core";
 
 type BgColor = "primary" | "secondary" | "success" |
@@ -29,3 +30,4 @@ class Header {
     @Input() public rootPath!: string;
     @Input() public links!: { path: string; text: string }[];
 }
+*/

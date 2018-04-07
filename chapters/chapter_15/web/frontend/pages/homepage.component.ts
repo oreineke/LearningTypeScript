@@ -1,14 +1,16 @@
-import { Card } from "../components/card_component";
-import { Container, Row, Column } from "../components/grid_component";
+/*
+import { Component } from "@angular/core";
 
-export const HomePage = () => (
+@Component({
+    selector: "home-page",
+    template: `
     <Container>
         <Row>
             <Column width={6}>
                 <Card
                     title="Movies"
                     description="Explore our database of movies"
-                    linkPath="/movies"
+                    linkPath="movies"
                     linkText="Movies"
                     img={null}
                 />
@@ -17,11 +19,16 @@ export const HomePage = () => (
                 <Card
                     title="Actors"
                     description="Explore our actors of movies"
-                    linkPath="/actors"
+                    linkPath="actors"
                     linkText="Actors"
                     img={null}
                 />
             </Column>
         </Row>
     </Container>
-);
+    `
+})
+export class HomePage {
+    //
+}
+*/

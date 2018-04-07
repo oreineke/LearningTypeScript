@@ -1,3 +1,4 @@
+/*
 import { Component, Input } from "@angular/core";
 
 @Component({
@@ -25,3 +26,4 @@ export class ListGroup {
     items: any[] | null;
     itemComponent(item: any): JSX.Element;
 }
+*/

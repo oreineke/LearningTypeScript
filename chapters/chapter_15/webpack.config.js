@@ -2,6 +2,7 @@ const { CheckerPlugin } = require("awesome-typescript-loader");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const path = require ("path");
 
 const corePlugins = [
     new CheckerPlugin(),
@@ -14,7 +15,11 @@ const corePlugins = [
     }),
     new CopyWebpackPlugin([
         { from: "./web/frontend/index.html", to: "index.html" }
-    ])
+    ]),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: "vendor",
+        minChunks: (module) => module.context && /node_modules/.test(module.context)
+    })
 ];
 
 const devPlugins = [];
@@ -27,14 +32,18 @@ const isProduction = process.env.NODE_ENV === "production";
 const plugins = isProduction ? corePlugins.concat(prodPlugins) : corePlugins.concat(devPlugins);
 
 module.exports = {
-    entry: "./web/frontend/index.tsx",
+    entry: [
+        "zone.js/dist/zone",
+        "./web/frontend/main.ts"
+    ],
     devServer: {
         inline: true
     },
     output: {
-        filename: "bundle.js",
-        path: __dirname + "/public",
-        publicPath: "/public"
+        filename: "[name].js",
+        chunkFilename: "[name]-chunk.js",
+        publicPath: "/public/",
+        path: path.resolve(__dirname, "public")
     },
     devtool: isProduction ? "source-map" : "eval-source-map",
     resolve: {

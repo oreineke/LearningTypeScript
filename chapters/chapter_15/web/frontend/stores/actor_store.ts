@@ -1,3 +1,4 @@
+/*
 import { ActorInterface } from "../../universal/entities/actor";
 import * as interfaces from "../interfaces";
 
@@ -82,7 +83,7 @@ export class ActorStore implements interfaces.ActorStore {
                 {
                     body: JSON.stringify(actor),
                     headers: {
-                        "Accept": "application/json, text/plain, */*",
+                        "Accept": "application/json, text/plain, *//*", // REMO // for /
                         "Content-Type": "application/json"
                     },
                     method: "POST"
@@ -118,3 +119,4 @@ export class ActorStore implements interfaces.ActorStore {
     }
 
 }
+*/

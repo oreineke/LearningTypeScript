@@ -1,3 +1,4 @@
+/*
 import { Component, Input } from "@angular/core";
 
 @Component({
@@ -64,3 +65,4 @@ export class Modal {
     @Input() public onCancel!: () => void;
     @Input() public onAccept!: () => void;
 }
+*/

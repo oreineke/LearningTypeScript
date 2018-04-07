@@ -1,3 +1,4 @@
+/*
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
@@ -28,3 +29,4 @@ export class TextField {
     @Input() public isValid!: (value: any) => boolean;
     @Input() public onChange = new EventEmitter<string>();
 }
+*/

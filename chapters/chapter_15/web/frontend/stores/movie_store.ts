@@ -1,3 +1,5 @@
+/*
+
 import { MovieInterface } from "../../universal/entities/movie";
 import * as interfaces from "../interfaces";
 export class MovieStore implements interfaces.MovieStore {
@@ -67,7 +69,7 @@ export class MovieStore implements interfaces.MovieStore {
                 {
                     body: JSON.stringify(movie),
                     headers: {
-                        "Accept": "application/json, text/plain, */*",
+                        "Accept": "application/json, text/plain, *//*", // REMOVE // for //
                         "Content-Type": "application/json"
                     },
                     method: "POST"
@@ -95,3 +97,5 @@ export class MovieStore implements interfaces.MovieStore {
     }
 
 }
+
+*/

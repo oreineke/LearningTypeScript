@@ -1,5 +1,5 @@
 {
-  "name": "chapter_14",
+  "name": "chapter_15",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,17 +12,27 @@
   "author": "Remo H. Jansen <remo.jansen@wolksoftware.com> (http://www.remojansen.com)",
   "license": "MIT",
   "dependencies": {
+    "@angular/common": "5.2.9",
+    "@angular/compiler": "5.2.9",
     "@angular/core": "5.2.9",
+    "@angular/forms": "5.2.9",
+    "@angular/platform-browser": "5.2.9",
+    "@angular/platform-browser-dynamic": "5.2.9",
+    "@angular/router": "5.2.9",
     "body-parser": "1.18.2",
     "bootstrap": "4.0.0",
+    "core-js": "2.5.4",
     "express": "4.16.2",
     "inversify": "4.11.1",
     "inversify-express-utils": "5.2.1",
     "pg": "7.4.1",
     "reflect-metadata": "0.1.12",
-    "typeorm": "0.1.14"
+    "rxjs": "^5.5.8",
+    "typeorm": "0.1.14",
+    "zone.js": "^0.8.25"
   },
   "devDependencies": {
+    "@angular/language-service": "^5.2.9",
     "@types/body-parser": "1.16.8",
     "@types/express": "4.11.1",
     "@types/node": "9.4.6",

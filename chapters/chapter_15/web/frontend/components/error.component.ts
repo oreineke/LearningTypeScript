@@ -1,3 +1,4 @@
+/*
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
@@ -10,3 +11,4 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 export class ErrorMsg {
     @Input() public msg!: string;
 }
+*/

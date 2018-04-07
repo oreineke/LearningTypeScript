@@ -1,3 +1,4 @@
+/*
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 interface CounterProps {
@@ -22,3 +23,4 @@ export class Counter {
     @Input() public initialValue!: string;
     @Output() public onChange = new EventEmitter();
 }
+*/

@@ -1,3 +1,4 @@
+/*
 import { MovieInterface } from "../../universal/entities/movie";
 import { Container, Row, Column } from "../components/grid_component";
 import { ListGroup } from "../components/list_group_component";
@@ -134,3 +135,4 @@ export class MoviePage extends React.Component {
         );
     }
 }
+*/
