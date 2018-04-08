@@ -1,3 +1,14 @@
+import { Component } from "@angular/core";
+
+@Component({
+    selector: "home-page",
+    template: "Home!"
+})
+export class HomePageComponent {
+    //
+}
+
+
 /*
 import { Component } from "@angular/core";
 

@@ -1,33 +1,44 @@
-/*
-import { Component, Input } from "@angular/core";
+import { Component, Input, Attribute } from "@angular/core";
 
 type BgColor = "primary" | "secondary" | "success" |
                "danger" | "warning" | "info" | "light" |
                "dark" | "white";
 
-@Component({
-    selector: "",
-    template: `
-        <nav className={`navbar navbar-expand-lg navbar-light bg-${props.bg}`}>
-        <Link className="navbar-brand" to={props.rootPath}>
-            {props.title}
-        </Link>
-        <ul className="navbar-nav">
-            {
-                props.links.map((link, linkIndex) => (
+export interface Route {
+    label: string;
+    path: string;
+}
 
-                    <a className="navbar-brand" routerLink="link.path" routerLinkActive="active">
-                        {link.text}
-                    </a>
-                ))
-            }
+@Component({
+    selector: "app-header",
+    template: `
+        <nav [ngClass]="navClass">
+        <a class="navbar-brand" [routerLink]="rootPath" routerLinkActive="active">
+            {{title}}
+        </a>
+        <ul class="navbar-nav">
+            <li *ngFor="let link of links">
+                <a className="navbar-brand" [routerLink]="link.path" routerLinkActive="active">
+                    {{link.label}}
+                </a>
+            </li>
         </ul>
     </nav>`
 })
-class Header {
-    @Input() public bg!: BgColor;
-    @Input() public title!: string;
-    @Input() public rootPath!: string;
-    @Input() public links!: { path: string; text: string }[];
+export class HeaderComponent {
+
+    public navClass!: string;
+    public title!: string;
+    public rootPath!: string;
+    @Input() public links!: Route[];
+
+    public constructor(
+        @Attribute("bg") bg: BgColor,
+        @Attribute("title") title: string,
+        @Attribute("rootPath") rootPath: string,
+    ) {
+        this.navClass = `navbar navbar-expand-lg navbar-light bg-${bg}`;
+        this.title = title;
+        this.rootPath = rootPath;
+    }
 }
-*/

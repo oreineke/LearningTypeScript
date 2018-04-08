@@ -1,3 +1,13 @@
+import { Component } from "@angular/core";
+
+@Component({
+    selector: "actors-page",
+    template: "Actors!"
+})
+export class ActorsPageComponent {
+    //
+}
+
 /*
 import { Component } from "@angular/core";
 import { ActorInterface } from "../../universal/entities/actor";

@@ -1,3 +1,14 @@
+import { Component } from "@angular/core";
+
+@Component({
+    selector: "movies-page",
+    template: "Movies!"
+})
+export class MoviesPageComponent {
+    //
+}
+
+
 /*
 import { MovieInterface } from "../../universal/entities/movie";
 import { Container, Row, Column } from "../components/grid_component";
