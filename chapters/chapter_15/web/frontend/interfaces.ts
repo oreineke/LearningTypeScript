@@ -10,7 +10,7 @@ export interface ActorService {
 }
 
 export interface MovieService {
-    getAll(): Promise<void>;
+    getAll(): Promise<MovieInterface[]>;
     create(movie: MovieInterface): Promise<void>;
     delete(id: number): Promise<void>;
 }

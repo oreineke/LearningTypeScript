@@ -1,29 +1,35 @@
-/*
 import { Component, Input } from "@angular/core";
 
 @Component({
-    selector: "",
+    host : {
+        "[class]": "itemClass"
+    },
+    selector: "app-list-group-item",
     template: `
-    <ul className="list-group">
-        if (this.props.error) {
-            return <ErrorMsg msg={this.props.error.message} />;
-        } else if (!this.props.items) {
-            return <Loading />;
-        } else {
-            return this.props.items.map(
-                (item, itemIndex) => (
-                    <li className="list-group-item" key={itemIndex}>
-                        {this.props.itemComponent(item)}
-                    </li>
-                )
-            );
-        }
-    </ul>
+        <ng-content></ng-content>
     `
 })
-export class ListGroup {
-    error: Error | null;
-    items: any[] | null;
-    itemComponent(item: any): JSX.Element;
+export class ListGroupItemComponent {
+    public itemClass = "list-group-item";
 }
-*/
+
+@Component({
+    selector: "app-list-group",
+    template: `
+        <div *ngIf="errorMsg">
+            <app-error [msg]="errorMsg"></app-error>
+        </div>
+        <div *ngIf="isLoading">
+            <app-loading></app-loading>
+        </div>
+        <div *ngIf="!errorMsg && !isLoading">
+            <ul className="list-group">
+                <ng-content></ng-content>
+            </ul>
+        </div>
+    `
+})
+export class ListGroupComponent {
+    @Input() public errorMsg!: string | null;
+    @Input() public isLoading!: boolean | null;
+}

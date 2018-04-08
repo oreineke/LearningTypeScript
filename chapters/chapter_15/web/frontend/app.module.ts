@@ -14,9 +14,7 @@ import "./app.scss";
         BrowserModule,
         CommonModule,
         AppRoutingModule,
-        LayoutModule, // ,
-        // MovieModule
-        // ActorModule
+        LayoutModule
     ]
 })
 export class AppModule {

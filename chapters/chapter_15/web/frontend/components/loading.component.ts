@@ -1,18 +1,16 @@
-/*
-import { Component, Input } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
-    selector: "",
+    selector: "app-loading",
     template: `
-    <div className="progress">
-        <div
-            className="progress-bar progress-bar-striped progress-bar-animated"
-            role="progressbar"
-            style="width: 50%"
-        >
-        </div>
-    </div>`
+        <div className="progress">
+            <div
+                className="progress-bar progress-bar-striped progress-bar-animated"
+                role="progressbar"
+                style="width: 50%"
+            >
+            </div>
+        </div>`
 })
-export class Loading {
+export class LoadingComponent {
 }
-*/

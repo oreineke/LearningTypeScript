@@ -1,5 +1,4 @@
-/*
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Attribute, Input, Output, EventEmitter } from "@angular/core";
 
 type Kind = "primary" | "secondary" | "success" |
             "danger" | "warning" | "info" | "light" |
@@ -10,30 +9,35 @@ type Kind = "primary" | "secondary" | "success" |
     template: `
         <button
             type="button"
-            class={{btnClass}}
+            [class]="btnClass"
             (click)="click()"
         >
             <ng-content></ng-content>
         </button>`
 })
-export class Button {
+export class ButtonComponent {
 
-    @Input() public kind?: Kind;
-    @Input() public className?: string;
-    @Output() public onClicked = new EventEmitter();
+    public btnClass: string;
+    @Output() public clicked = new EventEmitter();
 
-    public get btnClass(): string {
-        if (this.className !== undefined) {
-            return this.className;
+    public constructor(
+        @Attribute("kind") kind: Kind,
+        @Attribute("className") className: Kind,
+    ) {
+        this.btnClass = this._getBtnClass(kind, className);
+    }
+
+    private _getBtnClass(kind: Kind | null, className: string | null) {
+        if (className) {
+            return className;
         } else {
-            const kind = this.kind ? this.kind : "primary";
-            return `btn btn-${kind}`;
+            const actualKind = kind ? kind : "primary";
+            return `btn btn-${actualKind}`;
         }
     }
 
     public click() {
-        this.onClicked.emit();
+        this.clicked.emit();
     }
 
 }
-*/

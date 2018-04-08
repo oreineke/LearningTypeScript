@@ -39,7 +39,7 @@ export class ColumnComponent {
 
     public constructor(
         @Attribute("width") width: ColumnWidth,
-        @Attribute("size") size: DeviceSize | null
+        @Attribute("size") size: DeviceSize | null,
     ) {
         this.columnClass = this._getClass(width, size);
     }

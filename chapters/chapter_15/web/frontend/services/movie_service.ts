@@ -3,24 +3,25 @@ import { MovieInterface } from "../../universal/entities/movie";
 import * as interfaces from "../interfaces";
 
 @Injectable()
-export class MovieStore implements interfaces.MovieService {
+export class MovieService implements interfaces.MovieService {
 
     public async getAll() {
-        try {
-            const response = await fetch("/api/v1/movies/", { method: "GET" });
-            const movies: MovieInterface[] = await response.json();
-            // We use setTimeout to simulate a slow request
-            // this should allow us to see the loading component
-            setTimeout(
-                () => {
-                    // this.loadStatus = "done";
-                    // this.movies = movies;
-                },
-                1500
-            );
-        } catch (error) {
-            // this.loadStatus = "error";
-        }
+        return new Promise<MovieInterface[]>(async (res, rej) => {
+            try {
+                const response = await fetch("/api/v1/movies/", { method: "GET" });
+                const movs: MovieInterface[] = await response.json();
+                // We use setTimeout to simulate a slow request
+                // this should allow us to see the loading component
+                setTimeout(
+                    () => {
+                        res(movs);
+                    },
+                    1500
+                );
+            } catch (error) {
+                rej(error);
+            }
+        });
     }
 
     public async create(movie: Partial<MovieInterface>) {

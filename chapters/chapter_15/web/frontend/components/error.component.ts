@@ -1,14 +1,12 @@
-/*
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
-    selector: "app-error-msg",
+    selector: "app-error",
     template: `
         <div className="alert alert-danger" role="alert">
-            {msg}
+            {{msg}}
         </div>`
 })
-export class ErrorMsg {
+export class ErrorComponent {
     @Input() public msg!: string;
 }
-*/

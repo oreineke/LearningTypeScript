@@ -3,7 +3,7 @@ import { ActorInterface } from "../../universal/entities/actor";
 import * as interfaces from "../interfaces";
 
 @Injectable()
-export class ActorStore implements interfaces.ActorService {
+export class ActorService implements interfaces.ActorService {
 
     public async getAll() {
         return new Promise<ActorInterface[]>(async (res, rej) => {
