@@ -1,23 +1,5 @@
 import { Component } from "@angular/core";
-
-@Component({
-    selector: "movies-page",
-    template: "Movies!"
-})
-export class MoviesPageComponent {
-    //
-}
-
-
-/*
 import { MovieInterface } from "../../universal/entities/movie";
-import { Container, Row, Column } from "../components/grid_component";
-import { ListGroup } from "../components/list_group_component";
-import { Modal } from "../components/modal_component";
-import { TextField } from "../components/textfield_component";
-import { Button } from "../components/button_component";
-import { lazyInject } from "../config/ioc";
-import { TYPE } from "../contants/types";
 import * as interfaces from "../interfaces";
 
 function isValidNewMovie(o: any) {
@@ -33,6 +15,64 @@ function isValidNewMovie(o: any) {
     }
     return true;
 }
+
+@Component({
+    selector: "movies-page",
+    template: "Movies!"
+})
+export class MoviesPageComponent {
+
+    // Contains the movies that have been already loaded from the server
+    public movies: MovieInterface[] = [];
+
+    // Used to represent the status of the HTTP GET calls
+    public loadStatus: interfaces.Status = "pending";
+
+    // Used to represent the status of the HTTP DELETE call
+    public deleteStatus: interfaces.Status = "idle";
+
+    // Used to represent the status of the HTTP POST and HTTP PUT calls
+    public saveStatus: interfaces.Status = "idle";
+
+    // Used to desplay the confimation dialog before deleting a movie
+    // null hides the modal and number displays the modal
+    public deleteMovieId: null | number = null;
+
+    // Used to hold the values of the movie editor or null when nothing is being edited
+    public editorValue: null | Partial<MovieInterface> = null;
+
+    public focusEditor() {
+        this.editorValue = {};
+    }
+
+    public focusOutEditor() {
+        this.editorValue = null;
+    }
+
+    public focusDeleteDialog(id: number) {
+        this.deleteMovieId = id;
+    }
+
+    public focusOutDeleteDialog() {
+        this.deleteMovieId = null;
+    }
+
+    public edit<T extends MovieInterface, K extends keyof T>(key: K, val: T[K]) {
+        // const movie = {...(this.editorValue || {}), ...{[key]: val}};
+        // this.editorValue = movie;
+    }
+}
+
+/*
+import { MovieInterface } from "../../universal/entities/movie";
+import { Container, Row, Column } from "../components/grid_component";
+import { ListGroup } from "../components/list_group_component";
+import { Modal } from "../components/modal_component";
+import { TextField } from "../components/textfield_component";
+import { Button } from "../components/button_component";
+import { lazyInject } from "../config/ioc";
+import { TYPE } from "../contants/types";
+import * as interfaces from "../interfaces";
 
 @observer
 export class MoviePage extends React.Component {

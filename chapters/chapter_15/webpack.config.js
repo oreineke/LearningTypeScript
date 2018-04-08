@@ -10,7 +10,7 @@ const corePlugins = [
         "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development")
     }),
     new ExtractTextPlugin({
-        filename: "main.css",
+        filename: "[name].css",
         allChunks: true
     }),
     new CopyWebpackPlugin([
@@ -18,7 +18,9 @@ const corePlugins = [
     ]),
     new webpack.optimize.CommonsChunkPlugin({
         name: "vendor",
-        minChunks: (module) => module.context && /node_modules/.test(module.context)
+        minChunks: (module) => {
+            return module.context && module.context.includes("node_modules");
+        }
     })
 ];
 

@@ -1,13 +1,27 @@
 import { NgModule } from "@angular/core";
-import { HomePageComponent } from "./homepage.component";
 import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { HomePageComponent } from "./homepage.component";
+import { ContainerComponent, RowComponent, ColumnComponent } from "../components/grid.component";
+import { CardComponent, CardImageComponent } from "../components/card.component";
 
 @NgModule({
     declarations: [
-        HomePageComponent
+        HomePageComponent,
+        ContainerComponent,
+        RowComponent,
+        ColumnComponent,
+        CardComponent,
+        CardImageComponent
     ],
-    exports: [HomePageComponent],
-    imports: [CommonModule]
+    exports: [
+        HomePageComponent,
+        ContainerComponent,
+        RowComponent,
+        ColumnComponent,
+        CardComponent,
+        CardImageComponent
+    ],
+    imports: [CommonModule, RouterModule]
 })
-export class HomePageModule {
-}
+export class HomePageModule {}

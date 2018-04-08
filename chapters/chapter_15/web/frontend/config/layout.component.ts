@@ -11,7 +11,7 @@ import { Route } from "../components/header.component";
             rootPath=""
             [links]="appRoutes"
         ></app-header>
-        <main style="padding-top: 60px">
+        <main>
             <router-outlet></router-outlet>
         </main>
     </div>

@@ -1,13 +1,12 @@
-/*
-import { Component, Input } from "@angular/core";
+import { Component, Input, Attribute } from "@angular/core";
 
 @Component({
     selector: "app-card-img",
     template: `
-        <img className="card-img-top" src={imgPath} alt={imgAlt} />
+        <img class="card-img-top" [src]="imgPath" [alt]="imgAlt" />
     `
 })
-export class CardImage {
+export class CardImageComponent {
     @Input() public imgPath!: string;
     @Input() public imgAlt!: string;
 }
@@ -15,29 +14,44 @@ export class CardImage {
 @Component({
     selector: "app-card",
     template: `
-        <div className="card">
-            <div *ngIf="img">
-                <app-card-img [imgPath]={img.imgPath} [imgAlt]={img.imgAlt} />
+        <div class="card">
+            <div *ngIf="imgPath">
+                <app-card-img [imgPath]="imgPath" [imgAlt]="imgAlt"></app-card-img>
             </div>
-            <div className="card-body">
-                <h5 className="card-title">{props.title}</h5>
-                <p className="card-text">
-                    {props.description}
+            <div class="card-body">
+                <h5 class="card-title">{{title}}</h5>
+                <p class="card-text">
+                    {{description}}
                 </p>
-                <Link className="btn btn-primary" to={props.linkPath} >
-                    {props.linkText}
-                </Link>
+                <a class="btn btn-primary" [routerLink]="linkPath" routerLinkActive="active">
+                    {{linkText}}
+                </a>
             </div>
         </div>`
 })
-export class Card {
-    @Input() public title!: string;
-    @Input() public description!: string;
-    @Input() public linkPath!: string;
-    @Input() public linkText!: string;
-    @Input() public img!: {
-        imgPath: string;
-        imgAlt: string;
-    } | null;
+export class CardComponent {
+
+    public title!: string;
+    public description!: string;
+    public linkPath!: string;
+    public linkText!: string;
+    public imgPath?: string;
+    public imgAlt?: string;
+
+    public constructor(
+        @Attribute("title") title: string,
+        @Attribute("description") description: string,
+        @Attribute("linkPath") linkPath: string,
+        @Attribute("linkText") linkText: string,
+        @Attribute("imgPath") imgPath?: string,
+        @Attribute("imgAlt") imgAlt?: string
+    ) {
+        this.title = title;
+        this.description = description;
+        this.linkPath = linkPath;
+        this.linkText = linkText;
+        this.imgPath = imgPath;
+        this.imgAlt = imgAlt;
+    }
+
 }
-*/

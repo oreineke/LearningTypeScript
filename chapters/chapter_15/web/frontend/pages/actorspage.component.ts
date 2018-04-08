@@ -1,15 +1,4 @@
 import { Component } from "@angular/core";
-
-@Component({
-    selector: "actors-page",
-    template: "Actors!"
-})
-export class ActorsPageComponent {
-    //
-}
-
-/*
-import { Component } from "@angular/core";
 import { ActorInterface } from "../../universal/entities/actor";
 import * as interfaces from "../interfaces";
 
@@ -26,6 +15,57 @@ function isValidNewActor(o: any) {
     }
     return true;
 }
+
+@Component({
+    selector: "actors-page",
+    template: "Actors!"
+})
+export class ActorsPageComponent {
+    // Contains the actors that have been already loaded from the server
+    public actors: ActorInterface[] = [];
+
+    // Used to represent the status of the HTTP GET calls
+    public loadStatus: interfaces.Status = "pending";
+
+    // Used to represent the status of the HTTP DELETE call
+    public deleteStatus: interfaces.Status = "idle";
+
+    // Used to represent the status of the HTTP POST and HTTP PUT calls
+    public saveStatus: interfaces.Status = "idle";
+
+    // Used to desplay the confimation dialog before deleting a actor
+    // null hides the modal and number displays the modal
+    public deleteActorId: null | number = null;
+
+    // Used to hold the values of the actor editor or null when nothing is being edited
+    public editorValue: null | Partial<ActorInterface> = null;
+
+    public focusEditor() {
+        this.editorValue = {};
+    }
+
+    public focusOutEditor() {
+        this.editorValue = null;
+    }
+
+    public focusDeleteDialog(id: number) {
+        this.deleteActorId = id;
+    }
+
+    public focusOutDeleteDialog() {
+        this.deleteActorId = null;
+    }
+
+    public edit<T extends ActorInterface, K extends keyof T>(key: K, val: T[K]) {
+        // const actor = {...(this.editorValue || {}), ...{[key]: val}};
+        // this.editorValue = actor;
+    }
+}
+
+/*
+import { Component } from "@angular/core";
+import { ActorInterface } from "../../universal/entities/actor";
+import * as interfaces from "../interfaces";
 
 @Component({
     selector: "actor-page",

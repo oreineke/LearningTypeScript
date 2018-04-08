@@ -1,48 +1,54 @@
-/*
-import { Component, Input } from "@angular/core";
-
-@Component({
-    selector: "",
-    template: `
-        <div class="container">
-            {this.props.children}
-        </div>
-    `
-})
-export class Container {}
-
-@Component({
-    selector: "",
-    template: `
-        <div class="row">
-            {this.props.children}
-        </div>
-    `
-})
-export class Row {}
+import { Component, Attribute } from "@angular/core";
 
 // In the bootstrap grid system the max size is 12
 type ColumnWidth = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-type DeviceSize = "s" | "m" | "l" | "xl";
+type DeviceSize = "sm" | "md" | "lg" | "xl";
 
 @Component({
-    selector: "",
+    selector: "app-container",
     template: `
-    <div [class]={class} [style]={style}>
-        {this.props.children}
-    </div>
+        <div class="container">
+            <ng-content></ng-content>
+        </div>
     `
 })
-export class Column {
-    @Input() public width!: ColumnWidth;
-    @Input() public size?: DeviceSize;
-    @Input() public style? = "";
-    public get class() {
-        if (this.size !== undefined) {
-            return `col-${this.size}-${this.width}`;
+export class ContainerComponent {}
+
+@Component({
+    selector: "app-row",
+    template: `
+        <div class="row">
+            <ng-content></ng-content>
+        </div>
+    `
+})
+export class RowComponent {}
+
+@Component({
+    host : {
+        "[class]": "columnClass"
+    },
+    selector: "app-column",
+    template: `
+        <ng-content></ng-content>
+    `
+})
+export class ColumnComponent {
+
+    public columnClass: string;
+
+    public constructor(
+        @Attribute("width") width: ColumnWidth,
+        @Attribute("size") size: DeviceSize | null
+    ) {
+        this.columnClass = this._getClass(width, size);
+    }
+
+    private _getClass(width: ColumnWidth, size: DeviceSize | null) {
+        if (size) {
+            return `col-${size}-${width}`;
         } else {
-            return `col-${this.width}`;
+            return `col-${width}`;
         }
     }
 }
-*/
