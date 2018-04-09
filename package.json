@@ -4,7 +4,7 @@
   "description": "Source code of Learning TypeScript published by Packt Publishing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ts-node ./test/01_chapter.test.ts"
   },
   "repository": {
     "type": "git",
@@ -18,14 +18,17 @@
   },
   "homepage": "https://github.com/remojansen/LearningTypeScript#readme",
   "devDependencies": {
-    "@types/ramda": "0.24.17",
+    "@types/ramda": "0.25.21",
     "@types/requirejs": "2.1.31",
-    "typescript": "2.7.1"
+    "chalk": "2.3.2",
+    "ts-node": "5.0.1",
+    "ts-simple-ast": "10.2.0",
+    "typescript": "2.8.1"
   },
   "dependencies": {
     "immutable": "3.8.2",
-    "inversify": "4.3.0",
+    "inversify": "4.11.1",
     "ramda": "0.25.0",
-    "reflect-metadata": "0.1.10"
+    "reflect-metadata": "0.1.12"
   }
 }
