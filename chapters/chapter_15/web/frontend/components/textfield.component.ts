@@ -1,32 +1,38 @@
-/*
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
     selector: "app-text-field",
     template: `
-    <div>
-        <div *ng-if={isValid(value)}>
-            <ErrorMsg msg="Invalid input value!" />
+        <div>
+            <div *ngIf="errorMsg">
+                <app-error [msg]="errorMsg"></app-error>
+            </div>
+            <div className="form-group">
+                <label>{{title}}</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    [id]="id"
+                    [placeholder]="placeholder"
+                    onKeyUp="onEdit($event)"
+                />
+            </div>
         </div>
-        <div className="form-group">
-            <label>{this.props.title}</label>
-            <input
-                type="text"
-                className="form-control"
-                id={this.props.id}
-                placeholder={this.props.placeholder}
-                onKeyUp={(e) => this.props.onChange((e.target as any).value)}
-            />
-        </div>
-    </div>
     `
 })
-export class TextField {
+export class TextFieldComponent {
+
     @Input() public title!: string;
     @Input() public id!: string;
     @Input() public placeholder!: string;
-    @Input() public value!: any;
-    @Input() public isValid!: (value: any) => boolean;
-    @Input() public onChange = new EventEmitter<string>();
+    @Input() public errorMsg!: null | string;
+    @Output() public onChange = new EventEmitter<{k: string; v: string}>();
+
+    public onEdit(event: any) {
+        debugger; // tslint:disable-line
+        const value = (event.target as any).value;
+        const key = (event.target as any).id;
+        this.onChange.emit(value);
+    }
+
 }
-*/

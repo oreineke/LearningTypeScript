@@ -19,11 +19,11 @@ export class ListGroupItemComponent {
         <div *ngIf="errorMsg">
             <app-error [msg]="errorMsg"></app-error>
         </div>
-        <div *ngIf="isLoading">
+        <div *ngIf="!isLoaded">
             <app-loading></app-loading>
         </div>
-        <div *ngIf="!errorMsg && !isLoading">
-            <ul className="list-group">
+        <div *ngIf="isLoaded && !errorMsg">
+            <ul class="list-group">
                 <ng-content></ng-content>
             </ul>
         </div>
@@ -31,5 +31,5 @@ export class ListGroupItemComponent {
 })
 export class ListGroupComponent {
     @Input() public errorMsg!: string | null;
-    @Input() public isLoading!: boolean | null;
+    @Input() public isLoaded!: boolean | null;
 }

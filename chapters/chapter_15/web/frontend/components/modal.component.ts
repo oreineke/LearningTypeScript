@@ -1,68 +1,47 @@
-/*
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
-    selector: "",
+    selector: "app-modal",
     template: `
-    <div
-        className="modal fade show"
-        role="dialog"
-        style="display: block"
-    >
-        <div className="modal-dialog" role="document">
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title">
-                        {this.props.title}
-                    </h5>
-                    <Button
-                        className="close"
-                        onClick={() => {
-                            this.props.onCancel();
-                        }}
-                    >
-                        <span aria-hidden="true">&times;</span>
-                    </Button>
-                </div>
-                <div className="modal-body">
-                    {
-                        (() => {
-                            if (this.props.error) {
-                                return <ErrorMsg msg={this.props.error.message} />;
-                            }
-                        })()
-                    }
-                    {this.props.children}
-                </div>
-                <div className="modal-footer">
-                    <Button
-                        onClick={() => {
-                            this.props.onAccept();
-                        }}
-                    >
-                        {this.props.onAcceptLabel}
-                    </Button>
-                    <Button
-                        kind="secondary"
-                        onClick={() => {
-                            this.props.onCancel();
-                        }}
-                    >
-                        {this.props.onCancelLabel}
-                    </Button>
+        <div
+            class="modal fade show"
+            role="dialog"
+            style="display: block"
+        >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            {{title}}
+                        </h5>
+                        <app-button (clicked)="onCancel.emit()" [className]="'close'">
+                            <span aria-hidden="true">&times;</span>
+                        </app-button>
+                    </div>
+                    <div class="modal-body">
+                        <div *ngIf="errorMsg">
+                            <app-error [msg]="errorMsg"></app-error>
+                        </div>
+                        <ng-content></ng-content>
+                    </div>
+                    <div class="modal-footer">
+                        <app-button (clicked)="onAccept.emit()">
+                            {{acceptLabel}}
+                        </app-button>
+                        <app-button (clicked)="onCancel.emit()">
+                            {{cancelLabel}}
+                        </app-button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     `
 })
-export class Modal {
+export class ModalComponent {
     @Input() public title!: string;
-    @Input() public isVisible!: boolean;
-    @Input() public onAcceptLabel!: string;
-    @Input() public onCancelLabel!: string;
+    @Input() public acceptLabel!: string;
+    @Input() public cancelLabel!: string;
     @Input() public error?: Error;
-    @Input() public onCancel!: () => void;
-    @Input() public onAccept!: () => void;
+    @Output() public onCancel = new EventEmitter();
+    @Output() public onAccept = new EventEmitter();
 }
-*/

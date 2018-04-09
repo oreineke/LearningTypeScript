@@ -32,7 +32,7 @@ function isValidNewMovie(o: any) {
             </app-row>
             <app-row>
                 <app-column width="12">
-                    <app-list-group [isLoading]="loadStatus === 'pending'">
+                    <app-list-group [isLoaded]="isLoaded" [errorMsg]="fetchErrorMsg">
                         <app-list-group-item *ngFor="let movie of movies">
                             <app-row>
                                 <app-column width="8">
@@ -40,7 +40,7 @@ function isValidNewMovie(o: any) {
                                     <p>{{movie.year}}</p>
                                 </app-column>
                                 <app-column width="4" style="text-align: right">
-                                    <app-button kind="danger" clicked="focusDeleteDialog(movie.id)">
+                                    <app-button kind="danger" (clicked)="focusDeleteDialog(movie.id)">
                                         Delete
                                     </app-button>
                                 </app-column>
@@ -50,12 +50,43 @@ function isValidNewMovie(o: any) {
                 </app-column>
             </app-row>
             <div *ngIf="editorValue">
-                <form>
-                    Display editor modal!
-                </form>
+                <app-modal
+                    [title]="'Movie Editor'"
+                    [acceptLabel]="'Save'"
+                    [cancelLabel]="'Cancel'"
+                    [error]="saveStatus"
+                    (onCancel)="focusOutEditor()"
+                    (onAccept)="saveMovie()"
+                >
+                    <form>
+                        <app-text-field
+                            [id]="'title'"
+                            [title]="'Title'"
+                            [placeholder]="'Title'"
+                            [errorMsg]="isValidTitle"
+                            (onChange)=""
+                        ></app-text-field>
+                        <app-text-field
+                            [id]="'year'"
+                            [title]="'Year'"
+                            [placeholder]="'Year'"
+                            [errorMsg]="isValidYear"
+                            (onChange)="edit($event)"
+                        ></app-text-field>
+                    </form>
+                </app-modal>
             </div>
-            <div *ngIf="deleteMovieId">
-                Display confirmation modal!
+            <div *ngIf="deleteMovieId !== null">
+                <app-modal
+                    [title]="'Delete?'"
+                    [acceptLabel]="'Delete'"
+                    [cancelLabel]="'Cancel'"
+                    [error]="deleteStatus"
+                    (onCancel)="focusOutDeleteDialog()"
+                    (onAccept)="deleteMovie()"
+                >
+                    Are you sure?
+                </app-modal>
             </div>
         </app-container>
     `
@@ -66,13 +97,16 @@ export class MoviesPageComponent implements OnInit {
     public movies: MovieInterface[];
 
     // Used to represent the status of the HTTP GET calls
-    public loadStatus: interfaces.Status;
+    public isLoaded!: boolean;
+
+    // Display error if loading fails
+    public fetchErrorMsg: null | string;
 
     // Used to represent the status of the HTTP DELETE call
-    public deleteStatus: interfaces.Status;
+    public deleteStatus: null | string;
 
     // Used to represent the status of the HTTP POST and HTTP PUT calls
-    public saveStatus: interfaces.Status;
+    public saveStatus: null | string;
 
     // Used to desplay the confimation dialog before deleting a movie
     // null hides the modal and number displays the modal
@@ -80,6 +114,8 @@ export class MoviesPageComponent implements OnInit {
 
     // Used to hold the values of the movie editor or null when nothing is being edited
     public editorValue: null | Partial<MovieInterface>;
+    public isValidTitle!: null | string;
+    public isValidYear!: null | string;
 
     public movieService!: interfaces.MovieService;
 
@@ -88,23 +124,26 @@ export class MoviesPageComponent implements OnInit {
     ) {
         this.movieService = movieService;
         this.movies = [];
-        this.loadStatus = "pending";
-        this.deleteStatus = "idle";
-        this.saveStatus = "idle";
+        this.fetchErrorMsg = null;
+        this.isLoaded = false;
+        this.deleteStatus = null;
+        this.saveStatus = null;
         this.deleteMovieId = null;
         this.editorValue = null;
+        this.isValidTitle = null;
+        this.isValidYear = null;
     }
 
-    public ngOnInit() {
-        this.loadStatus = "pending";
-        (async () => {
-            try {
-                this.loadStatus = "done";
-                this.movies = await this.movieService.getAll();
-            } catch (err) {
-                this.loadStatus = "error";
-            }
-        })();
+    public async ngOnInit() {
+        this.isLoaded = false;
+        try {
+            this.movies = await this.movieService.getAll();
+            this.isLoaded = true;
+            this.fetchErrorMsg = null;
+        } catch (err) {
+            this.isLoaded = true;
+            this.fetchErrorMsg = "Loading failed!";
+        }
     }
 
     public focusEditor() {
@@ -123,104 +162,31 @@ export class MoviesPageComponent implements OnInit {
         this.deleteMovieId = null;
     }
 
-    public edit<T extends MovieInterface, K extends keyof T>(key: K, val: T[K]) {
+    public async saveMovie() {
+        if (isValidNewMovie(this.editorValue)) {
+            const newMovie = await this.movieService.create(this.editorValue as any);
+            this.movies.push(newMovie);
+        }
+        console.log(this.editorValue); // tslint:disable-line
+    }
+
+    public async deleteMovie() {
+        try {
+            if (this.deleteMovieId) {
+                await this.movieService.delete(this.deleteMovieId);
+                this.movies.filter((m) => m.id !== this.deleteMovieId);
+                this.deleteStatus = null;
+                this.deleteMovieId = null;
+            }
+        } catch (err) {
+            this.deleteStatus = "Cannot delete movie!";
+        }
+    }
+
+    public edit(event: any) {
+        console.log(event); // tslint:disable-line
         // const movie = {...(this.editorValue || {}), ...{[key]: val}};
         // this.editorValue = movie;
     }
+
 }
-
-/*
-
-        const error = this.movieStore.loadStatus === "error" ? new Error("Movies could not be loaded!") : null;
-        const movies = this.movieStore.loadStatus === "pending" ? null : this.movieStore.movies;
-
-        <Container>
-            <Row>
-                <Column width={12}>
-                    <ListGroup
-                        error={error}
-                        items={movies}
-                        itemComponent={(movie: MovieInterface) => (
-                            <Row>
-                                <Column width={8}>
-                                    <h5>{movie.title}</h5>
-                                    <p>{movie.year}</p>
-                                </Column>
-                                <Column width={4} style={{ textAlign: "right" }}>
-                                    <Button
-                                        kind="danger"
-                                        onClick={() => {
-                                            this.movieStore.focusDeleteDialog(movie.id);
-                                        }}
-                                    >
-                                        Delete
-                                    </Button>
-                                </Column>
-                            </Row>
-                        )}
-                    />
-                </Column>
-            </Row>
-            <Modal
-                title="Movie Editor"
-                isVisible={this.movieStore.editorValue !== null}
-                onAcceptLabel="Save"
-                onAccept={() => {
-                    if (isValidNewMovie(this.movieStore.editorValue)) {
-                        const movie: any = this.movieStore.editorValue;
-                        this.movieStore.create(movie);
-                    }
-                }}
-                onCancelLabel="Cancel"
-                onCancel={() => {
-                    this.movieStore.focusOutEditor();
-                }}
-                error={this.movieStore.saveStatus === "error" ? new Error("Something went wrong") : undefined}
-            >
-
-                <form>
-                    <TextField
-                        id="movie_title"
-                        value={this.movieStore.editorValue ? this.movieStore.editorValue.title : ""}
-                        title="Title"
-                        placeholder="Title"
-                        isValid={(val) => val !== undefined && val !== ""}
-                        onChange={(val) => {
-                            this.movieStore.edit("title", val);
-                        }}
-                    />
-                    <TextField
-                        id="movie_year"
-                        value={this.movieStore.editorValue ? this.movieStore.editorValue.year : 2018}
-                        title="Year"
-                        placeholder="Year"
-                        isValid={(val) => typeof val === "number"}
-                        onChange={(val) => {
-                            const n = parseInt(val);
-                            if (!isNaN(n)) {
-                                this.movieStore.edit("year", n);
-                            }
-                        }}
-                    />
-                </form>
-            </Modal>
-            <Modal
-                title="Are you sure?"
-                isVisible={this.movieStore.deleteMovieId !== null}
-                onAcceptLabel="Delete"
-                onAccept={() => {
-                    if (this.movieStore.deleteMovieId) {
-                        this.movieStore.delete(this.movieStore.deleteMovieId);
-                    }
-                }}
-                onCancelLabel="Cancel"
-                onCancel={() => {
-                    this.movieStore.focusOutDeleteDialog();
-                }}
-                error={this.movieStore.deleteStatus === "error" ? new Error("Something went wrong") : undefined}
-            >
-                The movie will be deleted permanently!
-            </Modal>
-        </Container>
-
-*/

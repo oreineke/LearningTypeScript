@@ -22,7 +22,7 @@ export class ButtonComponent {
 
     public constructor(
         @Attribute("kind") kind: Kind,
-        @Attribute("className") className: Kind,
+        @Attribute("className") className: string
     ) {
         this.btnClass = this._getBtnClass(kind, className);
     }

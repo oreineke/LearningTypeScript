@@ -3,7 +3,7 @@ import { Component, Input } from "@angular/core";
 @Component({
     selector: "app-error",
     template: `
-        <div className="alert alert-danger" role="alert">
+        <div class="alert alert-danger" role="alert">
             {{msg}}
         </div>`
 })

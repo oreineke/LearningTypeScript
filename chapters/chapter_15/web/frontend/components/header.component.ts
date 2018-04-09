@@ -18,7 +18,7 @@ export interface Route {
         </a>
         <ul class="navbar-nav">
             <li *ngFor="let link of links">
-                <a className="navbar-brand" [routerLink]="link.path" routerLinkActive="active">
+                <a class="navbar-brand" [routerLink]="link.path" routerLinkActive="active">
                     {{link.label}}
                 </a>
             </li>

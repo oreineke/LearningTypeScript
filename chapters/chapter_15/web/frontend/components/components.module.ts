@@ -8,6 +8,8 @@ import { ButtonComponent } from "../components/button.component";
 import { ErrorComponent } from "./error.component";
 import { LoadingComponent } from "./loading.component";
 import { ListGroupItemComponent, ListGroupComponent } from "./listgroup.component";
+import { ModalComponent } from "./modal.component";
+import { TextFieldComponent } from "./textfield.component";
 
 @NgModule({
     declarations: [
@@ -21,7 +23,9 @@ import { ListGroupItemComponent, ListGroupComponent } from "./listgroup.componen
         ErrorComponent,
         LoadingComponent,
         ListGroupItemComponent,
-        ListGroupComponent
+        ListGroupComponent,
+        ModalComponent,
+        TextFieldComponent
     ],
     exports: [
         HeaderComponent,
@@ -34,7 +38,9 @@ import { ListGroupItemComponent, ListGroupComponent } from "./listgroup.componen
         ErrorComponent,
         LoadingComponent,
         ListGroupItemComponent,
-        ListGroupComponent
+        ListGroupComponent,
+        ModalComponent,
+        TextFieldComponent
     ],
     imports: [
         RouterModule,
