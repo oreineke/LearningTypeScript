@@ -1,14 +1,11 @@
 namespace type_inference_variables_demo {
 
-    let TestVar1;           // variable is declared but not initialized
-    console.log(TestVar1);        // shows undefined
-    console.log(typeof TestVar1); // shows undefined
+    let testVar1;                 // variable is declared but not initialized
+    console.log(testVar1);        // shows undefined
+    console.log(typeof testVar1); // shows undefined
 
-    let TestVar2 = null;    // variable is declared and value null is assigned as value
-    console.log(TestVar2);        // shows null
-    console.log(typeof TestVar2); // shows object
-
-    let TestVar3: null;      // Error, Type expected
-    let TestVar4: undefined; // Error, cannot find name undefined
+    let testVar2 = null;          // variable is declared and null is assigned as value
+    console.log(testVar2);        // shows null
+    console.log(typeof testVar2); // shows object
 
 }
