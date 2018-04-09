@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { ActorInterface } from "../../universal/entities/actor";
 import * as interfaces from "../interfaces";
+import { ACTOR_SERVICE } from "../config/types";
 
 function isValidNewActor(o: any) {
     if (
@@ -18,27 +19,132 @@ function isValidNewActor(o: any) {
 
 @Component({
     selector: "actors-page",
-    template: "Actors!"
+    template: `
+        <app-container>
+            <app-row>
+                <app-column width="12">
+                    <div style="text-align: right; margin-bottom: 10px">
+                        <app-button (clicked)="focusEditor()">
+                            Add Actor
+                        </app-button>
+                    </div>
+                </app-column>
+            </app-row>
+            <app-row>
+                <app-column width="12">
+                    <app-list-group [isLoaded]="isLoaded" [errorMsg]="fetchErrorMsg">
+                        <app-list-group-item *ngFor="let actor of actors">
+                            <app-row>
+                                <app-column width="8">
+                                    <h5>{{actor.name}}</h5>
+                                    <p>{{actor.yearBorn}}</p>
+                                </app-column>
+                                <app-column width="4" style="text-align: right">
+                                    <app-button kind="danger" (clicked)="focusDeleteDialog(actor.id)">
+                                        Delete
+                                    </app-button>
+                                </app-column>
+                            </app-row>
+                        </app-list-group-item>
+                    </app-list-group>
+                </app-column>
+            </app-row>
+            <div *ngIf="editorValue">
+                <app-modal
+                    [title]="'Actor Editor'"
+                    [acceptLabel]="'Save'"
+                    [cancelLabel]="'Cancel'"
+                    [error]="saveStatus"
+                    (onCancel)="focusOutEditor()"
+                    (onAccept)="saveActor()"
+                >
+                    <form>
+                        <app-text-field
+                            [id]="'name'"
+                            [title]="'Name'"
+                            [placeholder]="'Name'"
+                            [errorMsg]="isValidTitle"
+                            (onChange)="edit($event)"
+                        ></app-text-field>
+                        <app-text-field
+                            [id]="'yearBorn'"
+                            [title]="'Year Born'"
+                            [placeholder]="'Year Born'"
+                            [errorMsg]="isValidYear"
+                            (onChange)="edit($event)"
+                        ></app-text-field>
+                    </form>
+                </app-modal>
+            </div>
+            <div *ngIf="deleteActorId !== null">
+                <app-modal
+                    [title]="'Delete?'"
+                    [acceptLabel]="'Delete'"
+                    [cancelLabel]="'Cancel'"
+                    [error]="deleteStatus"
+                    (onCancel)="focusOutDeleteDialog()"
+                    (onAccept)="deleteActor()"
+                >
+                    Are you sure?
+                </app-modal>
+            </div>
+        </app-container>
+    `
 })
-export class ActorsPageComponent {
+export class ActorsPageComponent implements OnInit {
+
     // Contains the actors that have been already loaded from the server
-    public actors: ActorInterface[] = [];
+    public actors: ActorInterface[];
 
     // Used to represent the status of the HTTP GET calls
-    public loadStatus: interfaces.Status = "pending";
+    public isLoaded!: boolean;
+
+    // Display error if loading fails
+    public fetchErrorMsg: null | string;
 
     // Used to represent the status of the HTTP DELETE call
-    public deleteStatus: interfaces.Status = "idle";
+    public deleteStatus: null | string;
 
     // Used to represent the status of the HTTP POST and HTTP PUT calls
-    public saveStatus: interfaces.Status = "idle";
+    public saveStatus: null | string;
 
     // Used to desplay the confimation dialog before deleting a actor
     // null hides the modal and number displays the modal
-    public deleteActorId: null | number = null;
+    public deleteActorId: null | number;
 
     // Used to hold the values of the actor editor or null when nothing is being edited
-    public editorValue: null | Partial<ActorInterface> = null;
+    public editorValue: null | Partial<ActorInterface>;
+    public isValidTitle!: null | string;
+    public isValidYear!: null | string;
+
+    public actorService!: interfaces.ActorService;
+
+    public constructor(
+        @Inject(ACTOR_SERVICE) actorService: interfaces.ActorService
+    ) {
+        this.actorService = actorService;
+        this.actors = [];
+        this.fetchErrorMsg = null;
+        this.isLoaded = false;
+        this.deleteStatus = null;
+        this.saveStatus = null;
+        this.deleteActorId = null;
+        this.editorValue = null;
+        this.isValidTitle = null;
+        this.isValidYear = null;
+    }
+
+    public async ngOnInit() {
+        this.isLoaded = false;
+        try {
+            this.actors = await this.actorService.getAll();
+            this.isLoaded = true;
+            this.fetchErrorMsg = null;
+        } catch (err) {
+            this.isLoaded = true;
+            this.fetchErrorMsg = "Loading failed!";
+        }
+    }
 
     public focusEditor() {
         this.editorValue = {};
@@ -56,132 +162,39 @@ export class ActorsPageComponent {
         this.deleteActorId = null;
     }
 
-    public edit<T extends ActorInterface, K extends keyof T>(key: K, val: T[K]) {
-        // const actor = {...(this.editorValue || {}), ...{[key]: val}};
-        // this.editorValue = actor;
+    public async saveActor() {
+        if (isValidNewActor(this.editorValue)) {
+            const newActor = await this.actorService.create(this.editorValue as any);
+            this.actors.push(newActor);
+            this.saveStatus = null;
+            this.editorValue = null;
+        } else {
+            this.saveStatus = "Invalid actor!";
+        }
     }
+
+    public async deleteActor() {
+        try {
+            if (this.deleteActorId) {
+                await this.actorService.delete(this.deleteActorId);
+                this.actors = this.actors.filter((m) => m.id !== this.deleteActorId);
+                this.deleteStatus = null;
+                this.deleteActorId = null;
+            }
+        } catch (err) {
+            this.deleteStatus = "Cannot delete actor!";
+        }
+    }
+
+    public edit(keyVal: any) {
+        const actor = {...(this.editorValue || {}), ...{[keyVal.k]: keyVal.v}};
+        if (actor.name) {
+            this.isValidTitle = (actor.name && actor.name.length) > 0 ? null : "Name cannot be empty!";
+        }
+        if (actor.yearBorn) {
+            this.isValidYear = isNaN(actor.yearBorn) === false ? null : "Year born must be a number!";
+        }
+        this.editorValue = actor;
+    }
+
 }
-
-/*
-import { Component } from "@angular/core";
-import { ActorInterface } from "../../universal/entities/actor";
-import * as interfaces from "../interfaces";
-
-@Component({
-    selector: "actor-page",
-    template: `
-        <Container>
-        <Row>
-            <Column width={12} style={{ textAlign: "right", marginBottom: "10px" }}>
-                <Button
-                    onClick={() => {
-                        this.actorStore.focusEditor();
-                    }}
-                >
-                    Add Actor
-                </Button>
-            </Column>
-        </Row>
-        <Row>
-            <Column width={12}>
-                <ListGroup
-                    error={error}
-                    items={actors}
-                    itemComponent={(actor: ActorInterface) => (
-                        <Row>
-                            <Column width={8}>
-                                <h5>{actor.name}</h5>
-                                <p>{actor.yearBorn}</p>
-                            </Column>
-                            <Column width={4} style={{ textAlign: "right" }}>
-                                <Button
-                                    kind="danger"
-                                    onClick={() => {
-                                        this.actorStore.focusDeleteDialog(actor.id);
-                                    }}
-                                >
-                                    Delete
-                                </Button>
-                            </Column>
-                        </Row>
-                    )}
-                />
-            </Column>
-        </Row>
-        <Modal
-            title="Actor Editor"
-            isVisible={this.actorStore.editorValue !== null}
-            onAcceptLabel="Save"
-            onAccept={() => {
-                if (isValidNewActor(this.actorStore.editorValue)) {
-                    const actor: any = this.actorStore.editorValue;
-                    this.actorStore.create(actor);
-                }
-            }}
-            onCancelLabel="Cancel"
-            onCancel={() => {
-                this.actorStore.focusOutEditor();
-            }}
-            error={this.actorStore.saveStatus === "error" ? new Error("Something went wrong") : undefined}
-        >
-
-            <form>
-                <TextField
-                    id="actor_title"
-                    value={this.actorStore.editorValue ? this.actorStore.editorValue.name : ""}
-                    title="Name"
-                    placeholder="Name"
-                    isValid={(val) => val !== undefined && val !== ""}
-                    onChange={(val) => {
-                        this.actorStore.edit("name", val);
-                    }}
-                />
-                <TextField
-                    id="actor_year"
-                    value={this.actorStore.editorValue ? this.actorStore.editorValue.yearBorn : 2018}
-                    title="Brith"
-                    placeholder="Brith"
-                    isValid={(val) => typeof val === "number"}
-                    onChange={(val) => {
-                        const n = parseInt(val);
-                        if (!isNaN(n)) {
-                            this.actorStore.edit("yearBorn", n);
-                        }
-                    }}
-                />
-            </form>
-        </Modal>
-        <Modal
-            title="Are you sure?"
-            isVisible={this.actorStore.deleteActorId !== null}
-            onAcceptLabel="Delete"
-            onAccept={() => {
-                if (this.actorStore.deleteActorId) {
-                    this.actorStore.delete(this.actorStore.deleteActorId);
-                }
-            }}
-            onCancelLabel="Cancel"
-            onCancel={() => {
-                this.actorStore.focusOutDeleteDialog();
-            }}
-            error={this.actorStore.deleteStatus === "error" ? new Error("Something went wrong") : undefined}
-        >
-            The actor will be deleted permanently!
-        </Modal>
-    </Container>
-    `
-})
-export class ActorPage extends React.Component {
-    @lazyInject(TYPE.ActorStore) public actorStore!: interfaces.ActorStore;
-    public componentWillMount() {
-        this.actorStore.getAll();
-    }
-    public render() {
-        const error = this.actorStore.loadStatus === "error" ? new Error("Actors could not be loaded!") : null;
-        const actors = this.actorStore.loadStatus === "pending" ? null : this.actorStore.actors;
-        return (
-
-        );
-    }
-}
-*/

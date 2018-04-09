@@ -64,7 +64,7 @@ function isValidNewMovie(o: any) {
                             [title]="'Title'"
                             [placeholder]="'Title'"
                             [errorMsg]="isValidTitle"
-                            (onChange)=""
+                            (onChange)="edit($event)"
                         ></app-text-field>
                         <app-text-field
                             [id]="'year'"
@@ -166,15 +166,18 @@ export class MoviesPageComponent implements OnInit {
         if (isValidNewMovie(this.editorValue)) {
             const newMovie = await this.movieService.create(this.editorValue as any);
             this.movies.push(newMovie);
+            this.saveStatus = null;
+            this.editorValue = null;
+        } else {
+            this.saveStatus = "Invalid movie!";
         }
-        console.log(this.editorValue); // tslint:disable-line
     }
 
     public async deleteMovie() {
         try {
             if (this.deleteMovieId) {
                 await this.movieService.delete(this.deleteMovieId);
-                this.movies.filter((m) => m.id !== this.deleteMovieId);
+                this.movies = this.movies.filter((m) => m.id !== this.deleteMovieId);
                 this.deleteStatus = null;
                 this.deleteMovieId = null;
             }
@@ -183,10 +186,15 @@ export class MoviesPageComponent implements OnInit {
         }
     }
 
-    public edit(event: any) {
-        console.log(event); // tslint:disable-line
-        // const movie = {...(this.editorValue || {}), ...{[key]: val}};
-        // this.editorValue = movie;
+    public edit(keyVal: any) {
+        const movie = {...(this.editorValue || {}), ...{[keyVal.k]: keyVal.v}};
+        if (movie.title) {
+            this.isValidTitle = (movie.title && movie.title.length) > 0 ? null : "Title cannot be empty!";
+        }
+        if (movie.year) {
+            this.isValidYear = isNaN(movie.year) === false ? null : "Year must be a number!";
+        }
+        this.editorValue = movie;
     }
 
 }

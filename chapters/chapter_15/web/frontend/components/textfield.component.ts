@@ -14,7 +14,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
                     className="form-control"
                     [id]="id"
                     [placeholder]="placeholder"
-                    onKeyUp="onEdit($event)"
+                    (input)="onEdit($event)"
                 />
             </div>
         </div>
@@ -29,10 +29,9 @@ export class TextFieldComponent {
     @Output() public onChange = new EventEmitter<{k: string; v: string}>();
 
     public onEdit(event: any) {
-        debugger; // tslint:disable-line
         const value = (event.target as any).value;
         const key = (event.target as any).id;
-        this.onChange.emit(value);
+        this.onChange.emit({ v: value, k: key });
     }
 
 }
