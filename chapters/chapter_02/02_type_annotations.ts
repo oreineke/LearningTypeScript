@@ -9,6 +9,7 @@ namespace type_annotations_demo {
   add(2, 3); // 5
   add("2", 3); // "23"
 
+  // (a: number, b: number) => number;
   function annotatedAdd(a: number, b: number): number {
     return a + b;
   }

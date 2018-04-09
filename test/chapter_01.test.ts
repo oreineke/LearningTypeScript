@@ -3,6 +3,8 @@ import * as path from "path";
 
 export function testChapter01() {
 
+    console.log(("\nCHAPTER 01:"));
+
     shouldNotThrow(path.join(__dirname, "..", "chapters", "chapter_01", "01_type_inference.ts"));
     shouldNotThrow(path.join(__dirname, "..", "chapters", "chapter_01", "02_variables.ts"));
     

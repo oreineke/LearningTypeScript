@@ -69,3 +69,23 @@ namespace custom_type_guard_demo_2 {
     }
 
 }
+
+namespace custom_type_guard_demo_3 {
+
+    interface Cat {
+        meow(): void;
+    }
+
+    interface Dog {
+        woof(): void;
+    }
+
+    function doSomething(obj: Cat | Dog) {
+        if ("meow" in obj) {
+            obj.meow(); // OK
+        } else {
+            obj.woof(); // OK
+        }
+    }
+
+}

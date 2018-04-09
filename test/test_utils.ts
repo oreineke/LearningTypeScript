@@ -12,14 +12,18 @@ function diagnosticToString(diagnosticMessageChain: SimpleAst.DiagnosticMessageC
     return result;
 }
 
-export function getFileDiagnostics(filePath: string) {
+export function getFileDiagnostics(filePath: string, opt?: SimpleAst.CompilerOptions) {
 
     const tsconfigPath = path.join(__dirname, "..", "tsconfig.json");
 
-    const ast = new Ast({
+    const baseOptions = {
         tsConfigFilePath: tsconfigPath,
         addFilesFromTsConfig: false
-    });
+    };
+
+    const overrideOptions = opt ? { compilerOptions: opt } : {};
+    const finalOptions = { ...baseOptions, ...overrideOptions };
+    const ast = new Ast(finalOptions);
     
     ast.addExistingSourceFile(filePath);
 
@@ -36,18 +40,18 @@ export function getFileDiagnostics(filePath: string) {
 
 }
 
-export function shouldNotThrow(filePath: string) {
+export function shouldNotThrow(filePath: string, opt?: SimpleAst.CompilerOptions) {
     console.log(chalk.blueBright(`Parsing file: ${filePath}`));
-    const diagnostics = getFileDiagnostics(filePath);
+    const diagnostics = getFileDiagnostics(filePath, opt);
     diagnostics.forEach((msg) => {
         throw new Error(chalk.redBright(`Expected ${filePath} to not have errors but found:\n- ${msg}`));
     });
     console.log(chalk.greenBright("OK!"));
 }
 
-export function shouldThrow(filePath: string, errors: string[]) {
+export function shouldThrow(filePath: string, errors: string[], opt?: SimpleAst.CompilerOptions) {
     console.log(chalk.blueBright(`Parsing file: ${filePath}`));
-    const diagnostics = getFileDiagnostics(filePath);
+    const diagnostics = getFileDiagnostics(filePath, opt);
     diagnostics.forEach((actual, index) => {
         console.log(chalk.blueBright(`Found: ${actual}`));
         const expected = errors[index];
