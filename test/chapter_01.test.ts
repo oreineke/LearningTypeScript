@@ -33,3 +33,5 @@ export function testChapter01() {
     shouldNotThrow(path.join(__dirname, "..", "chapters", "chapter_01", "11_geometry.ts"));
 
 }
+
+testChapter01();
