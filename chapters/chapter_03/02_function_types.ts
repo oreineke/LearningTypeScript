@@ -4,7 +4,7 @@ namespace function_types_demo {
         return `Hi! ${name}`;
     }
 
-    let greetUnnamed1: (name?: string) => string;
+    let greetUnnamed1: (name: string) => string;
 
     greetUnnamed1 = function(name: string): string {
         return `Hi! ${name}`;
