@@ -6,11 +6,11 @@ namespace arrow_functions {
             this._name = name;
         }
         public greet() {
-            alert(`Hi! My name is ${this._name}`);
+            console.log(`Hi! My name is ${this._name}`);
         }
         public greetDelay(time: number) {
             setTimeout(() => {
-                alert(`Hi! My name is ${this._name}`); // OK
+                console.log(`Hi! My name is ${this._name}`); // OK
             }, time);
         }
     }

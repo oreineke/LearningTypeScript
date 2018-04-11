@@ -30,7 +30,7 @@ namespace scope {
           const bar: number = 0;
           bar = 1; // Error
         }
-        alert(bar); // Error
+        console.log(bar); // Error
     }
 
 }

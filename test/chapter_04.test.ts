@@ -16,6 +16,14 @@ export function testChapter04() {
         { strict: true }
     );
 
+    shouldThrow(
+        path.join(__dirname, "..", "chapters", "chapter_04", "03_access_modifiers.ts"),
+        [
+            ""
+        ],
+        { strict: true }
+    );
+
 /*
 .ts          
 04_parameter_properties.ts  
@@ -32,7 +40,7 @@ export function testChapter04() {
 14_abstract_classes.ts  
 17_encapsulation.ts  
 20_isp.ts
-03_access_modifiers.ts  
+.ts  
 06_static_members.ts        
 09_method_overriding.ts    
 12_mixins.ts               
