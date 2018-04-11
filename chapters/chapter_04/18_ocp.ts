@@ -1,8 +1,8 @@
 namespace ocp_demo {
 
     class Rectangle {
-        public width: number;
-        public height: number;
+        public width!: number;
+        public height!: number;
     }
 
     class AreaCalculator {
@@ -21,12 +21,12 @@ namespace ocp_demo {
 namespace ocp_demo_2 {
 
     class Rectangle {
-        public width: number;
-        public height: number;
+        public width!: number;
+        public height!: number;
     }
 
     class Circle {
-        public radius: number;
+        public radius!: number;
     }
 
     class AreaCalculator {
@@ -53,15 +53,15 @@ namespace ocp_demo_3 {
     }
 
     class Rectangle extends Shape {
-        public width: number;
-        public height: number;
+        public width!: number;
+        public height!: number;
         public area() {
             return this.width * this.height;
         }
     }
 
     class Circle implements Shape {
-        public radius: number;
+        public radius!: number;
         public area() {
             return (this.radius * this.radius * Math.PI);
         }

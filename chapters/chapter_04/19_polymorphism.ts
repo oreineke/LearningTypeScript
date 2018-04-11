@@ -5,15 +5,15 @@ namespace polymorphism {
     }
 
     class Rectangle extends Shape {
-        public width: number;
-        public height: number;
+        public width!: number;
+        public height!: number;
         public area() {
             return this.width * this.height;
         }
     }
 
     class Circle implements Shape {
-        public radius: number;
+        public radius!: number;
         public area() {
             return (this.radius * this.radius * Math.PI);
         }

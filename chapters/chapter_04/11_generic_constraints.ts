@@ -1,13 +1,13 @@
 namespace generic_constraints_demo_1 {
 
     class User {
-        public name: string;
-        public surname: string;
+        public name!: string;
+        public surname!: string;
     }
 
     class Car {
-        public manufacturer: string;
-        public model: string;
+        public manufacturer!: string;
+        public model!: string;
     }
 
     class Queue<T> {
@@ -15,24 +15,24 @@ namespace generic_constraints_demo_1 {
         public push(item: T) {
             if (item instanceof User) {
                 if (
-                    item.name !== "" ||
-                    item.surname !== ""
+                    item.name === "" ||
+                    item.surname === ""
                 ) {
                     throw new Error("Invalid user");
                 }
             }
             if (item instanceof Car) {
                 if (
-                    item.manufacturer !== "" ||
-                    item.model !== ""
+                    item.manufacturer === "" ||
+                    item.model === ""
                 ) {
-                    throw new Error("Invalid user");
+                    throw new Error("Invalid car");
                 }
             }
             this._items.push(item);
         }
         public pop() {
-            return this._items.splice(0, 1)[0];
+            return this._items.shift();
         }
         public size() {
             return this._items.length;
@@ -64,8 +64,8 @@ namespace generic_constraints_demo_2 {
         ) {}
         public validate() {
             if (
-                this.name !== "" ||
-                this.surname !== ""
+                this.name === "" ||
+                this.surname === ""
             ) {
                 throw new Error("Invalid Car");
             }
@@ -79,10 +79,10 @@ namespace generic_constraints_demo_2 {
         ) {}
         public validate() {
             if (
-                this.manufacturer !== "" ||
-                this.model !== ""
+                this.manufacturer === "" ||
+                this.model === ""
             ) {
-                throw new Error("Invalid Car");
+                throw new Error("Invalid user");
             }
         }
     }
@@ -94,7 +94,7 @@ namespace generic_constraints_demo_2 {
             this._items.push(item);
         }
         public pop() {
-            return this._items.splice(0, 1)[0];
+            return this._items.shift();
         }
         public size() {
             return this._items.length;
@@ -102,14 +102,14 @@ namespace generic_constraints_demo_2 {
     }
 
     const userQueue = new Queue<User>();
-    userQueue.push(new User("", "")); // Error
-    userQueue.push(new User("Remo", "")); // Error
-    userQueue.push(new User("", "Jansen")); // Error
+    userQueue.push(new User("", "")); // Runtime Error
+    userQueue.push(new User("Remo", "")); // Runtime Error
+    userQueue.push(new User("", "Jansen")); // Runtime Error
 
     const carQueue = new Queue<Car>();
-    carQueue.push(new Car("", "")); // Error
-    carQueue.push(new Car("BMW", "")); // Error
-    carQueue.push(new Car("", "M3")); // Error
+    carQueue.push(new Car("", "")); // Runtime Error
+    carQueue.push(new Car("BMW", "")); // Runtime Error
+    carQueue.push(new Car("", "M3")); // Runtime Error
 
 }
 
@@ -124,7 +124,7 @@ namespace generic_constraints_demo_3 {
     }
 
     class Example1<T extends Foo, Bar> {
-        private prop: T;
+        private prop!: T;
         public doEverything() {
           this.prop.doSomething();
           this.prop.doSomethingElse(); // error
@@ -134,7 +134,7 @@ namespace generic_constraints_demo_3 {
     interface FooBar extends Foo, Bar {}
 
     class Example2<T extends FooBar> {
-        private prop: T;
+        private prop!: T;
         public doEverything() {
             this.prop.doSomething();
             this.prop.doSomethingElse();
@@ -158,11 +158,11 @@ namespace generic_constraints_demo_5 {
     }
 
     class Foo {
-        public name: "foo";
+        public name!: "foo";
     }
 
     class Bar {
-        public name: "bar";
+        public name!: "bar";
     }
 
     const foo = factory<Foo>(Foo);

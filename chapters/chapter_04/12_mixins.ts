@@ -46,8 +46,8 @@ namespace mixins_demo_2 {
     }
 
     class Bat implements Mammal, WingedAnimal {
-        public breath: () => string;
-        public fly: () => string;
+        public breath!: () => string;
+        public fly!: () => string;
     }
 
     function applyMixins(derived: any, bases: any[]) {
@@ -96,10 +96,10 @@ namespace mixins_demo_3 {
     }
 
     class Bat implements Mammal, WingedAnimal {
-        public eat: () => string;
-        public breath: () => string;
-        public fly: () => string;
-        public move: () => string;
+        public eat!: () => string;
+        public breath!: () => string;
+        public fly!: () => string;
+        public move!: () => string;
     }
 
     function applyMixins(derived: any, bases: any[]) {

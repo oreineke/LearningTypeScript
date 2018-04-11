@@ -7,7 +7,7 @@ namespace interface_segregation_demo_1 {
         isLightsOn(): boolean;
         isLightsOff(): boolean;
         startEngine(): void;
-        acelerate(): number;
+        accelerate(): number;
         stopEngine(): void;
         startRadio(): void;
         playCd(): void;
@@ -38,7 +38,7 @@ namespace interface_segregation_demo_2 {
 
     interface EngineInterface {
         startEngine(): void;
-        acelerate(): number;
+        accelerate(): number;
         stopEngine(): void;
     }
 

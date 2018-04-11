@@ -1,8 +1,8 @@
 namespace not_generic_classes_demo {
 
     class User {
-        public name: string;
-        public surname: string;
+        public name!: string;
+        public surname!: string;
     }
 
     class UserQueue {
@@ -11,7 +11,7 @@ namespace not_generic_classes_demo {
             this._items.push(item);
         }
         public pop() {
-            return this._items.splice(0, 1)[0];
+            return this._items.shift();
         }
         public size() {
             return this._items.length;
@@ -25,8 +25,8 @@ namespace not_generic_classes_demo {
     const john = userQueue.pop();
 
     class Car {
-        public manufacturer: string;
-        public model: string;
+        public manufacturer!: string;
+        public model!: string;
     }
 
     class CarQueue {
@@ -35,7 +35,7 @@ namespace not_generic_classes_demo {
             this._items.push(item);
         }
         public pop() {
-            return this._items.splice(0, 1)[0];
+            return this._items.shift();
         }
         public size() {
             return this._items.length;
@@ -50,6 +50,23 @@ namespace not_generic_classes_demo {
 
 }
 
+namespace class_with_any_demo {
+
+    class Queue {
+        private _items: any[] = [];
+        public push(item: any) {
+            this._items.push(item);
+        }
+        public pop() {
+            return this._items.shift();
+        }
+        public size() {
+            return this._items.length;
+        }
+    }    
+
+}
+
 namespace generic_classes_demo {
 
     class Queue<T> {
@@ -58,7 +75,7 @@ namespace generic_classes_demo {
             this._items.push(item);
         }
         public pop() {
-            return this._items.splice(0, 1)[0];
+            return this._items.shift();
         }
         public size() {
             return this._items.length;
@@ -66,8 +83,8 @@ namespace generic_classes_demo {
     }
 
     class User {
-        public name: string;
-        public surname: string;
+        public name!: string;
+        public surname!: string;
     }
 
     const userQueue = new Queue<User>();
@@ -77,8 +94,8 @@ namespace generic_classes_demo {
     const john = userQueue.pop();
 
     class Car {
-        public manufacturer: string;
-        public model: string;
+        public manufacturer!: string;
+        public model!: string;
     }
 
     const carQueue = new Queue<Car>();
