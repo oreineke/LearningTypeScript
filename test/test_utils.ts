@@ -12,7 +12,7 @@ function diagnosticToString(diagnosticMessageChain: SimpleAst.DiagnosticMessageC
     return result;
 }
 
-export function getFileDiagnostics(filePath: string, opt?: SimpleAst.CompilerOptions) {
+export function getFileDiagnostics(filePaths: string[], opt?: SimpleAst.CompilerOptions) {
 
     const tsconfigPath = path.join(__dirname, "..", "tsconfig.json");
 
@@ -24,8 +24,8 @@ export function getFileDiagnostics(filePath: string, opt?: SimpleAst.CompilerOpt
     const overrideOptions = opt ? { compilerOptions: opt } : {};
     const finalOptions = { ...baseOptions, ...overrideOptions };
     const ast = new Ast(finalOptions);
-    
-    ast.addExistingSourceFile(filePath);
+
+    filePaths.forEach(filePath => ast.addExistingSourceFile(filePath));
 
     const diagnostics = ast.getDiagnostics();
 
@@ -40,23 +40,23 @@ export function getFileDiagnostics(filePath: string, opt?: SimpleAst.CompilerOpt
 
 }
 
-export function shouldNotThrow(filePath: string, opt?: SimpleAst.CompilerOptions) {
-    console.log(chalk.blueBright(`Parsing file: ${filePath}`));
-    const diagnostics = getFileDiagnostics(filePath, opt);
+export function shouldNotThrow(filePaths: string[], opt?: SimpleAst.CompilerOptions) {
+    console.log(chalk.blueBright(`Parsing file: ${filePaths.join("\n")}`));
+    const diagnostics = getFileDiagnostics(filePaths, opt);
     diagnostics.forEach((msg) => {
-        throw new Error(chalk.redBright(`Expected ${filePath} to not have errors but found:\n- ${msg}`));
+        throw new Error(chalk.redBright(`Expected ${filePaths.join("\n")} to not have errors but found:\n- ${msg}`));
     });
     console.log(chalk.greenBright("OK!"));
 }
 
-export function shouldThrow(filePath: string, errors: string[], opt?: SimpleAst.CompilerOptions) {
-    console.log(chalk.blueBright(`Parsing file: ${filePath}`));
-    const diagnostics = getFileDiagnostics(filePath, opt);
+export function shouldThrow(filePaths: string[], errors: string[], opt?: SimpleAst.CompilerOptions) {
+    console.log(chalk.blueBright(`Parsing file: ${filePaths.join("\n")}`));
+    const diagnostics = getFileDiagnostics(filePaths, opt);
     diagnostics.forEach((actual, index) => {
         console.log(chalk.blueBright(`Found: ${actual}`));
         const expected = errors[index];
         if (expected !== actual) {
-            throw new Error(chalk.redBright(`Expected ${filePath} to throw:\n- ${expected}\nbut found:\n- ${actual}`));
+            throw new Error(chalk.redBright(`Expected ${filePaths.join("\n")} to throw:\n- ${expected}\nbut found:\n- ${actual}`));
         } else {
             console.log(chalk.greenBright("OK!"));
         }
