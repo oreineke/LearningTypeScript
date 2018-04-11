@@ -3,8 +3,15 @@ import * as path from "path";
 
 export function testChapter04() {
 
-    shouldNotThrow(
+    console.log(("\nCHAPTER 04:"));
+
+    shouldThrow(
         path.join(__dirname, "..", "chapters", "chapter_04", "01_classes.ts"),
+        [
+            "Property 'height' has no initializer and is not definitely assigned in the constructor.",
+            "Property 'width' has no initializer and is not definitely assigned in the constructor.",
+            "Property 'height' has no initializer and is not definitely assigned in the constructor."
+        ],
         { strict: true }
     );
 

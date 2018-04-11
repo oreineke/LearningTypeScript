@@ -3,6 +3,8 @@ import * as path from "path";
 
 export function testChapter03() {
 
+    console.log(("\nCHAPTER 03:"));
+
     shouldThrow(
         path.join(__dirname, "..", "chapters", "chapter_03", "01_function_declaration.ts"),
         [
