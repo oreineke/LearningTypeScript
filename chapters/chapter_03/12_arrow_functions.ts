@@ -10,7 +10,7 @@ namespace arrow_functions {
         }
         public greetDelay(time: number) {
             setTimeout(() => {
-                alert(`Hi! My name is ${this._name}`); // Error
+                alert(`Hi! My name is ${this._name}`); // OK
             }, time);
         }
     }

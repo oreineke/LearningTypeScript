@@ -54,7 +54,8 @@ export function testChapter03() {
     shouldThrow(
         path.join(__dirname, "..", "chapters", "chapter_03", "07_function_overloading.ts"),
         [
-            "Argument of type '{ custom: string; }' is not assignable to parameter of type 'boolean'."
+            "Argument of type '{ custom: string; }' is not assignable to parameter of type 'boolean'.",
+            "Overload signature is not compatible with function implementation."
         ],
         { strict: true }
     );
@@ -77,6 +78,7 @@ export function testChapter03() {
     shouldThrow(
         path.join(__dirname, "..", "chapters", "chapter_03", "10_iife.ts"),
         [
+            "Cannot find name 'foo'.",
             "Cannot find name 'foo'.",
             "Property '_i' is private and only accessible within class 'Counter'.",
             "Argument of type '(nestedCallback: (e: number) => void) => void' is not assignable to parameter of type '(nestedCallback: (error: number, result: any) => void) => void'.Types of parameters 'nestedCallback' and 'nestedCallback' are incompatible."

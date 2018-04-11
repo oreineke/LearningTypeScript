@@ -21,4 +21,20 @@ namespace function_overloading {
     test(false);                 // returns "I'm not single.";
     test({ custom: "custom" }); // Error
 
+    function test1(name: string): string;
+    function test1(age: number): number; // Error
+    function test1(single: boolean): string;
+    function test1(value: (string|number|boolean)): string {
+        switch (typeof value) {
+            case "string":
+                return `My name is ${value}.`;
+            case "number":
+                return `I'm ${value} years old.`;
+            case "boolean":
+                return value ? "I'm single." : "I'm not single.";
+            default:
+                throw new Error("Invalid Operation!");
+        }
+    }        
+
 }
