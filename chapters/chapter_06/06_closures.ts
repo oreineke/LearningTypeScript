@@ -3,24 +3,9 @@ namespace closures_demo_1 {
     function makeArmy() {
         const shooters = [];
         for (let i = 0; i < 10; i++) {
-            const shooter = () => { // a shooter is a function
-                alert(i); // which should alert it's number
-            };
-            shooters.push(shooter);
-        }
-        return shooters;
-    }
-
-}
-
-namespace closures_demo_2 {
-
-    function makeArmy() {
-        const shooters = [];
-        for (let i = 0; i < 10; i++) {
             ((index: number) => {
                 const shooter = () => {
-                  alert(index);
+                  console.log(index);
                 };
                 shooters.push(shooter);
             })(i);
@@ -30,7 +15,7 @@ namespace closures_demo_2 {
 
 }
 
-namespace closures_demo_3 {
+namespace closures_demo_2 {
 
     class Counter {
         private static _COUNTER = 0;
@@ -62,7 +47,7 @@ namespace closures_demo_3 {
 
 }
 
-namespace closures_demo_4 {
+namespace closures_demo_3 {
 
     function makeCounter() {
 
