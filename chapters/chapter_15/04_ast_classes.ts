@@ -1,8 +1,7 @@
 import chalk from "chalk";
 import Ast, { DiagnosticMessageChain } from "ts-simple-ast";
 
-// Warning: Executing this file can break the existing
-// application under the app folder
+// Warning: This file is not mean to be executed. It is just a form of documentation
 
 function getAst(tsConfigPath: string, sourceFilesPath: string) {
     const ast = new Ast({

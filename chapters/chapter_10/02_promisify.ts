@@ -1,17 +1,7 @@
 import { readFile } from "fs";
+import { promisify } from "util";
 
-function promisify<T>(fn: (...args: any[]) => void) {
-    return (...args: any[]) => {
-        return new Promise<T>((res, rej) => {
-            const cb = (err: Error, result: T) =>  err ? rej(err) : res(result);
-            const cbIndex = fn.length - 1;
-            args[cbIndex] = cb;
-            fn(...args);
-        });
-    };
-}
-
-const readFileAsync = promisify<Buffer>(readFile);
+const readFileAsync = promisify(readFile);
 
 (async () => {
     const buffer = await readFileAsync("./hello.txt", "utf-8");
@@ -27,6 +17,3 @@ async function readJson(fileName: string) {
         return err;
     }
 }
-
-
-

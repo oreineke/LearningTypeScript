@@ -8,7 +8,7 @@ const timerMiddleware = (
     res: express.Response,
     next: express.NextFunction
 ) => {
-    console.log(`Time: ${Date.now()}`)
+    console.log(`Time: ${Date.now()}`);
     next();
 };
 
@@ -17,7 +17,7 @@ const loggerMiddleware = (
     res: express.Response,
     next: express.NextFunction
 ) => {
-    console.log(`URL: ${req.url}`)
+    console.log(`URL: ${req.url}`);
     next();
 };
 
@@ -26,9 +26,9 @@ app.use(timerMiddleware);
 
 // Route level middleware
 app.get("/", loggerMiddleware, (req, res) => {
-    res.send("Hello World!")
+    res.send("Hello World!");
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://127.0.0.1:${port}/`)
+    console.log(`Server running at http://127.0.0.1:${port}/`);
 });

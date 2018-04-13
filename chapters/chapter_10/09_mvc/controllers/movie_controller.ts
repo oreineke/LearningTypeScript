@@ -29,7 +29,8 @@ movieRouter.post("/", function (req, res) {
     const movieRepository = getRepository();
     const newMovie = req.body;
     if (
-        !(typeof newMovie.title === "string") || isNaN(newMovie.year)
+        typeof newMovie.title !== "string" ||
+        typeof newMovie.year !== "number"
     ) {
         res.status(400);
         res.send(`Invalid Movie!`);

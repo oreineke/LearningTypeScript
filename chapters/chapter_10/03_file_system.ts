@@ -1,17 +1,9 @@
+// Run using ts-node 03_file_system.ts --files ./**/*.txt --find SOMETHING --replace SOMETHING_ELSE
+
 import * as fs from "fs";
 import * as yargs from "yargs";
 import glob from "glob";
-
-function promisify<T>(fn: (...args: any[]) => void) {
-    return (...args: any[]) => {
-        return new Promise<T>((res, rej) => {
-            const cb = (err: Error, result: T) => err ? rej(err) : res(result);
-            const cbIndex = fn.length - 1;
-            args[cbIndex] = cb;
-            fn(...args);
-        });
-    };
-}
+import { promisify } from "util";
 
 const globAsync = promisify(glob);
 const readFileAsync = promisify(fs.readFile);
@@ -19,11 +11,30 @@ const writeFileAsync = promisify(fs.writeFile);
 
 // Read arguments from process.argv
 function getCommandLineArguments() {
+
+    const files = yargs.argv.files;
+
+    if (!files) {
+        throw new Error("Missing argument --files");
+    }
+    const find = yargs.argv.find;
+
+    if (!find) {
+        throw new Error("Missing argument --find");
+    }
+
+    const replace = yargs.argv.replace;
+
+    if (!replace) {
+        throw new Error("Missing argument --replace");
+    }
+
     return {
-        pattern: yargs.argv.files,
-        find: yargs.argv.find,
-        replace: yargs.argv.replace
+        pattern: files,
+        find: find,
+        replace: replace
     };
+
 };
 
 // Checks that no arguments are missing
@@ -80,5 +91,3 @@ async function runAsync() {
 (async () => {
     await runAsync();
 })();
-
-// Run using ts-node 03_file_system.ts --files ./**/*.txt --find SOMETHING --replace SOMETHING_ELSE

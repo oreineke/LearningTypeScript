@@ -19,8 +19,13 @@ interface PropertyDetails {
   name: string;
 }
 
+export interface HeritageClause {
+  clause: string;
+  className: string;
+}
+
 const templates = {
-  url: (dsl: string) => `http://yuml.me/diagram/scruffy/class/${dsl}`,
+  url: (dsl: string) => `http://yuml.me/diagram/plain/class/${dsl}`,
   composition: "+->",
   implementsOrExtends: (abstraction: string, implementation: string) => {
     return (
@@ -66,86 +71,106 @@ function getAst(tsConfigPath: string, sourceFilesPaths?: string[]) {
 
 // Emits yUML code for an class declaration
 function emitClass(classDeclaration: SimpleAST.ClassDeclaration) {
-  const name = classDeclaration.getName();
-  const members = classDeclaration.getAllMembers();
 
-  const properties = members
-    .filter(m => m instanceof SimpleAST.PropertyDeclaration)
-    .map(m => {
-      return {
-        name: m
-          .getChildren()
-          .filter(c => c.getKind() === ts.SyntaxKind.Identifier)[0]
-          .getFullText()
-          .trim()
-      };
-    });
+  const className = classDeclaration.getSymbol()!.getName();
+  const propertyDeclarations = classDeclaration.getProperties();
+  const methodDeclarations = classDeclaration.getMethods();
 
-  const methods = members
-    .filter(m => m instanceof SimpleAST.MethodDeclaration)
-    .map(m => {
-      return {
-        name: m
-          .getChildren()
-          .filter(c => c.getKind() === ts.SyntaxKind.Identifier)[0]
-          .getFullText()
-          .trim()
-      };
-    });
+  const properties = propertyDeclarations.map(property => {
+      const sym = property.getSymbol();
+      if (sym) {
+          return {
+              name: sym.getName()
+          };
+      }
+  }).filter((p) => p !== undefined) as PropertyDetails[];
 
-  return templates.class(name, properties, methods);
+  const methods = methodDeclarations.map(method => {
+    const sym = method.getSymbol();
+    if (sym) {
+        return {
+            name: sym.getName()
+        }
+    }
+  }).filter((p) => p !== undefined) as MethodDetails[];
+
+  return templates.class(className, properties, methods);
 }
 
 // Emits yUML code for an interface declaration
 function emitInterface(interfaceDeclaration: SimpleAST.InterfaceDeclaration) {
-  const name = interfaceDeclaration.getName();
-  const members = interfaceDeclaration.getAllMembers();
 
-  const properties = members
-    .filter(m => m.getKind() === ts.SyntaxKind.PropertySignature)
-    .map(m => {
-      return {
-        name: m
-          .getChildren()
-          .filter(c => c.getKind() === ts.SyntaxKind.Identifier)[0]
-          .getFullText()
-          .trim()
-      };
-    });
+  const interfaceName = interfaceDeclaration.getSymbol()!.getName();
+  const propertyDeclarations = interfaceDeclaration.getProperties();
+  const methodDeclarations = interfaceDeclaration.getMethods();
 
-  const methods = members
-    .filter(m => m.getKind() === ts.SyntaxKind.MethodSignature)
-    .map(m => {
-      return {
-        name: m
-          .getChildren()
-          .filter(c => c.getKind() === ts.SyntaxKind.Identifier)[0]
-          .getFullText()
-          .trim()
-      };
-    });
+  const properties = propertyDeclarations.map(property => {
+      const sym = property.getSymbol();
+      if (sym) {
+          return {
+              name: sym.getName()
+          }
+      }
+  }).filter((p) => p !== undefined) as PropertyDetails[];
 
-  return templates.interface(name, properties, methods);
+  const methods = methodDeclarations.map(method => {
+      const sym = method.getSymbol();
+      if (sym) {
+          return {
+              name: sym.getName()
+          }
+      }
+  }).filter((p) => p !== undefined) as MethodDetails[];
+
+  return templates.interface(interfaceName, properties, methods);
 }
 
 // Emits yUML code for an heritage clauses
 function emitInheritanceRelationships(
   classDeclaration: SimpleAST.ClassDeclaration
 ) {
-  const name = classDeclaration.getName();
-  const heritageClauses = classDeclaration.getHeritageClauses();
 
-  const implementsClauses = heritageClauses.map(m => {
-    return flatten(
-      m
-        .getChildren()
-        .map(ff => ff.getChildren().map(c => c.getFullText().trim()))
-    );
-  });
+  const className = classDeclaration.getSymbol()!.getName();
+  const extended =  classDeclaration.getExtends();
+  const implemented =  classDeclaration.getImplements();
+  let heritageClauses: HeritageClause[] = [];
 
-  return flatten(implementsClauses).map(c =>
-    templates.implementsOrExtends(c, name)
+  if (extended) {
+      const identifier = extended.getChildrenOfKind(ts.SyntaxKind.Identifier)[0];
+      if (identifier) {
+          const sym = identifier.getSymbol();
+          if (sym) {
+              heritageClauses.push(
+                  {
+                      clause: sym.getName(),
+                      className
+                  }
+              );
+          }
+      }
+  }
+
+  if (implemented) {
+      implemented.forEach(i => {
+          const identifier = i.getChildrenOfKind(ts.SyntaxKind.Identifier)[0];
+          if (identifier) {
+              const sym = identifier.getSymbol();
+              if (sym) {
+                  heritageClauses.push(
+                      {
+                          clause: sym.getName(),
+                          className
+                      }
+                  );
+              }
+          }
+      });
+  }
+
+  return flatten(heritageClauses).map((c: HeritageClause) =>
+    templates.implementsOrExtends(c.clause, c.className)
   );
+
 }
 
 // Renders the UML diagram in a png
