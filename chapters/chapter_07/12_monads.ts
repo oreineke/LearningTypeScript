@@ -21,7 +21,7 @@ namespace monads_demo_1 {
         public static of<TVal>(val?: TVal) {
             return new MayBe(val);
         }
-        private _value: T;
+        private _value!: T;
         public constructor(val?: T) {
             if (val) {
                 this._value = val;

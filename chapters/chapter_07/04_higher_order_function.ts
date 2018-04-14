@@ -19,7 +19,7 @@ namespace higher_oder_function_demo_2 {
     function addDelay(msg: string, ms: number) {
         return () => {
             setTimeout(() => {
-                console.log("Hello world!");
+                console.log(msg);
             }, ms);
         };
     }

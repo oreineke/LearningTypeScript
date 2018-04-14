@@ -68,6 +68,6 @@ namespace partial_application_demo_4 {
         replace("/", "-")
     );
 
-    trimAndCapitalize("   13/feb/1989   "); // "13-FEB-1989"
+    trimCapitalizeAndReplace("   13/feb/1989   "); // "13-FEB-1989"
 
 }

@@ -16,7 +16,7 @@ namespace functors_demo_1 {
     let double = (x: number) => x + x;
     let container = Container.of(3);
     let container2 = container.map(double);
-    console.log(container); // { _value: 6 }
+    console.log(container2); // { _value: 6 }
 
 }
 
@@ -26,7 +26,7 @@ namespace functors_demo_2 {
         public static of<TVal>(val?: TVal) {
             return new MayBe(val);
         }
-        private _value: T;
+        private _value!: T;
         public constructor(val?: T) {
             if (val) {
                 this._value = val;

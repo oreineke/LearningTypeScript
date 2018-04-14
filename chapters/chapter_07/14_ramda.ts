@@ -13,11 +13,12 @@ namespace ramda_demo_1 {
         s.split(f).join(r);
 
     const curriedReplace = R.curry(replace);
+
     const trimCapitalizeAndReplace = R.compose(
         trimAndCapitalize,
         curriedReplace("/")("-")
     );
 
-    trimAndCapitalize("   13/feb/1989   "); // "13-FEB-1989"
+    trimCapitalizeAndReplace("   13/feb/1989   "); // "13-FEB-1989"
 
 }
