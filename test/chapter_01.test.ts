@@ -1,9 +1,7 @@
-import { shouldNotThrow, shouldThrow } from "./test_utils";
+import { shouldNotThrow, shouldThrow, describe } from "./test_utils";
 import * as path from "path";
 
-export function testChapter01() {
-
-    console.log(("\nCHAPTER 01:"));
+describe("CHAPTER 01", () => {
 
     shouldNotThrow([
         path.join(__dirname, "..", "chapters", "chapter_01", "01_type_inference.ts")
@@ -60,6 +58,4 @@ export function testChapter01() {
         path.join(__dirname, "..", "chapters", "chapter_01", "11_geometry.ts")
     ]);
 
-}
-
-testChapter01();
+});

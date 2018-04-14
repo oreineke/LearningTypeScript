@@ -12,6 +12,11 @@ function diagnosticToString(diagnosticMessageChain: SimpleAst.DiagnosticMessageC
     return result;
 }
 
+export function describe(name: string, cb: () => void) {
+    console.log(chalk.blueBright(`\n${name}:`));
+    cb();
+}
+
 export function getFileDiagnostics(filePaths: string[], opt?: SimpleAst.CompilerOptions) {
 
     const tsconfigPath = path.join(__dirname, "..", "tsconfig.json");

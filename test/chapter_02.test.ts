@@ -1,9 +1,7 @@
-import { shouldNotThrow, shouldThrow } from "./test_utils";
+import { shouldNotThrow, shouldThrow, describe } from "./test_utils";
 import * as path from "path";
 
-export function testChapter02() {
-
-    console.log(("\nCHAPTER 02:"));
+describe("CHAPTER 02", () => {
     
     shouldNotThrow(
         [
@@ -259,6 +257,4 @@ export function testChapter02() {
         { strict: true }
     );
 
-}
-
-testChapter02();
+});

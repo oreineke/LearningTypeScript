@@ -25,7 +25,7 @@ namespace reflect_metadata_demo2 {
             target,
             key
         );
-        var s = types.map((a: any) => a.name).join();
+        const s = types.map((a: any) => a.name).join();
         console.log(`${key} param types: ${s}`);
     }
 
