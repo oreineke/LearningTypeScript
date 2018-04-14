@@ -5,7 +5,7 @@ import { MathDemo } from "./math_demo";
 export function getApp() {
 
     const app = express();
-    const nullableAppRootPath = process.env.PWD;
+    const nullableAppRootPath = process.env.PWD || process.cwd();
 
     if (!nullableAppRootPath) {
         throw new Error("Please run the app via npm scripts");
@@ -17,7 +17,7 @@ export function getApp() {
     // the path is ../../../ because it is executed
     // from the /dist/backend folder
     // /Users/remojansen/CODE/LearningTypeScript/chapters/chapter_11/02_frontend_testing
-    console.log(process.env.PWD); // tslint:disable-line
+    console.log(nullableAppRootPath); // tslint:disable-line
     app.use("/public", express.static(path.join(appRootPath, "public")));
 
     // Route for index.html the path

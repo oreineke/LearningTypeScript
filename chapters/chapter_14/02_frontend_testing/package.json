@@ -7,11 +7,11 @@
     "test": "test"
   },
   "scripts": {
-    "all": "npm run clean && npm install && pm2 install typescript && npm run lint && npm run build && npm test",
-    "clean": "rm -r -f ./dist ./public",
-    "start": "pm2 start src/backend/main.ts",
-    "kill": "pm2 kill",
-    "lint": "tslint --project tsconfig.json -c tslint.json ./**/*.ts",
+    "all": "npm run clean && npm install && npm run lint && npm run build && npm test",
+    "clean": "rimraf ./dist ./public",
+    "start": "./node_modules/.bin/pm2 start ./dist/src/backend/main.js",
+    "kill": "./node_modules/.bin/pm2 kill",
+    "lint": "tslint --project tsconfig.json -c tslint.json ./src/**/*.ts ./test/**/*.ts",
     "build": "npm run build-frontend && npm run build-e2e",
     "build-frontend": "webpack",
     "build-e2e": "tsc -p tsconfig.e2e.json",
@@ -38,7 +38,7 @@
     "@types/supertest": "2.0.4",
     "awesome-typescript-loader": "3.4.1",
     "chai": "4.1.2",
-    "chromedriver": "2.33.2",
+    "chromedriver": "2.36.0",
     "css-loader": "0.28.8",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
@@ -49,20 +49,21 @@
     "nightwatch": "0.9.19",
     "node-sass": "4.7.2",
     "nyc": "11.4.1",
-    "pm2": "2.9.3",
     "resolve-url-loader": "2.2.1",
+    "rimraf": "2.6.2",
     "sass-loader": "6.0.6",
     "sinon": "4.2.0",
     "style-loader": "0.19.1",
     "supertest": "3.0.0",
-    "ts-node": "4.1.0",
     "tslint": "5.9.1",
-    "typescript": "2.6.2",
+    "typescript": "2.8.1",
     "webpack": "3.10.0"
   },
   "dependencies": {
     "express": "4.16.2",
+    "pm2": "^2.10.2",
     "react": "16.2.0",
-    "react-dom": "16.2.0"
+    "react-dom": "16.2.0",
+    "ts-node": "^5.0.1"
   }
 }

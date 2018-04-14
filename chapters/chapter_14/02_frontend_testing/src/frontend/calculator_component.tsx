@@ -32,7 +32,7 @@ export class Calculator extends React.Component<CalculatorProps, CalculatorState
 
   public render() {
     return (
-      <div className="well">
+      <div className="well" id="calculator">
         <div className="row">
           <div className="col">
             <NumericInput

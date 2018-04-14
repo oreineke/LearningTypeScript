@@ -1,6 +1,6 @@
 {
     "src_folders": [
-        "dist"
+        "./dist/test"
     ],
     "output_folder": "reports",
     "custom_commands_path": "",
