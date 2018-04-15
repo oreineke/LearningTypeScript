@@ -59,3 +59,23 @@ docker run --name POSTGRES_USER -p 5432:5432 -e POSTGRES_PASSWORD=secret -e POST
 npm run build
 npm run start
 ```
+
+# Common issues
+
+If you run webpack via the `npm run build` command you might enconter the following issue:
+
+```sh
+ERROR in [at-loader] ./node_modules/@types/node/index.d.ts:5939:5
+    TS2300: Duplicate identifier 'mod'.
+
+ERROR in [at-loader] ..\..\node_modules\@types\requirejs\index.d.ts:38:11
+    TS2300: Duplicate identifier 'mod'.
+
+ERROR in [at-loader] ..\..\node_modules\@types\requirejs\index.d.ts:422:13
+    TS2403: Subsequent variable declarations must have the same type.  Variable 'require' must be of type 'NodeRequire', but here has type 'Require'.
+Child extract-text-webpack-plugin node_modules/extract-text-webpack-plugin/dist node_modules/css-loader/index.js!node_modules/resolve-url-loader/index.js!node_modules/sass-loader/lib/loader.js!node_modules/bootstrap/scss/bootstrap.scss:
+       2 modules
+npm ERR! code ELIFECYCLE
+```
+
+To solve this issue you must delete the all the `node_module` folders in the companion source code. Then navigate to the folder that contains the `package.json` for this chapter: `/chapters/chapter_11` and run npm install. At this point, there should be only one `node_modules` folder in the entire companion source code (under the `/chapters/chapter_11` directory). The `npm run build` command should not throw the `TS2300: Duplicate identifier 'mod'.` error anymore.

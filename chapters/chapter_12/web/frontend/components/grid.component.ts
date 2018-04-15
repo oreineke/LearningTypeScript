@@ -15,17 +15,18 @@ type DeviceSize = "sm" | "md" | "lg" | "xl";
 export class ContainerComponent {}
 
 @Component({
+    host: {
+        "[class]": "'row'"
+    },
     selector: "app-row",
     template: `
-        <div class="row">
-            <ng-content></ng-content>
-        </div>
+        <ng-content></ng-content>
     `
 })
 export class RowComponent {}
 
 @Component({
-    host : {
+    host: {
         "[class]": "columnClass"
     },
     selector: "app-column",
