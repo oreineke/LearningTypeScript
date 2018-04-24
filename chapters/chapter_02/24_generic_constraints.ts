@@ -1,38 +1,48 @@
-interface Comparable {
-    equals<T>(value: T): boolean;
+interface Comparable<T> {
+    equals(value: T): boolean;
 }
 
-function isEqual<T extends Comparable, TVal>(comparable: T, value: TVal) {
+function isEqual<TVal, T extends Comparable<TVal>>(comparable: T, value: TVal) {
     return comparable.equals(value);
 }
 
-interface Rectangle {
+interface RectangleInterface {
     width: number;
     height: number;
 }
 
-type ComparableRectangle = Rectangle & Comparable;
+type ComparableRectangle = RectangleInterface & Comparable<RectangleInterface>;
 
-const rectangle: Rectangle & Comparable = {
-    width: 5,
-    height: 8,
-    equals: (v: Rectangle) => {
-        return v.width === this.width && v.height === this.height;
+class Rectangle implements ComparableRectangle {
+    public width: number;
+    public height: number;
+    public constructor(width: number, height: number) {
+        this.width = width;
+        this.height = height;
+    }
+    public equals(value: Rectangle) {
+        return value.width === this.width && value.height === this.height;
     }
 };
 
-interface Circle {
+interface CircleInterface {
     radious: number;
 }
 
-type ComparableCircle = Circle & Comparable;
+type ComparableCircle = CircleInterface & Comparable<CircleInterface>;
 
-const circle: Circle & Comparable = {
-    radious: 5,
-    equals: (v: Circle) => {
-        return v.radious === this.radious;
+class Circle implements ComparableCircle {
+    public radious: number;
+    public constructor(radious: number) {
+        this.radious = radious
     }
-};
+    public equals(value: CircleInterface): boolean {
+        return value.radious === this.radious;
+    }
+}
 
-isEqual<ComparableRectangle, Rectangle>(rectangle, { width: 5, height: 8 });
-isEqual<ComparableCircle, Circle>(circle, { radious: 5 });
+const circle = new Circle(5);
+const rectangle = new Rectangle(5, 8);
+
+isEqual<RectangleInterface, ComparableRectangle>(rectangle, { width: 5, height: 8 });
+isEqual<CircleInterface, ComparableCircle>(circle, { radious: 5 });

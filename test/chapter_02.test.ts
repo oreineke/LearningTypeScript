@@ -114,7 +114,7 @@ describe("CHAPTER 02", () => {
 
     shouldNotThrow(
         [
-            path.join(__dirname, "..", "chapters", "chapter_02", "12_control_flow analysis.ts")
+            path.join(__dirname, "..", "chapters", "chapter_02", "12_control_flow_analysis.ts")
         ],
         { strict: true }
     );
@@ -205,19 +205,9 @@ describe("CHAPTER 02", () => {
         { strict: true }
     );
 
-    shouldThrow(
+    shouldNotThrow(
         [
             path.join(__dirname, "..", "chapters", "chapter_02", "24_generic_constraints.ts")
-        ],
-        [
-            "Type '{ width: number; height: number; equals: (v: Rectangle) => boolean; }' is not assignable to type 'Rectangle & Comparable'." +
-            "Type '{ width: number; height: number; equals: (v: Rectangle) => boolean; }' is not assignable to type 'Comparable'." +
-            "Types of property 'equals' are incompatible.Type '(v: Rectangle) => boolean' is not assignable to type '<T>(value: T) => boolean'." +
-            "Types of parameters 'v' and 'value' are incompatible.Type 'T' is not assignable to type 'Rectangle'.",
-            "'this' implicitly has type 'any' because it does not have a type annotation.",
-            "'this' implicitly has type 'any' because it does not have a type annotation.",
-            "Type '{ radious: number; equals: (v: Circle) => boolean; }' is not assignable to type 'Circle & Comparable'.Type '{ radious: number; equals: (v: Circle) => boolean; }' is not assignable to type 'Comparable'.Types of property 'equals' are incompatible.Type '(v: Circle) => boolean' is not assignable to type '<T>(value: T) => boolean'.Types of parameters 'v' and 'value' are incompatible.Type 'T' is not assignable to type 'Circle'.",
-            "'this' implicitly has type 'any' because it does not have a type annotation."
         ],
         { strict: true }
     );
