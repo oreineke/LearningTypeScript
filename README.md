@@ -201,7 +201,16 @@ ts-node chapters/chapter_04/22_dip.ts
 ```
 ts-node chapters/chapter_05/01_namespaces.ts
 ts-node chapters/chapter_05/02_nested_namespaces.ts
-ts-node chapters/chapter_05/03_multifile_namespace.ts
+```
+
+The example about multi-file namespaces requires both files to be passed to ts-node:
+
+```
+ts-node chapters/chapter_05/02_nested_namespaces.ts chapters/chapter_05/03_multifile_namespace.ts
+
+```
+
+```
 ts-node chapters/chapter_05/04_periods.ts
 ts-node chapters/chapter_05/05_e6_modules_export.ts
 ts-node chapters/chapter_05/06_es6_module_import.ts
@@ -235,11 +244,11 @@ ts-node chapters/chapter_07/07_currying.ts
 ts-node chapters/chapter_07/08_pipes.ts
 ts-node chapters/chapter_07/09_pointfree_style.ts
 ts-node chapters/chapter_07/10_recursion.ts
-ts-node chapters/chapter_07/11_functors.ts
-ts-node chapters/chapter_07/12_monads.ts
 ts-node chapters/chapter_07/13_immutable.ts
 ts-node chapters/chapter_07/14_ramda.ts
 ```
+
+Examples `11_functors.ts` and `12_monads.ts` should be executed in a web browser. This means that `ts-node` will not work. You can compile the code using the [TypeScript playground](https://www.typescriptlang.org/play/index.html) and then execute the output JS code using in the JavaScript console of your web browser.
 
 ### Chapter 08
 
@@ -251,7 +260,6 @@ ts-node chapters/chapter_08/04_parameter_decorator.ts
 ts-node chapters/chapter_08/05_decorator_options.ts
 ts-node chapters/chapter_08/06_reflect_metadata.ts
 ts-node chapters/chapter_08/07_decorator_factory.ts
-ts-node chapters/chapter_08/decorators.ts
 ```
 
 ### Chapter 09
