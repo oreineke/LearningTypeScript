@@ -22,7 +22,7 @@ namespace structural_type_system_demo {
   const p1 = { name: "remo", surname: "jansen" };
   getFullName(p1); // OK
 
-  const p2 = { name: "remo", famiyName: "jansen" };
+  const p2 = { name: "remo", familyName: "jansen" };
   getFullName(p2); // Error
 
 }

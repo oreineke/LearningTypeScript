@@ -108,7 +108,7 @@ export class ActorsPageComponent implements OnInit {
     // Used to represent the status of the HTTP POST and HTTP PUT calls
     public saveStatus: null | string;
 
-    // Used to desplay the confimation dialog before deleting a actor
+    // Used to desplay the confirmation dialog before deleting a actor
     // null hides the modal and number displays the modal
     public deleteActorId: null | number;
 

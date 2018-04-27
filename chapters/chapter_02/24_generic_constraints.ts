@@ -26,18 +26,18 @@ class Rectangle implements ComparableRectangle {
 };
 
 interface CircleInterface {
-    radious: number;
+    radius: number;
 }
 
 type ComparableCircle = CircleInterface & Comparable<CircleInterface>;
 
 class Circle implements ComparableCircle {
-    public radious: number;
-    public constructor(radious: number) {
-        this.radious = radious
+    public radius: number;
+    public constructor(radius: number) {
+        this.radius = radius
     }
     public equals(value: CircleInterface): boolean {
-        return value.radious === this.radious;
+        return value.radius === this.radius;
     }
 }
 
@@ -45,4 +45,4 @@ const circle = new Circle(5);
 const rectangle = new Rectangle(5, 8);
 
 isEqual<RectangleInterface, ComparableRectangle>(rectangle, { width: 5, height: 8 });
-isEqual<CircleInterface, ComparableCircle>(circle, { radious: 5 });
+isEqual<CircleInterface, ComparableCircle>(circle, { radius: 5 });

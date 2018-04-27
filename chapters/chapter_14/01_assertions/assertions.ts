@@ -2,7 +2,7 @@ import { MathApi } from "./application";
 
 const actual1 = MathApi.pow(3, 5);
 const expected1 = 243;
-const asertion1 = MathApi.pow(5, 5) === expected1;
+const asertion1 = actual1 === expected1;
 
 if (asertion1 === false) {
     throw new Error(
@@ -13,7 +13,7 @@ if (asertion1 === false) {
 
 const actual2 = MathApi.pow(5, 3);
 const expected2 = 125;
-const asertion2 = MathApi.pow(5, 3) === expected2;
+const asertion2 = actual2 === expected2;
 
 if (asertion2 === false) {
     throw new Error(

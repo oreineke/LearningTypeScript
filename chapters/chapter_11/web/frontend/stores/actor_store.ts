@@ -22,7 +22,7 @@ export class ActorStore implements interfaces.ActorStore {
     // Used to represent the status of the HTTP POST and HTTP PUT calls
     @observable public saveStatus: interfaces.Status = "idle";
 
-    // Used to desplay the confimation dialog before deleting a actor
+    // Used to desplay the confirmation dialog before deleting a actor
     // null hides the modal and number displays the modal
     @observable public deleteActorId: null | number = null;
 

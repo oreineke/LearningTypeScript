@@ -23,8 +23,8 @@ describe("CHAPTER 02", () => {
             path.join(__dirname, "..", "chapters", "chapter_02", "03_structural_type_system.ts")
         ],
         [
-            "Argument of type '{ name: string; famiyName: string; }' is not assignable to parameter of type 'Person'." +
-            "Property 'surname' is missing in type '{ name: string; famiyName: string; }'."
+            "Argument of type '{ name: string; familyName: string; }' is not assignable to parameter of type 'Person'." +
+            "Property 'surname' is missing in type '{ name: string; familyName: string; }'."
         ],
         { strict: false }
     );

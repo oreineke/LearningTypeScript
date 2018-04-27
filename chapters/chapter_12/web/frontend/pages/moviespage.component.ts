@@ -108,7 +108,7 @@ export class MoviesPageComponent implements OnInit {
     // Used to represent the status of the HTTP POST and HTTP PUT calls
     public saveStatus: null | string;
 
-    // Used to desplay the confimation dialog before deleting a movie
+    // Used to desplay the confirmation dialog before deleting a movie
     // null hides the modal and number displays the modal
     public deleteMovieId: null | number;
 

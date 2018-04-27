@@ -103,8 +103,8 @@ export class ActorPage extends React.Component {
                         <TextField
                             id="actor_year"
                             value={this.actorStore.editorValue ? this.actorStore.editorValue.yearBorn : 2018}
-                            title="Brith"
-                            placeholder="Brith"
+                            title="Year of Birth"
+                            placeholder="Year of Birth"
                             isValid={(val) => typeof val === "number"}
                             onChange={(val) => {
                                 const n = parseInt(val);
