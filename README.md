@@ -92,6 +92,8 @@ git clone https://github.com/remojansen/LearningTypeScript.git
 
 - Some code samples also require you to change the `tsconfig.json` to enable or disable some compilation flags. This is usually indicated by comments, if not comments are available, it means that the default configuration should work.
 
+- The `test` directory under the root directory can be ignored because it is used to test the examples in this book.
+
 ### Chapter 01
 
 ```
@@ -254,9 +256,7 @@ ts-node chapters/chapter_08/decorators.ts
 
 ### Chapter 09
 
-```
 Please refer to the instructions at [`/chapters/chapter_09/readme.md`](/chapters/chapter_09/readme.md).
-```
 
 ### Chapter 10
 
