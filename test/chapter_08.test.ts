@@ -33,21 +33,21 @@ describe("CHAPTER 08", () => {
 
     shouldNotThrow(
         [
-            path.join(__dirname, "..", "chapters", "chapter_08", "05_decorator_factory.ts")
+            path.join(__dirname, "..", "chapters", "chapter_08", "05_decorator_options.ts")
         ],
         { strict: true }
     );
 
     shouldNotThrow(
         [
-            path.join(__dirname, "..", "chapters", "chapter_08", "06_decorator_options.ts")
+            path.join(__dirname, "..", "chapters", "chapter_08", "06_reflect_metadata.ts")
         ],
         { strict: true }
     );
 
     shouldNotThrow(
         [
-            path.join(__dirname, "..", "chapters", "chapter_08", "07_reflect_metadata.ts")
+            path.join(__dirname, "..", "chapters", "chapter_08", "07_decorator_factory.ts")
         ],
         { strict: true }
     );
